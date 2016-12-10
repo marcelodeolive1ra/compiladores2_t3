@@ -14,6 +14,11 @@ class t3_cc2Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by t3_cc2Parser#titulo_site.
+    def visitTitulo_site(self, ctx:t3_cc2Parser.Titulo_siteContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by t3_cc2Parser#titulo.
     def visitTitulo(self, ctx:t3_cc2Parser.TituloContext):
         return self.visitChildren(ctx)
@@ -69,6 +74,11 @@ class t3_cc2Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by t3_cc2Parser#mais_secoes.
+    def visitMais_secoes(self, ctx:t3_cc2Parser.Mais_secoesContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by t3_cc2Parser#uma_coluna.
     def visitUma_coluna(self, ctx:t3_cc2Parser.Uma_colunaContext):
         return self.visitChildren(ctx)
@@ -99,33 +109,8 @@ class t3_cc2Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by t3_cc2Parser#uma_coluna_texto_uma_imagem.
-    def visitUma_coluna_texto_uma_imagem(self, ctx:t3_cc2Parser.Uma_coluna_texto_uma_imagemContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by t3_cc2Parser#uma_coluna_imagem_uma_texto.
-    def visitUma_coluna_imagem_uma_texto(self, ctx:t3_cc2Parser.Uma_coluna_imagem_uma_textoContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by t3_cc2Parser#uma_coluna_texto.
-    def visitUma_coluna_texto(self, ctx:t3_cc2Parser.Uma_coluna_textoContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by t3_cc2Parser#uma_linha_texto.
-    def visitUma_linha_texto(self, ctx:t3_cc2Parser.Uma_linha_textoContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by t3_cc2Parser#imagem.
     def visitImagem(self, ctx:t3_cc2Parser.ImagemContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by t3_cc2Parser#mais_secoes.
-    def visitMais_secoes(self, ctx:t3_cc2Parser.Mais_secoesContext):
         return self.visitChildren(ctx)
 
 

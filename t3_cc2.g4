@@ -4,84 +4,70 @@ CADEIA:
     '"' ~('\n' | '\r' | '"')* '"';
 
 COMENTARIO:
-    '//' ~('/'|'\n')* '//' -> skip
-;
+    '//' ~('/' | '\n')* '\n' -> skip;
 
 ESPACO:
-    ( ' ' |'\t' | '\r' | '\n') -> skip
-;
+    (' ' | '\t' | '\r' | '\n') -> skip;
 
 site:
-	'site' '{' CADEIA '}' '{' menu sidebar banner conteudo rodape '}';
+	'site' titulo_site '{' menu sidebar banner conteudo rodape '}';
+
+titulo_site:
+    '(' CADEIA ')';
 
 titulo:
-	'titulo' '{' CADEIA '}';
+	'titulo' '(' CADEIA ')';
 
 menu:
-	'menu' '{' (item)+ '}';
+	'menu' '{' item '}';
 
 item:
-	CADEIA link mais_itens;
+	'item' '(' CADEIA ')' link? mais_itens;
 
 link:
-    'link' ':' CADEIA | ;
+    '->' CADEIA;
 
 mais_itens:
 	item | ;
 
 sidebar:
-	'sidebar' '{' (item)+ '}' | ;
+	'sidebar' '{' item '}' | ;
 
 banner:
-	'banner' '{' imagem	titulo subtitulo '}';
+	'banner' '{' imagem	titulo subtitulo '}' | ;
 
 subtitulo:
-	'subtitulo' '{' CADEIA '}';
+	'subtitulo' '(' CADEIA ')';
 
 rodape:
-	titulo subtitulo;
+	'rodape' '{' titulo subtitulo '}' | ;
 
 conteudo:
-	secao mais_secoes | ;
+	'conteudo' '{' secao '}' | ;
 
 secao:
-	'uma_coluna' '{' uma_coluna '}'
-	| 'duas_colunas' '{' duas_colunas '}'
-	| 'tres_colunas' '{' tres_colunas '}'
-	| 'linha' '{' linha '}';
-
-uma_coluna:
-	coluna;
-
-duas_colunas:
-	coluna coluna;
-
-tres_colunas:
-    coluna coluna coluna;
-
-coluna:
-    imagem | titulo subtitulo texto;
-
-linha:
-    imagem | titulo subtitulo texto;
-
-texto:
-	CADEIA | ;
-
-uma_coluna_texto_uma_imagem:
-	coluna imagem;
-
-uma_coluna_imagem_uma_texto:
-	imagem coluna;
-
-uma_coluna_texto:
-	coluna;
-
-uma_linha_texto:
-	linha;
-
-imagem:
-	'imagem' '{' CADEIA '}';
+	(uma_coluna | duas_colunas | tres_colunas | linha) mais_secoes;
 
 mais_secoes:
 	secao | ;
+
+uma_coluna:
+	'uma_coluna' '{' coluna '}';
+
+duas_colunas:
+	'duas_colunas' '{' coluna coluna '}';
+
+tres_colunas:
+    'tres_colunas' '{' coluna coluna coluna '}';
+
+coluna:
+    'coluna' '{' (imagem | titulo subtitulo texto) '}';
+
+linha:
+    'linha' '{' (imagem | titulo subtitulo texto) '}';
+
+texto:
+	'texto' '(' CADEIA ')' | ;
+
+imagem:
+	'imagem' '(' CADEIA ')' link;
