@@ -1,4 +1,4 @@
-# Generated from /home/joao/PycharmProjects/compiladores2_t3/t3_cc2.g4 by ANTLR 4.5.3
+# Generated from /Users/marcelodeoliveiradasilva/PycharmProjects/T3_CC2_PyCharm/t3_cc2.g4 by ANTLR 4.5.3
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .t3_cc2Parser import t3_cc2Parser
@@ -74,6 +74,11 @@ class t3_cc2Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by t3_cc2Parser#mais_secoes.
+    def visitMais_secoes(self, ctx:t3_cc2Parser.Mais_secoesContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by t3_cc2Parser#colunas.
     def visitColunas(self, ctx:t3_cc2Parser.ColunasContext):
         return self.visitChildren(ctx)
@@ -81,6 +86,11 @@ class t3_cc2Visitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by t3_cc2Parser#coluna.
     def visitColuna(self, ctx:t3_cc2Parser.ColunaContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#mais_colunas.
+    def visitMais_colunas(self, ctx:t3_cc2Parser.Mais_colunasContext):
         return self.visitChildren(ctx)
 
 

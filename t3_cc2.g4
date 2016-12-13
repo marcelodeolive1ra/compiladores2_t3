@@ -31,7 +31,7 @@ mais_itens:
 	item | ;
 
 sidebar:
-	'sidebar' '{' item '}' | ;
+	'sidebar' '{' item '}' | 'sidebar' '=' 'menu' | ;
 
 banner:
 	'banner' '{' imagem	titulo subtitulo '}' | ;
@@ -43,16 +43,22 @@ rodape:
 	'rodape' '{' titulo subtitulo '}' | ;
 
 conteudo:
-	'conteudo' '{' (secao)+ '}' | ;
+	'conteudo' '{' secao mais_secoes '}' | ;
 
 secao:
 	'secao' '{' colunas '}';
 
+mais_secoes:
+    secao | ;
+
 colunas:
-    'colunas' '{' (coluna)+ '}' | coluna |;
+    'colunas' '{' coluna mais_colunas '}' | coluna |;
 
 coluna:
     'coluna' '{' (imagem | titulo subtitulo texto) '}';
+
+mais_colunas:
+    coluna | ;
 
 texto:
 	'texto' '(' CADEIA ')' | ;
