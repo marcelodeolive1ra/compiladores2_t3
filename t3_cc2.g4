@@ -43,28 +43,16 @@ rodape:
 	'rodape' '{' titulo subtitulo '}' | ;
 
 conteudo:
-	'conteudo' '{' secao '}' | ;
+	'conteudo' '{' (secao)+ '}' | ;
 
 secao:
-	(uma_coluna | duas_colunas | tres_colunas | linha) mais_secoes;
+	'secao' '{' colunas '}';
 
-mais_secoes:
-	secao | ;
-
-uma_coluna:
-	'uma_coluna' '{' coluna '}';
-
-duas_colunas:
-	'duas_colunas' '{' coluna coluna '}';
-
-tres_colunas:
-    'tres_colunas' '{' coluna coluna coluna '}';
+colunas:
+    'colunas' '{' (coluna)+ '}' | coluna |;
 
 coluna:
     'coluna' '{' (imagem | titulo subtitulo texto) '}';
-
-linha:
-    'linha' '{' (imagem | titulo subtitulo texto) '}';
 
 texto:
 	'texto' '(' CADEIA ')' | ;

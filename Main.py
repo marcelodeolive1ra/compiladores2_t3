@@ -24,29 +24,29 @@ site("Título da Página") {
         subtitulo("Subtítulo")
     }
     conteudo {
-        duas_colunas {
-            coluna {
-                titulo("Título")
-                subtitulo("Subtítulo")
-                texto("Texto")
-            }
-            coluna {
-                imagem("link para a imagem") -> "link oprcional da imagem"
-            }
-        }
-        duas_colunas {
-            coluna {
-                titulo("Título")
-                subtitulo("Subtitulo")
-            }
-            coluna {
-                titulo("Título")
-                subtitulo("Subtítulo")
+        secao {
+            colunas {
+                coluna {
+                    titulo("Título")
+                    subtitulo("Subtítulo")
+                    texto("Texto")
+                }
+                coluna {
+                    imagem("link para a imagem") -> "link opcional da imagem"
+                }
             }
         }
-        linha {
-            titulo("Título")
-            subtitulo("Subtitulo")
+        secao {
+            colunas {
+                coluna {
+                    titulo("Título")
+                    subtitulo("Subtitulo")
+                }
+                coluna {
+                    titulo("Título")
+                    subtitulo("Subtítulo")
+                }
+            }
         }
     }
     rodape {
@@ -72,4 +72,4 @@ interpretador.visitSite(programa)
 
 print(parser.literalNames)
 
-print(interpretador.getCodigo())
+print('\n' + interpretador.getCodigo())

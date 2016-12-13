@@ -1,4 +1,4 @@
-# Generated from /Users/marcelodeoliveiradasilva/PycharmProjects/T3_CC2_PyCharm/t3_cc2.g4 by ANTLR 4.5.3
+# Generated from /home/joao/PycharmProjects/compiladores2_t3/t3_cc2.g4 by ANTLR 4.5.3
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .t3_cc2Parser import t3_cc2Parser
@@ -74,33 +74,13 @@ class t3_cc2Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by t3_cc2Parser#mais_secoes.
-    def visitMais_secoes(self, ctx:t3_cc2Parser.Mais_secoesContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by t3_cc2Parser#uma_coluna.
-    def visitUma_coluna(self, ctx:t3_cc2Parser.Uma_colunaContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by t3_cc2Parser#duas_colunas.
-    def visitDuas_colunas(self, ctx:t3_cc2Parser.Duas_colunasContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by t3_cc2Parser#tres_colunas.
-    def visitTres_colunas(self, ctx:t3_cc2Parser.Tres_colunasContext):
+    # Visit a parse tree produced by t3_cc2Parser#colunas.
+    def visitColunas(self, ctx:t3_cc2Parser.ColunasContext):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by t3_cc2Parser#coluna.
     def visitColuna(self, ctx:t3_cc2Parser.ColunaContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by t3_cc2Parser#linha.
-    def visitLinha(self, ctx:t3_cc2Parser.LinhaContext):
         return self.visitChildren(ctx)
 
 
