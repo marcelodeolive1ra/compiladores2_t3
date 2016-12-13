@@ -13,6 +13,7 @@ site("Título da Página") {
         item("Página 2") -> "Link2"
         item("Página 3") -> "Link3"
     }
+    //sidebar = menu
     sidebar {
         item("Home") -> "Link1"
         item("Página 2") -> "Link2"
