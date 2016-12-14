@@ -1,4 +1,4 @@
-# Generated from /Users/marcelodeoliveiradasilva/PycharmProjects/T3_CC2_PyCharm/t3_cc2.g4 by ANTLR 4.5.3
+# Generated from /home/joao/PycharmProjects/compiladores2_t3/t3_cc2.g4 by ANTLR 4.5.3
 from antlr4 import *
 from io import StringIO
 

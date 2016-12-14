@@ -19,10 +19,10 @@ titulo:
 	'titulo' '(' CADEIA ')';
 
 menu:
-	'menu' '{' item '}';
+	'menu' '{' item mais_itens '}';
 
 item:
-	'item' '(' CADEIA ')' link? mais_itens;
+	'item' '(' CADEIA ')' link?;
 
 link:
     '->' nova_aba? CADEIA;
@@ -31,10 +31,10 @@ nova_aba:
     '+';
 
 mais_itens:
-	item | ;
+	(item)* | ;
 
 sidebar:
-	'sidebar' '{' item '}' | 'sidebar' '=' 'menu' | ;
+	'sidebar' '{' item mais_itens '}' | 'sidebar' '=' 'menu' | ;
 
 banner:
 	'banner' '{' imagem	texto '}' | ;
