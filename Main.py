@@ -16,21 +16,25 @@ site("Título da Página") {
     //sidebar = menu
     sidebar {
         item("Home") -> "Link1"
-        item("Página 2") -> "Link2"
+        item("Página 2") ->+ "Link2 para abrir em nova aba"
         item("Página 3") -> "Link3"
     }
     banner {
         imagem("link para a imagem") -> "link opcional da imagem"
-        titulo("Título")
-        subtitulo("Subtítulo")
+        texto {
+            titulo("Título")
+            subtitulo("Subtítulo")
+        }
     }
     conteudo {
         secao {
             colunas {
                 coluna {
-                    titulo("Título")
-                    subtitulo("Subtítulo")
-                    texto("Texto")
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                        paragrafo("Texto")
+                    }
                 }
                 coluna {
                     imagem("link para a imagem") -> "link opcional da imagem"
@@ -40,19 +44,25 @@ site("Título da Página") {
         secao {
             colunas {
                 coluna {
-                    titulo("Título")
-                    subtitulo("Subtitulo")
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtitulo")
+                    }
                 }
                 coluna {
-                    titulo("Título")
-                    subtitulo("Subtítulo")
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
                 }
             }
         }
     }
     rodape {
-        titulo("Copyright 2016")
-        subtitulo("Construção de Compiladores 2")
+        texto {
+            titulo("Copyright 2016")
+            subtitulo("Construção de Compiladores 2")
+        }
     }
 }
 """

@@ -39,6 +39,11 @@ class t3_cc2Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by t3_cc2Parser#nova_aba.
+    def visitNova_aba(self, ctx:t3_cc2Parser.Nova_abaContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by t3_cc2Parser#mais_itens.
     def visitMais_itens(self, ctx:t3_cc2Parser.Mais_itensContext):
         return self.visitChildren(ctx)
@@ -96,6 +101,21 @@ class t3_cc2Visitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by t3_cc2Parser#texto.
     def visitTexto(self, ctx:t3_cc2Parser.TextoContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#conteudo_texto.
+    def visitConteudo_texto(self, ctx:t3_cc2Parser.Conteudo_textoContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#mais_conteudo_texto.
+    def visitMais_conteudo_texto(self, ctx:t3_cc2Parser.Mais_conteudo_textoContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#paragrafo.
+    def visitParagrafo(self, ctx:t3_cc2Parser.ParagrafoContext):
         return self.visitChildren(ctx)
 
 

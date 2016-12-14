@@ -25,7 +25,10 @@ item:
 	'item' '(' CADEIA ')' link? mais_itens;
 
 link:
-    '->' CADEIA;
+    '->' nova_aba? CADEIA;
+
+nova_aba:
+    '+';
 
 mais_itens:
 	item | ;
@@ -34,13 +37,13 @@ sidebar:
 	'sidebar' '{' item '}' | 'sidebar' '=' 'menu' | ;
 
 banner:
-	'banner' '{' imagem	titulo subtitulo '}' | ;
+	'banner' '{' imagem	texto '}' | ;
 
 subtitulo:
 	'subtitulo' '(' CADEIA ')';
 
 rodape:
-	'rodape' '{' titulo subtitulo '}' | ;
+	'rodape' '{' texto '}' | ;
 
 conteudo:
 	'conteudo' '{' secao mais_secoes '}' | ;
@@ -55,13 +58,22 @@ colunas:
     'colunas' '{' coluna mais_colunas '}' | coluna |;
 
 coluna:
-    'coluna' '{' (imagem | titulo subtitulo texto) '}';
+    'coluna' '{' (imagem | texto) '}';
 
 mais_colunas:
     coluna | ;
 
 texto:
-	'texto' '(' CADEIA ')' | ;
+    'texto' '{' conteudo_texto mais_conteudo_texto '}';
+
+conteudo_texto:
+    (titulo | subtitulo | paragrafo) mais_conteudo_texto;
+
+mais_conteudo_texto:
+    conteudo_texto | ;
+
+paragrafo:
+    'paragrafo' '(' CADEIA ')';
 
 imagem:
 	'imagem' '(' CADEIA ')' link;
