@@ -3,13 +3,37 @@ from ANTLR.t3_cc2Parser import *
 
 class Intepretador(t3_cc2Visitor):
 
-    codigo = ""
+    codigo = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+            <title>#TITULODOSITE</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css">
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.js"></script>
+            #SCRIPT_SIDEBAR
+        </head>
+        <body>
+            #PUSHER_INICIO
+            #MENU
+            #SIDEBAR
+            #BANNER
+            #CONTEUDO
+            #RODAPE
+            #PUSHER_FIM
+        </body>
+        </html>
+    """
 
     def visitSite(self, ctx: t3_cc2Parser.SiteContext):
-        self.codigo += "SITE (" + self.visitTitulo_site(ctx.titulo_site()) + ")\n"
-        self.visitBanner(ctx.banner())
+        self.codigo = self.codigo.replace("#TITULODOSITE", self.visitTitulo_site(ctx.titulo_site()))
         self.visitMenu(ctx.menu())
         self.visitSidebar(ctx.sidebar())
+        self.visitBanner(ctx.banner())
         self.visitConteudo(ctx.conteudo())
         self.visitRodape(ctx.rodape())
 
@@ -17,33 +41,83 @@ class Intepretador(t3_cc2Visitor):
         return str(ctx.CADEIA())
 
     def visitMenu(self, ctx: t3_cc2Parser.MenuContext):
-        self.codigo += "MENU ("
-        self.visitItem(ctx.item())
-        self.codigo += ")"
+        if ctx is not None:
+            menu = """
+            <!-- Menu principal -->
+            <div class="ui large top fixed menu">
+                <div class="ui container">
+                    #BOTAO_SIDEBAR
+                    #ITEM
+                </div>
+            </div>
+            """
+
+            self.codigo = self.codigo.replace("#MENU", menu)
+            self.visitItem(ctx.item())
+            self.visitMais_itens(ctx.mais_itens())
+            self.codigo = self.codigo.replace("#ITEM", "")
 
     def visitSidebar(self, ctx: t3_cc2Parser.SidebarContext):
-        if ctx.item() is not None:
-            self.codigo += "\nSIDEBAR ("
+        if ctx is not None:
+            sidebar = """
+            <!-- Sidebar -->
+            <div class="ui vertical inverted sidebar menu">
+                #ITEM
+            </div>
+            """
+            self.codigo = self.codigo.replace("#SIDEBAR", sidebar)
             self.visitItem(ctx.item())
-            self.codigo += ")\n"
+            self.visitMais_itens(ctx.mais_itens())
+            self.codigo = self.codigo.replace("#ITEM", "")
+
+            script_sidebar = """
+            <script>
+                $(document)
+                    .ready(function() {
+                        $('.ui.sidebar')
+                            .sidebar('attach events', '.toc.item')
+                        ;
+                    })
+                ;
+            </script>
+            """
+
+            self.codigo = self.codigo.replace("#SCRIPT_SIDEBAR", script_sidebar)
+            self.codigo = self.codigo.replace("#PUSHER_INICIO", '<div class="pusher">')
+            self.codigo = self.codigo.replace("#PUSHER_FIM", '</div>')
+
+            botao_sidebar = """
+            <a class="toc item">
+                <i class="sidebar icon"></i>
+            </a>
+            """
+
+            self.codigo = self.codigo.replace("#BOTAO_SIDEBAR", botao_sidebar)
         else:
-            self.codigo += "\nSIDEBAR = MENU"
+            # tratar caso SIDEBAR = MENU
+            self.codigo = self.codigo.replace("PUSHER_INICIO", "")
+            self.codigo = self.codigo.replace("PUSHER_FIM", "")
+            self.codigo = self.codigo.replace("BOTAO_SIDEBAR", "")
 
     def visitItem(self, ctx: t3_cc2Parser.ItemContext):
         if ctx is not None:
-            self.codigo += str(ctx.CADEIA()) + "->" + self.visitLink(ctx.link()) + ", "
+            item = '<a class="item" href=#LINK#TARGET>#CADEIA</a>\n'
 
-            if ctx.mais_itens() is not None:
-                self.visitMais_itens(ctx.mais_itens())
+            item = item.replace("#CADEIA", str(ctx.CADEIA()))
+            item = item.replace("#LINK", self.visitLink(ctx.link()))
+            item = item.replace("#TARGET", self.visitNova_aba(ctx.link().nova_aba()))
+
+            self.codigo = self.codigo.replace("#ITEM", item + "#ITEM")
 
     def visitMais_itens(self, ctx: t3_cc2Parser.Mais_itensContext):
-        self.visitItem(ctx.item())
+        for item in ctx.item():
+            self.visitItem(item)
 
     def visitLink(self, ctx: t3_cc2Parser.LinkContext):
+        return str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
 
-        nova_aba = " -> nova_aba" if ctx.nova_aba() is not None else ""
-
-        return str(ctx.CADEIA()) + nova_aba if ctx is not None and ctx.CADEIA() is not None else ""
+    def visitNova_aba(self, ctx: t3_cc2Parser.Nova_abaContext):
+        return ' target="_blank"' if ctx is not None else ""
 
     def visitBanner(self, ctx: t3_cc2Parser.BannerContext):
         self.codigo += "BANNER ("
