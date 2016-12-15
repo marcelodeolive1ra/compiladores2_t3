@@ -16,7 +16,7 @@ titulo_site:
     '(' CADEIA ')';
 
 titulo:
-	'titulo' '(' CADEIA ')';
+	'titulo' parametro? '(' CADEIA ')';
 
 menu:
 	'menu' '{' item mais_itens '}';
@@ -40,7 +40,7 @@ banner:
 	'banner' '{' imagem	texto '}' | ;
 
 subtitulo:
-	'subtitulo' '(' CADEIA ')';
+	'subtitulo' parametro? '(' CADEIA ')';
 
 rodape:
 	'rodape' '{' texto '}' | ;
@@ -64,7 +64,7 @@ mais_colunas:
     coluna | ;
 
 texto:
-    'texto' '{' conteudo_texto mais_conteudo_texto '}';
+    'texto' parametro? '{' conteudo_texto mais_conteudo_texto '}';
 
 conteudo_texto:
     (titulo | subtitulo | paragrafo) mais_conteudo_texto;
@@ -73,7 +73,22 @@ mais_conteudo_texto:
     conteudo_texto | ;
 
 paragrafo:
-    'paragrafo' '(' CADEIA ')';
+    'paragrafo' parametro? '(' CADEIA ')';
 
 imagem:
 	'imagem' '(' CADEIA ')' link;
+
+parametro:
+    '(' (tamanho | fonte | cor) mais_parametros ')';
+
+mais_parametros:
+    ',' parametro | ;
+
+tamanho:
+    'tamanho' '=' ('extra-pequeno' | 'pequeno' | 'normal' | 'grande' | 'extra-grande');
+
+fonte:
+    'fonte' '=' ('Arial' | 'Helvetica' | 'Times New Roman' | 'Lato' | 'Roboto' | 'Open Sans');
+
+cor:
+    'cor' '=' ('azul' | 'verde' | 'amarelo' | 'branco' | 'preto' | 'vermelho' | 'laranja' | 'roxo');

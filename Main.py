@@ -22,7 +22,7 @@ site("Título da Página") {
     }
     banner {
         imagem("link para a imagem") -> "link opcional da imagem"
-        texto {
+        texto (cor=azul) {
             titulo("Título")
             subtitulo("Subtítulo")
         }
@@ -81,7 +81,8 @@ try:
     parser = t3_cc2Parser(tokens)
     programa = parser.site()
 
-    # print(programa.getText())
+    print(programa.getText())
+    print(parser.literalNames)
 
     gerador_de_codigo = GeradorDeCodigo()
     gerador_de_codigo.visitSite(programa)
