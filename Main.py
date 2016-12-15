@@ -2,7 +2,8 @@ import antlr4
 from ANTLR.t3_cc2Lexer import *
 from ANTLR.t3_cc2Parser import *
 from ANTLR.t3_cc2Visitor import *
-from Interpretador import *
+from GeradorDeCodigo import *
+from ErrosSintaticosErrorListener import ErrosSintaticosErrorListener
 
 programa_exemplo = """
 // Comentário
@@ -70,17 +71,25 @@ site("Título da Página") {
 input = antlr4.InputStream(programa_exemplo)
 
 lexer = t3_cc2Lexer(input=input)
-tokens = antlr4.CommonTokenStream(lexer=lexer)
-parser = t3_cc2Parser(tokens)
 
-programa = parser.site()
+lexer.removeErrorListeners()
+erros_sintaticos = ErrosSintaticosErrorListener()
+lexer.addErrorListener(erros_sintaticos)
 
-print(programa.getText())
+try:
+    tokens = antlr4.CommonTokenStream(lexer=lexer)
+    parser = t3_cc2Parser(tokens)
+    programa = parser.site()
 
-interpretador = Intepretador()
+    # print(programa.getText())
 
-interpretador.visitSite(programa)
+    gerador_de_codigo = GeradorDeCodigo()
+    gerador_de_codigo.visitSite(programa)
 
-print(parser.literalNames)
+    print('\n' + gerador_de_codigo.getCodigo())
 
-print('\n' + interpretador.getCodigo())
+except:
+    if erros_sintaticos.getErrosSintaticos() != "":
+        print(erros_sintaticos.getErrosSintaticos())
+    else:
+        print("Erros semânticos")

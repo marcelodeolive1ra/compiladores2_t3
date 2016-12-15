@@ -1,7 +1,7 @@
 from ANTLR.t3_cc2Visitor import *
 from ANTLR.t3_cc2Parser import *
 
-class Intepretador(t3_cc2Visitor):
+class GeradorDeCodigo(t3_cc2Visitor):
 
     codigo = """
         <!DOCTYPE html>
