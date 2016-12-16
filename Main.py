@@ -22,7 +22,7 @@ site("Título da Página") {
     }
     banner {
         imagem("link para a imagem") -> "link opcional da imagem"
-        texto (cor=azul) {
+        texto (cor=azul, fonte=Arial) {
             titulo("Título")
             subtitulo("Subtítulo")
         }

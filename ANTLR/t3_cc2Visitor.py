@@ -139,13 +139,28 @@ class t3_cc2Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by t3_cc2Parser#opcao_tamanho.
+    def visitOpcao_tamanho(self, ctx:t3_cc2Parser.Opcao_tamanhoContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by t3_cc2Parser#fonte.
     def visitFonte(self, ctx:t3_cc2Parser.FonteContext):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by t3_cc2Parser#opcao_fonte.
+    def visitOpcao_fonte(self, ctx:t3_cc2Parser.Opcao_fonteContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by t3_cc2Parser#cor.
     def visitCor(self, ctx:t3_cc2Parser.CorContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#opcao_cor.
+    def visitOpcao_cor(self, ctx:t3_cc2Parser.Opcao_corContext):
         return self.visitChildren(ctx)
 
 
