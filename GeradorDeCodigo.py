@@ -169,12 +169,28 @@ class GeradorDeCodigo(t3_cc2Visitor):
             pass
 
     def visitTitulo(self, ctx: t3_cc2Parser.TituloContext):
+        if ctx.parametro() is not None:
+            self.codigo += "parametros("
+            self.visitParametro(ctx.parametro())
+            self.codigo += ")"
         return str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
 
     def visitSubtitulo(self, ctx: t3_cc2Parser.SubtituloContext):
+        if ctx.parametro() is not None:
+            self.codigo += "parametros("
+            self.visitParametro(ctx.parametro())
+            self.codigo += ")"
         return str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
 
     def visitTexto(self, ctx: t3_cc2Parser.TextoContext):
+        try:
+            if ctx.parametro() is not None:
+                self.codigo += "parametros("
+                self.visitParametro(ctx.parametro())
+                self.codigo += ")"
+        except:
+            pass
+
         try:
             if ctx.conteudo_texto() is not None:
                 self.visitConteudo_texto(ctx.conteudo_texto())
@@ -192,7 +208,15 @@ class GeradorDeCodigo(t3_cc2Visitor):
         if ctx.mais_conteudo_texto() is not None:
             self.visitMais_conteudo_texto(ctx.mais_conteudo_texto())
 
+    def visitMais_conteudo_texto(self, ctx: t3_cc2Parser.Mais_conteudo_textoContext):
+        self.visitConteudo_texto(ctx.conteudo_texto())
+
     def visitParagrafo(self, ctx: t3_cc2Parser.ParagrafoContext):
+        if ctx.parametro() is not None:
+            self.codigo += "parametros("
+            self.visitParametro(ctx.parametro())
+            self.codigo += ")"
+
         return str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
 
     def visitImagem(self, ctx: t3_cc2Parser.ImagemContext):
@@ -202,6 +226,40 @@ class GeradorDeCodigo(t3_cc2Visitor):
         self.codigo += "RODAPE ("
         self.visitTexto(ctx.texto())
         self.codigo += ")"
+
+    def visitParametro(self, ctx: t3_cc2Parser.ParametroContext):
+        if ctx is not None:
+            if ctx.getText().startswith("fonte"):
+                self.codigo += "fonte = " + self.visitFonte(ctx.fonte())
+            elif ctx.getText().startswith("tamanho"):
+                self.codigo += "tamanho = " + self.visitTamanho(ctx.tamanho())
+            elif ctx.getText().startswith("cor"):
+                self.codigo += "cor = " + self.visitCor(ctx.cor())
+
+        if ctx.mais_parametros() is not None:
+            self.codigo += ", "
+            self.visitMais_parametros(ctx.mais_parametros())
+
+    def visitMais_parametros(self, ctx: t3_cc2Parser.Mais_parametrosContext):
+        self.visitParametro(ctx.parametro())
+
+    def visitFonte(self, ctx: t3_cc2Parser.FonteContext):
+        return self.visitOpcao_fonte(ctx.opcao_fonte())
+
+    def visitOpcao_fonte(self, ctx: t3_cc2Parser.Opcao_fonteContext):
+        return ctx.getText()
+
+    def visitCor(self, ctx: t3_cc2Parser.CorContext):
+        return self.visitOpcao_cor(ctx.opcao_cor())
+
+    def visitOpcao_cor(self, ctx: t3_cc2Parser.Opcao_corContext):
+        return ctx.getText()
+
+    def visitTamanho(self, ctx: t3_cc2Parser.TamanhoContext):
+        return self.visitOpcao_tamanho(ctx.opcao_tamanho())
+
+    def visitOpcao_tamanho(self, ctx: t3_cc2Parser.Opcao_tamanhoContext):
+        return ctx.getText()
 
     def getCodigo(self):
         return self.codigo

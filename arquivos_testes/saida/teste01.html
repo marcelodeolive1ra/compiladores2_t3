@@ -1,0 +1,63 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+            <title>"Título da Página"</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css">
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.js"></script>
+            
+            <script>
+                $(document)
+                    .ready(function() {
+                        $('.ui.sidebar')
+                            .sidebar('attach events', '.toc.item')
+                        ;
+                    })
+                ;
+            </script>
+            
+        </head>
+        <body>
+            <div class="pusher">
+            
+            <!-- Menu principal -->
+            <div class="ui large top fixed menu">
+                <div class="ui container">
+                    
+            <a class="toc item">
+                <i class="sidebar icon"></i>
+            </a>
+            
+                    <a class="item" href="http://google.com.br">"Home"</a>
+<a class="item" href="Link2">"Página 2"</a>
+<a class="item" href="Link3">"Página 3"</a>
+
+                </div>
+            </div>
+            
+            
+            <!-- Sidebar -->
+            <div class="ui vertical inverted sidebar menu">
+                <a class="item" href="Link1">"Home"</a>
+<a class="item" href="Link2 para abrir em nova aba" target="_blank">"Página 2"</a>
+<a class="item" href="Link3">"Página 3"</a>
+
+            </div>
+            
+            #BANNER
+            #CONTEUDO
+            #RODAPE
+            </div>
+        </body>
+        </html>
+    BANNER (Imagem de fundo: "link para a imagem", TEXTO (parametros(cor = azul, fonte = Arial, TITULO ("Título"), SUBTITULO ("Subtítulo"), ))
+COLUNA (TITULO ("Título"), SUBTITULO ("Subtítulo"), PARAGRAFO ("Texto"), )
+COLUNA ("link para a imagem")
+COLUNA (TITULO ("Título"), SUBTITULO ("Subtitulo"), )
+COLUNA (TITULO ("Título"), SUBTITULO ("Subtítulo"), )
+RODAPE (TITULO ("Copyright 2016"), SUBTITULO ("Construção de Compiladores 2"), )

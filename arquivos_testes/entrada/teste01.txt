@@ -1,0 +1,60 @@
+// Comentário
+
+site("Título da Página") {
+    menu {
+        item("Home") -> "http://google.com.br"
+        item("Página 2") -> "Link2"
+        item("Página 3") -> "Link3"
+    }
+    //sidebar = menu
+    sidebar {
+        item("Home") -> "Link1"
+        item("Página 2") ->+ "Link2 para abrir em nova aba"
+        item("Página 3") -> "Link3"
+    }
+    banner {
+        imagem("link para a imagem") -> "link opcional da imagem"
+        texto (cor=azul, fonte=Arial) {
+            titulo("Título")
+            subtitulo("Subtítulo")
+        }
+    }
+    conteudo {
+        secao {
+            colunas {
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                        paragrafo("Texto")
+                    }
+                }
+                coluna {
+                    imagem("link para a imagem") -> "link opcional da imagem"
+                }
+            }
+        }
+        secao {
+            colunas {
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtitulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+            }
+        }
+    }
+    rodape {
+        texto {
+            titulo("Copyright 2016")
+            subtitulo("Construção de Compiladores 2")
+        }
+    }
+}

@@ -1,4 +1,4 @@
-# Generated from /home/joao/PycharmProjects/compiladores2_t3/t3_cc2.g4 by ANTLR 4.5.3
+# Generated from /Users/marcelodeoliveiradasilva/PycharmProjects/T3_CC2_PyCharm/t3_cc2.g4 by ANTLR 4.6
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .t3_cc2Parser import t3_cc2Parser
@@ -121,6 +121,46 @@ class t3_cc2Visitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by t3_cc2Parser#imagem.
     def visitImagem(self, ctx:t3_cc2Parser.ImagemContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#parametro.
+    def visitParametro(self, ctx:t3_cc2Parser.ParametroContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#mais_parametros.
+    def visitMais_parametros(self, ctx:t3_cc2Parser.Mais_parametrosContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#tamanho.
+    def visitTamanho(self, ctx:t3_cc2Parser.TamanhoContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#opcao_tamanho.
+    def visitOpcao_tamanho(self, ctx:t3_cc2Parser.Opcao_tamanhoContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#fonte.
+    def visitFonte(self, ctx:t3_cc2Parser.FonteContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#opcao_fonte.
+    def visitOpcao_fonte(self, ctx:t3_cc2Parser.Opcao_fonteContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#cor.
+    def visitCor(self, ctx:t3_cc2Parser.CorContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#opcao_cor.
+    def visitOpcao_cor(self, ctx:t3_cc2Parser.Opcao_corContext):
         return self.visitChildren(ctx)
 
 

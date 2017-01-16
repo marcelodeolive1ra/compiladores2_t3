@@ -33,4 +33,4 @@ Menu PyCharm -> Preferences... -> Plugins
 
 #### Ubuntu ou outras distribuições Linux
 
-... texto em desenvolvimento
+Menu File -> Settings... -> Plugins
