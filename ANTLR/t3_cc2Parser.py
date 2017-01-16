@@ -1,4 +1,4 @@
-# Generated from /home/joao/PycharmProjects/compiladores2_t3/t3_cc2.g4 by ANTLR 4.5.3
+# Generated from /Users/marcelodeoliveiradasilva/PycharmProjects/T3_CC2_PyCharm/t3_cc2.g4 by ANTLR 4.6
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -244,7 +244,7 @@ class t3_cc2Parser ( Parser ):
 
     def __init__(self, input:TokenStream):
         super().__init__(input)
-        self.checkVersion("4.5.3")
+        self.checkVersion("4.6")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -399,7 +399,7 @@ class t3_cc2Parser ( Parser ):
             self.state = 76
             self.match(t3_cc2Parser.T__5)
             self.state = 81
-            self._errHandler.sync(self);
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,0,self._ctx)
             if la_ == 1:
                 self.state = 77
@@ -515,6 +515,7 @@ class t3_cc2Parser ( Parser ):
             self.state = 96
             self.match(t3_cc2Parser.T__4)
             self.state = 98
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==t3_cc2Parser.T__8:
                 self.state = 97
@@ -564,6 +565,7 @@ class t3_cc2Parser ( Parser ):
             self.state = 100
             self.match(t3_cc2Parser.T__8)
             self.state = 102
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==t3_cc2Parser.T__9:
                 self.state = 101
@@ -647,7 +649,7 @@ class t3_cc2Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 115
-            self._errHandler.sync(self);
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -709,7 +711,7 @@ class t3_cc2Parser ( Parser ):
         self.enterRule(localctx, 16, self.RULE_sidebar)
         try:
             self.state = 127
-            self._errHandler.sync(self);
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -781,6 +783,7 @@ class t3_cc2Parser ( Parser ):
         self.enterRule(localctx, 18, self.RULE_banner)
         try:
             self.state = 136
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [t3_cc2Parser.T__12]:
                 self.enterOuterAlt(localctx, 1)
@@ -794,11 +797,11 @@ class t3_cc2Parser ( Parser ):
                 self.texto()
                 self.state = 133
                 self.match(t3_cc2Parser.T__2)
-
+                pass
             elif token in [t3_cc2Parser.T__2, t3_cc2Parser.T__14, t3_cc2Parser.T__15]:
                 self.enterOuterAlt(localctx, 2)
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -844,7 +847,7 @@ class t3_cc2Parser ( Parser ):
             self.state = 138
             self.match(t3_cc2Parser.T__13)
             self.state = 143
-            self._errHandler.sync(self);
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
             if la_ == 1:
                 self.state = 139
@@ -897,6 +900,7 @@ class t3_cc2Parser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_rodape)
         try:
             self.state = 155
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [t3_cc2Parser.T__14]:
                 self.enterOuterAlt(localctx, 1)
@@ -908,11 +912,11 @@ class t3_cc2Parser ( Parser ):
                 self.texto()
                 self.state = 152
                 self.match(t3_cc2Parser.T__2)
-
+                pass
             elif token in [t3_cc2Parser.T__2]:
                 self.enterOuterAlt(localctx, 2)
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -956,6 +960,7 @@ class t3_cc2Parser ( Parser ):
         self.enterRule(localctx, 24, self.RULE_conteudo)
         try:
             self.state = 164
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [t3_cc2Parser.T__15]:
                 self.enterOuterAlt(localctx, 1)
@@ -969,11 +974,11 @@ class t3_cc2Parser ( Parser ):
                 self.mais_secoes()
                 self.state = 161
                 self.match(t3_cc2Parser.T__2)
-
+                pass
             elif token in [t3_cc2Parser.T__2, t3_cc2Parser.T__14]:
                 self.enterOuterAlt(localctx, 2)
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1057,16 +1062,17 @@ class t3_cc2Parser ( Parser ):
         self.enterRule(localctx, 28, self.RULE_mais_secoes)
         try:
             self.state = 173
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [t3_cc2Parser.T__16]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 171
                 self.secao()
-
+                pass
             elif token in [t3_cc2Parser.T__2]:
                 self.enterOuterAlt(localctx, 2)
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1110,6 +1116,7 @@ class t3_cc2Parser ( Parser ):
         self.enterRule(localctx, 30, self.RULE_colunas)
         try:
             self.state = 183
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [t3_cc2Parser.T__17]:
                 self.enterOuterAlt(localctx, 1)
@@ -1123,16 +1130,16 @@ class t3_cc2Parser ( Parser ):
                 self.mais_colunas()
                 self.state = 179
                 self.match(t3_cc2Parser.T__2)
-
+                pass
             elif token in [t3_cc2Parser.T__18]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 181
                 self.coluna()
-
+                pass
             elif token in [t3_cc2Parser.T__2]:
                 self.enterOuterAlt(localctx, 3)
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1181,15 +1188,16 @@ class t3_cc2Parser ( Parser ):
             self.state = 186
             self.match(t3_cc2Parser.T__1)
             self.state = 189
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [t3_cc2Parser.T__21]:
                 self.state = 187
                 self.imagem()
-
+                pass
             elif token in [t3_cc2Parser.T__19]:
                 self.state = 188
                 self.texto()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1231,16 +1239,17 @@ class t3_cc2Parser ( Parser ):
         self.enterRule(localctx, 34, self.RULE_mais_colunas)
         try:
             self.state = 195
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [t3_cc2Parser.T__18]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 193
                 self.coluna()
-
+                pass
             elif token in [t3_cc2Parser.T__2]:
                 self.enterOuterAlt(localctx, 2)
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1292,6 +1301,7 @@ class t3_cc2Parser ( Parser ):
             self.state = 197
             self.match(t3_cc2Parser.T__19)
             self.state = 202
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==t3_cc2Parser.T__3:
                 self.state = 198
@@ -1359,19 +1369,20 @@ class t3_cc2Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 212
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [t3_cc2Parser.T__5]:
                 self.state = 209
                 self.titulo()
-
+                pass
             elif token in [t3_cc2Parser.T__13]:
                 self.state = 210
                 self.subtitulo()
-
+                pass
             elif token in [t3_cc2Parser.T__20]:
                 self.state = 211
                 self.paragrafo()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1413,7 +1424,7 @@ class t3_cc2Parser ( Parser ):
         self.enterRule(localctx, 40, self.RULE_mais_conteudo_texto)
         try:
             self.state = 218
-            self._errHandler.sync(self);
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -1469,7 +1480,7 @@ class t3_cc2Parser ( Parser ):
             self.state = 220
             self.match(t3_cc2Parser.T__20)
             self.state = 225
-            self._errHandler.sync(self);
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
             if la_ == 1:
                 self.state = 221
@@ -1584,19 +1595,20 @@ class t3_cc2Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 240
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [t3_cc2Parser.T__23]:
                 self.state = 237
                 self.tamanho()
-
+                pass
             elif token in [t3_cc2Parser.T__29]:
                 self.state = 238
                 self.fonte()
-
+                pass
             elif token in [t3_cc2Parser.T__36]:
                 self.state = 239
                 self.cor()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1638,6 +1650,7 @@ class t3_cc2Parser ( Parser ):
         self.enterRule(localctx, 48, self.RULE_mais_parametros)
         try:
             self.state = 247
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [t3_cc2Parser.T__22]:
                 self.enterOuterAlt(localctx, 1)
@@ -1645,11 +1658,11 @@ class t3_cc2Parser ( Parser ):
                 self.match(t3_cc2Parser.T__22)
                 self.state = 245
                 self.parametro()
-
+                pass
             elif token in [t3_cc2Parser.T__4]:
                 self.enterOuterAlt(localctx, 2)
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1734,6 +1747,7 @@ class t3_cc2Parser ( Parser ):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << t3_cc2Parser.T__24) | (1 << t3_cc2Parser.T__25) | (1 << t3_cc2Parser.T__26) | (1 << t3_cc2Parser.T__27) | (1 << t3_cc2Parser.T__28))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -1816,6 +1830,7 @@ class t3_cc2Parser ( Parser ):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << t3_cc2Parser.T__30) | (1 << t3_cc2Parser.T__31) | (1 << t3_cc2Parser.T__32) | (1 << t3_cc2Parser.T__33) | (1 << t3_cc2Parser.T__34) | (1 << t3_cc2Parser.T__35))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -1898,6 +1913,7 @@ class t3_cc2Parser ( Parser ):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << t3_cc2Parser.T__37) | (1 << t3_cc2Parser.T__38) | (1 << t3_cc2Parser.T__39) | (1 << t3_cc2Parser.T__40) | (1 << t3_cc2Parser.T__41) | (1 << t3_cc2Parser.T__42) | (1 << t3_cc2Parser.T__43) | (1 << t3_cc2Parser.T__44))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re

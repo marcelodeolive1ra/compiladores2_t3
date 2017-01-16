@@ -5,70 +5,17 @@ from ANTLR.t3_cc2Visitor import *
 from GeradorDeCodigo import *
 from ErrosSintaticosErrorListener import ErrosSintaticosErrorListener
 
-programa_exemplo = """
-// Comentário
+import os
+DIRETORIO_PROJETO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CAMINHO_ARQUIVOS_ENTRADA = '/T3_CC2_Pycharm/arquivos_testes/entrada/'
+CAMINHO_ARQUIVOS_SAIDA = '/T3_CC2_Pycharm/arquivos_testes/saida/'
 
-site("Título da Página") {
-    menu {
-        item("Home") -> "http://google.com.br"
-        item("Página 2") -> "Link2"
-        item("Página 3") -> "Link3"
-    }
-    //sidebar = menu
-    sidebar {
-        item("Home") -> "Link1"
-        item("Página 2") ->+ "Link2 para abrir em nova aba"
-        item("Página 3") -> "Link3"
-    }
-    banner {
-        imagem("link para a imagem") -> "link opcional da imagem"
-        texto (cor=azul, fonte=Arial) {
-            titulo("Título")
-            subtitulo("Subtítulo")
-        }
-    }
-    conteudo {
-        secao {
-            colunas {
-                coluna {
-                    texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
-                        paragrafo("Texto")
-                    }
-                }
-                coluna {
-                    imagem("link para a imagem") -> "link opcional da imagem"
-                }
-            }
-        }
-        secao {
-            colunas {
-                coluna {
-                    texto {
-                        titulo("Título")
-                        subtitulo("Subtitulo")
-                    }
-                }
-                coluna {
-                    texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
-                    }
-                }
-            }
-        }
-    }
-    rodape {
-        texto {
-            titulo("Copyright 2016")
-            subtitulo("Construção de Compiladores 2")
-        }
-    }
-}
-"""
 
-input = antlr4.InputStream(programa_exemplo)
+CASO_DE_TESTE = 'teste01.txt'
+with open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_ENTRADA + CASO_DE_TESTE) as f:
+    programa = f.read()
+
+input = antlr4.InputStream(programa)
 
 lexer = t3_cc2Lexer(input=input)
 
@@ -87,7 +34,13 @@ try:
     gerador_de_codigo = GeradorDeCodigo()
     gerador_de_codigo.visitSite(programa)
 
-    print('\n' + gerador_de_codigo.getCodigo())
+    codigo_gerado = gerador_de_codigo.getCodigo()
+
+    arquivo_saida = open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_SAIDA + 'teste01.html', 'w')
+    arquivo_saida.write(codigo_gerado)
+    arquivo_saida.close()
+
+    print('\n' + codigo_gerado)
 
 except:
     if erros_sintaticos.getErrosSintaticos() != "":

@@ -1,4 +1,4 @@
-# Generated from /home/joao/PycharmProjects/compiladores2_t3/t3_cc2.g4 by ANTLR 4.5.3
+# Generated from /Users/marcelodeoliveiradasilva/PycharmProjects/T3_CC2_PyCharm/t3_cc2.g4 by ANTLR 4.6
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .t3_cc2Parser import t3_cc2Parser
