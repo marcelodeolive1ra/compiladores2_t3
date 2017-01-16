@@ -12,7 +12,7 @@ CAMINHO_ARQUIVOS_SAIDA = '/T3_CC2_Pycharm/arquivos_testes/saida/'
 
 
 CASO_DE_TESTE = 'teste01.txt'
-with open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_ENTRADA + CASO_DE_TESTE) as f:
+with open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_ENTRADA + CASO_DE_TESTE, encoding='utf-8') as f:
     programa = f.read()
 
 input = antlr4.InputStream(programa)
@@ -36,7 +36,7 @@ try:
 
     codigo_gerado = gerador_de_codigo.getCodigo()
 
-    arquivo_saida = open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_SAIDA + 'teste01.html', 'w')
+    arquivo_saida = open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_SAIDA + 'teste01.html', 'w', encoding='utf-8')
     arquivo_saida.write(codigo_gerado)
     arquivo_saida.close()
 
