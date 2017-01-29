@@ -1,0 +1,9 @@
+ //sidebar = menu
+
+site("Título da Página") {
+    sidebar {
+        item("Home") -> "Link1"
+        item("Página 2") ->+ "Link2 para abrir em nova aba"
+        item("Página 3") -> "Link3"
+    }
+}

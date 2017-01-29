@@ -1,0 +1,8 @@
+//Tesde de menu
+site("Título da Página") {
+    menu {
+        item("Home") -> "http://google.com.br"
+        item("Página 2") -> "Link2"
+        item("Página 3") -> "Link3"
+    }
+}

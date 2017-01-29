@@ -1,0 +1,9 @@
+//Teste de rodape
+site("Título da Página") {
+    rodape {
+        texto {
+            titulo("Copyright 2016")
+            subtitulo("Construção de Compiladores 2")
+        }
+    }
+}
