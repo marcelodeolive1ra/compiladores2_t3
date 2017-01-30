@@ -1,8 +1,8 @@
 from ANTLR.t3_cc2Visitor import *
 from ANTLR.t3_cc2Parser import *
 
-class GeradorDeCodigo(t3_cc2Visitor):
 
+class GeradorDeCodigo(t3_cc2Visitor):
     codigo = """
         <!DOCTYPE html>
         <html>
@@ -25,8 +25,6 @@ class GeradorDeCodigo(t3_cc2Visitor):
             #CONTEUDO
             #RODAPE
             #PUSHER_FIM
-        </body>
-        </html>
     """
 
     def visitSite(self, ctx: t3_cc2Parser.SiteContext):
@@ -36,6 +34,11 @@ class GeradorDeCodigo(t3_cc2Visitor):
         self.visitBanner(ctx.banner())
         self.visitConteudo(ctx.conteudo())
         self.visitRodape(ctx.rodape())
+        self.codigo += """
+        </div>
+        </body>
+        </html>
+        """
 
     def visitTitulo_site(self, ctx: t3_cc2Parser.Titulo_siteContext):
         return str(ctx.CADEIA())
@@ -84,7 +87,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
             self.codigo = self.codigo.replace("#SCRIPT_SIDEBAR", script_sidebar)
             self.codigo = self.codigo.replace("#PUSHER_INICIO", '<div class="pusher">')
-            self.codigo = self.codigo.replace("#PUSHER_FIM", '</div>')
+            # self.codigo = self.codigo.replace("#PUSHER_FIM", '</div>')
 
             botao_sidebar = """
             <a class="toc item">
@@ -104,7 +107,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
             item = '<a class="item" href=#LINK#TARGET>#CADEIA</a>\n'
 
             item = item.replace("#CADEIA", str(ctx.CADEIA()))
-            item = item.replace("#LINK", self.visitLink(ctx.link()))
+            item = item.replace('#LINK', self.visitLink(ctx.link()))
             item = item.replace("#TARGET", self.visitNova_aba(ctx.link().nova_aba()))
 
             self.codigo = self.codigo.replace("#ITEM", item + "#ITEM")
@@ -120,10 +123,74 @@ class GeradorDeCodigo(t3_cc2Visitor):
         return ' target="_blank"' if ctx is not None else ""
 
     def visitBanner(self, ctx: t3_cc2Parser.BannerContext):
+        self.codigo = self.codigo.replace("#BANNER", """
+
+
+    <style>
+    .masthead.segment {
+      min-height: 700px;
+      padding: 1em 0em;
+    }
+    .masthead .logo.item img {
+      margin-right: 1em;
+    }
+    .masthead .ui.menu .ui.button {
+      margin-left: 0.5em;
+    }
+    .masthead h1.ui.header {
+      margin-top: 3em;
+      margin-bottom: 0em;
+      font-size: 4em;
+      font-weight: normal;
+    }
+    .masthead h2 {
+      font-size: 1.7em;
+      font-weight: normal;
+    }
+
+    .ui.vertical.stripe {
+      padding: 8em 0em;
+    }
+    .ui.vertical.stripe h3 {
+      font-size: 2em;
+    }
+    .ui.vertical.stripe .button + h3,
+    .ui.vertical.stripe p + h3 {
+      margin-top: 3em;
+    }
+    .ui.vertical.stripe .floated.image {
+      clear: both;
+    }
+    .ui.vertical.stripe p {
+      font-size: 1.33em;
+    }
+    .ui.vertical.stripe .horizontal.divider {
+      margin: 3em 0em;
+    }
+    </style>
+    <div class="ui inverted vertical masthead center aligned segment">
+
+
+    <div class="ui text container">
+    #IMAGEM
+      <h1 class="ui inverted header">
+        #TITULO
+      </h1>
+      <h2>#SUBTITULO</h2>
+
+    </div>
+
+  </div>
+</div>
+
+
+        """)
+
         self.codigo += "BANNER ("
-        self.codigo += "Imagem de fundo: " + self.visitImagem(ctx.imagem()) + ", "
+        # self.codigo += "Imagem de fundo: " + self.visitImagem(ctx.imagem()) + ", "
+        self.codigo = self.codigo.replace('#IMAGEM', self.visitImagem(ctx.imagem()))
         self.codigo += "TEXTO ("
-        self.visitTexto(ctx.texto())
+        self.codigo = self.codigo.replace("#TITULO", self.visitTexto(ctx.texto()))
         self.codigo += "))\n"
 
     def visitConteudo(self, ctx: t3_cc2Parser.ConteudoContext):
@@ -157,14 +224,26 @@ class GeradorDeCodigo(t3_cc2Visitor):
         try:
             if ctx.imagem() is not None:
                 self.codigo += "COLUNA (" + self.visitImagem(ctx.imagem()) + ")\n"
+
+                self.codigo += """
+                <div class="ui sixteen wide column">
+                    #TEXTO_ESCOPO_COLUNA
+                    #IMAGEM_ESCOPO_COLUNA
+                </div>
+                """
+
+                self.codigo = self.codigo.replace('#TEXTO_ESCOPO_COLUNA', self.visitTexto(ctx.texto()))
+                self.codigo = self.codigo.replace('#IMAGEM_ESCOPO_COLUNA', self.visitImagem(ctx.imagem()))
         except:
             pass
 
         try:
             if ctx.texto() is not None:
-                self.codigo += "COLUNA ("
-                self.visitTexto(ctx.texto())
-                self.codigo += ")\n"
+                # self.codigo += "COLUNA ("
+                # self.visitTexto(ctx.texto())
+                # self.codigo += ")\n"
+
+                self.codigo = self.codigo.replace('#TEXTO_ESCOPO_COLUNA', self.visitTexto(ctx.texto()))
         except:
             pass
 
@@ -173,14 +252,16 @@ class GeradorDeCodigo(t3_cc2Visitor):
             self.codigo += "parametros("
             self.visitParametro(ctx.parametro())
             self.codigo += ")"
-        return str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
+        return '<h1 class="header">' + (
+        str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else "") + '</h1>'
 
     def visitSubtitulo(self, ctx: t3_cc2Parser.SubtituloContext):
         if ctx.parametro() is not None:
             self.codigo += "parametros("
             self.visitParametro(ctx.parametro())
             self.codigo += ")"
-        return str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
+        return '<h2 class="header">' + (
+        str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else "") + '</h2>'
 
     def visitTexto(self, ctx: t3_cc2Parser.TextoContext):
         try:
@@ -193,17 +274,22 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
         try:
             if ctx.conteudo_texto() is not None:
-                self.visitConteudo_texto(ctx.conteudo_texto())
+                return self.visitConteudo_texto(ctx.conteudo_texto())
+                # if ctx.mais_conteudo_texto() is not None:
+                # self.visitMais_conteudo_texto(ctx.mais_conteudo_texto())
         except:
             pass
 
     def visitConteudo_texto(self, ctx: t3_cc2Parser.Conteudo_textoContext):
         if ctx.paragrafo() is not None:
             self.codigo += "PARAGRAFO (" + self.visitParagrafo(ctx.paragrafo()) + "), "
-        elif ctx.titulo() is not None:
+            return self.visitParagrafo(ctx.paragrafo())
+        if ctx.titulo() is not None:
             self.codigo += "TITULO (" + self.visitTitulo(ctx.titulo()) + "), "
-        elif ctx.subtitulo() is not None:
+            return self.visitTitulo(ctx.titulo())
+        if ctx.subtitulo() is not None:
             self.codigo += "SUBTITULO (" + self.visitSubtitulo(ctx.subtitulo()) + "), "
+            return self.visitSubtitulo(ctx.subtitulo())
 
         if ctx.mais_conteudo_texto() is not None:
             self.visitMais_conteudo_texto(ctx.mais_conteudo_texto())
@@ -217,15 +303,28 @@ class GeradorDeCodigo(t3_cc2Visitor):
             self.visitParametro(ctx.parametro())
             self.codigo += ")"
 
-        return str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
+        return '<p>' + (str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else "") + '</p>'
 
     def visitImagem(self, ctx: t3_cc2Parser.ImagemContext):
-        return str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
+        return '<img src="' + \
+               (str(ctx.CADEIA()).replace('"', '') if ctx is not None and ctx.CADEIA() is not None else "") + '">'
 
     def visitRodape(self, ctx: t3_cc2Parser.RodapeContext):
         self.codigo += "RODAPE ("
         self.visitTexto(ctx.texto())
         self.codigo += ")"
+
+        self.codigo += """
+<div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        #RODAPE
+    </div>
+  </div>
+
+        """
+
+        self.codigo = self.codigo.replace('#RODAPE', self.visitTexto(ctx.texto()))
 
     def visitParametro(self, ctx: t3_cc2Parser.ParametroContext):
         if ctx is not None:

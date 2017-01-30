@@ -14,7 +14,7 @@ site("Título da Página") {
         item("Página 3") -> "Link3"
     }
     banner {
-        imagem("link para a imagem") -> "link opcional da imagem"
+        //imagem("Octocat.png") -> "link opcional da imagem"
         texto (cor=azul, fonte=Arial) {
             titulo("Título")
             subtitulo("Subtítulo")
@@ -31,7 +31,7 @@ site("Título da Página") {
                     }
                 }
                 coluna {
-                    imagem("link para a imagem") -> "link opcional da imagem"
+                    imagem("Octocat.png") -> "link opcional da imagem"
                 }
             }
         }
