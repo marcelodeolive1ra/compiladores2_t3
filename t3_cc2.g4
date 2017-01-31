@@ -4,7 +4,7 @@ CADEIA:
     '"' ~('\n' | '\r' | '"')* '"';
 
 COMENTARIO:
-    '//' ~('/' | '\n')* '\n' -> skip;
+    '#' ~('#' | '\n')* '\n' -> skip;
 
 ESPACO:
     (' ' | '\t' | '\r' | '\n') -> skip;

@@ -11,7 +11,7 @@ class ErrosSintaticosErrorListener(ErrorListener):
         simbolo = msg.replace("token recognition error at: ", "")
         self.erros_sintaticos += "Linha " + str(line) + ": erro sintático próximo a " + simbolo
 
-        raise Exception("Erro sintático")
+        raise Exception("Erro sintático: " + self.erros_sintaticos)
 
     def reportAmbiguity(self, recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs):
         return

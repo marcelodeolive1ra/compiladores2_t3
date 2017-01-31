@@ -1,5 +1,5 @@
-//Testa geral: compilado de testes
-// Comentário
+# Testa geral: compilado de testes
+# Comentário
 
 site("Título da Página") {
     menu {
@@ -7,14 +7,14 @@ site("Título da Página") {
         item("Página 2") -> "https://github.com"
         item("Página 3") -> "http://theverge.com"
     }
-    //sidebar = menu
-    sidebar {
-        item("Home") -> "http://google.com.br"
-        item("Página 2") ->+ "https://github.com"
-        item("Página 3") -> "http://theverge.com"
-    }
+    sidebar = menu
+    #sidebar {
+      #  item("Home") -> "http://google.com.br"
+        #item("Página 2") ->+ "https://github.com"
+        #item("Página 3") -> "http://theverge.com"
+    #}
     banner {
-        //imagem("Octocat.png") -> "link opcional da imagem"
+        # imagem("Octocat.png") -> "link opcional da imagem"
         texto (cor=azul, fonte=Arial) {
             titulo("Título")
             subtitulo("Subtítulo")

@@ -34,6 +34,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
     """
 
     quantidade_colunas = 0
+    itens_menu = ''
 
     def visitSite(self, ctx: t3_cc2Parser.SiteContext):
         print("visitSite\n")
@@ -93,7 +94,9 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     def visitSidebar(self, ctx: t3_cc2Parser.SidebarContext):
         print("visitSidebar\n")
+
         if ctx is not None:
+
             sidebar = """
             <!-- Sidebar -->
             <div class="ui vertical inverted sidebar menu">
@@ -101,12 +104,14 @@ class GeradorDeCodigo(t3_cc2Visitor):
             </div>
             """
 
-            sidebar = sidebar.replace('#ITEM', (self.visitItem(ctx.item()) if ctx.item() is not None else '') +
-                                      (self.visitMais_itens(ctx.mais_itens()) if ctx.mais_itens() is not None else ''))
+            if ctx.getText() == 'sidebar=menu':
+                sidebar = sidebar.replace('#ITEM', self.itens_menu)
+            else:
+                sidebar = sidebar.replace('#ITEM', (self.visitItem(ctx.item()) if ctx.item() is not None else '') +
+                                          (self.visitMais_itens(ctx.mais_itens()) if ctx.mais_itens() is not None else ''))
 
             return sidebar
         else:
-            # tratar caso SIDEBAR = MENU
             return ''
 
     def visitItem(self, ctx: t3_cc2Parser.ItemContext):
@@ -118,6 +123,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
             item = item.replace('#LINK', self.visitLink(ctx.link()))
             item = item.replace("#TARGET", self.visitNova_aba(ctx.link().nova_aba()))
 
+            self.itens_menu += item + '\n'
             return item
         else:
             return ''
