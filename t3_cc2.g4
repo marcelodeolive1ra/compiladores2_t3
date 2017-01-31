@@ -37,7 +37,7 @@ sidebar:
 	'sidebar' '{' item mais_itens '}' | 'sidebar' '=' 'menu' | ;
 
 banner:
-	'banner' '{' imagem	texto '}' | ;
+	'banner' '{' imagem texto '}' | ;
 
 subtitulo:
 	'subtitulo' ('(' parametro ')')? '(' CADEIA ')';
@@ -67,16 +67,16 @@ texto:
     'texto' ('(' parametro ')')? '{' conteudo_texto mais_conteudo_texto '}';
 
 conteudo_texto:
-    (titulo | subtitulo | paragrafo) mais_conteudo_texto;
+    (titulo | subtitulo | paragrafo);
 
 mais_conteudo_texto:
-    conteudo_texto | ;
+    conteudo_texto mais_conteudo_texto | ;
 
 paragrafo:
     'paragrafo' ('(' parametro ')')? '(' CADEIA ')';
 
 imagem:
-	'imagem' '(' CADEIA ')' link;
+	'imagem' '(' CADEIA ')' link | ;
 
 parametro:
     (tamanho | fonte | cor) mais_parametros;

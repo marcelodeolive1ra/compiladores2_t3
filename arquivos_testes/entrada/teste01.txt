@@ -4,14 +4,14 @@
 site("Título da Página") {
     menu {
         item("Home") -> "http://google.com.br"
-        item("Página 2") -> "Link2"
-        item("Página 3") -> "Link3"
+        item("Página 2") -> "https://github.com"
+        item("Página 3") -> "http://theverge.com"
     }
     //sidebar = menu
     sidebar {
-        item("Home") -> "Link1"
-        item("Página 2") ->+ "Link2 para abrir em nova aba"
-        item("Página 3") -> "Link3"
+        item("Home") -> "http://google.com.br"
+        item("Página 2") ->+ "https://github.com"
+        item("Página 3") -> "http://theverge.com"
     }
     banner {
         //imagem("Octocat.png") -> "link opcional da imagem"
@@ -31,7 +31,7 @@ site("Título da Página") {
                     }
                 }
                 coluna {
-                    imagem("Octocat.png") -> "link opcional da imagem"
+                    imagem("Octocat.png") -> "https://github.com"
                 }
             }
         }
