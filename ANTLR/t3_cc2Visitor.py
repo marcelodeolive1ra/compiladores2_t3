@@ -164,5 +164,15 @@ class t3_cc2Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by t3_cc2Parser#alinhamento.
+    def visitAlinhamento(self, ctx:t3_cc2Parser.AlinhamentoContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#opcao_alinhamento.
+    def visitOpcao_alinhamento(self, ctx:t3_cc2Parser.Opcao_alinhamentoContext):
+        return self.visitChildren(ctx)
+
+
 
 del t3_cc2Parser
