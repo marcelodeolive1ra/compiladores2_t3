@@ -33,7 +33,6 @@ class GeradorDeCodigo(t3_cc2Visitor):
 </html>
     """
 
-    quantidade_colunas = 0
     itens_menu = ''
 
     def visitSite(self, ctx: t3_cc2Parser.SiteContext):
@@ -217,37 +216,22 @@ class GeradorDeCodigo(t3_cc2Visitor):
         return banner
 
     def visitConteudo(self, ctx: t3_cc2Parser.ConteudoContext):
-        return self.visitSecao(ctx.secao()) if ctx.secao() is not None else ''
+        secao = self.visitSecao(ctx.secao()) if ctx.secao() is not None else ''
+        mais_secoes = self.visitMais_secoes(ctx.mais_secoes()) if ctx.mais_secoes() is not None else ''
+        return secao + mais_secoes
 
     def visitSecao(self, ctx: t3_cc2Parser.SecaoContext):
         self.quantidade_colunas = 0
 
         secao = """
         <div class="ui vertical segment">
-            <div class="ui centered grid container">
-            #COLUNAS
+            <div class="ui equal width centered grid container">
+                #COLUNAS
             </div>
         </div>
         """
         colunas = (self.visitColunas(ctx.colunas()) if ctx.colunas() is not None else '') +\
                   (self.visitColuna(ctx.coluna()) if ctx.coluna() is not None else '')
-
-        if self.quantidade_colunas == 1:
-            tamanho_coluna = 'sixteen'
-        elif self.quantidade_colunas == 2:
-            tamanho_coluna = 'eight'
-        elif self.quantidade_colunas == 3:
-            tamanho_coluna = 'five'
-        elif self.quantidade_colunas == 4:
-            tamanho_coluna = 'four'
-        elif self.quantidade_colunas == 5:
-            tamanho_coluna = 'three'
-        elif self.quantidade_colunas == 6:
-            tamanho_coluna = 'two'
-        else:
-            tamanho_coluna = 'one'
-
-        colunas = colunas.replace('#TAMANHO_COLUNA', tamanho_coluna)
 
         secao = secao.replace('#COLUNAS', colunas)
 
@@ -274,7 +258,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
         self.quantidade_colunas += 1
 
         coluna = """
-        <div class="ui #TAMANHO_COLUNA wide column">
+        <div class="column">
             #CONTEUDO_COLUNA
         </div>
         """

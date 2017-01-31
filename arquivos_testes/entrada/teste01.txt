@@ -51,6 +51,122 @@ site("Título da Página") {
                         subtitulo("Subtítulo")
                     }
                 }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+            }
+        }
+        secao {
+            colunas {
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtitulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtitulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+            }
+        }
+        secao {
+            colunas {
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtitulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtitulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtitulo")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Título")
+                        subtitulo("Subtítulo")
+                    }
+                }
             }
         }
     }
