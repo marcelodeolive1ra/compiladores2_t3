@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <title>"Título da Página"</title>
+    <title>Título da Página</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.js"></script>
@@ -30,9 +30,9 @@
                             <i class="sidebar icon"></i>
                         </a>
                         
-                <a class="item" href="http://google.com.br">"Home"</a>
-<a class="item" href="https://github.com">"Página 2"</a>
-<a class="item" href="http://theverge.com">"Página 3"</a>
+                <a class="item" href="http://google.com.br">Home</a>
+<a class="item" href="https://github.com">Página 2</a>
+<a class="item" href="http://theverge.com">Página 3</a>
 
             </div>
         </div>
@@ -40,9 +40,9 @@
     
             <!-- Sidebar -->
             <div class="ui vertical inverted sidebar menu">
-                <a class="item" href="http://google.com.br">"Home"</a>
-<a class="item" href="https://github.com" target="_blank">"Página 2"</a>
-<a class="item" href="http://theverge.com">"Página 3"</a>
+                <a class="item" href="http://google.com.br">Home</a>
+<a class="item" href="https://github.com" target="_blank">Página 2</a>
+<a class="item" href="http://theverge.com">Página 3</a>
 
             </div>
             
@@ -88,30 +88,47 @@
         .ui.vertical.stripe .horizontal.divider {
             margin: 3em 0em;
         }
+
+        #banner {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            text-align: center;
+        }
+
         </style>
-        <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui inverted vertical masthead center aligned segment" id="banner">
             <div class="ui text container">
                 
-                <h1 class="ui inverted header">"Título"</h1><h2 class="ui inverted header">"Subtítulo"</h2>
+                <h1 class="ui inverted header">Título</h1><h2 class="ui inverted header">Subtítulo</h2>
             </div>
         </div>
 
         
     
-        <div class="ui sixteen wide column">
-            <h1 class="ui header">"Título"</h1><h2 class="ui header">"Subtítulo"</h2>
+        <div class="ui vertical segment">
+            <div class="ui centered grid container">
+            
+        <div class="ui eight wide column">
+            <h1 class="ui header">Título</h1><h2 class="ui header">Subtítulo</h2>
         </div>
         
-        <div class="ui sixteen wide column">
-            <img src="Octocat.png">
+        <div class="ui eight wide column">
+            <img src="Octocat.png" class="ui medium image">
+        </div>
+        
+            </div>
         </div>
         
     
         <div class="ui inverted vertical footer segment">
             <div class="ui container">
-                <div class="ui stackable inverted divided equal height stackable grid">
-                    <h3 class="ui inverted header">"Copyright 2016"</h3><h4 class="ui inverted header">"Construção de Compiladores 2"</h4>
-                </div>
+                <h3 class="ui inverted header">Copyright 2016</h3><h4 class="ui inverted header">Construção de Compiladores 2</h4>
             </div>
         </div>
         

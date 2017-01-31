@@ -1,6 +1,11 @@
 from ANTLR.t3_cc2Visitor import *
 from ANTLR.t3_cc2Parser import *
 
+EXTRA_PEQUENO = 'extra-pequeno'
+PEQUENO = 'pequeno'
+NORMAL = 'medio'
+GRANDE = 'grande'
+EXTRA_GRANDE = 'extra-grande'
 
 class GeradorDeCodigo(t3_cc2Visitor):
     codigo = """<!DOCTYPE html>
@@ -27,6 +32,8 @@ class GeradorDeCodigo(t3_cc2Visitor):
 </body>
 </html>
     """
+
+    quantidade_colunas = 0
 
     def visitSite(self, ctx: t3_cc2Parser.SiteContext):
         print("visitSite\n")
@@ -59,9 +66,13 @@ class GeradorDeCodigo(t3_cc2Visitor):
                         """
             self.codigo = self.codigo.replace("#BOTAO_SIDEBAR", botao_sidebar)
 
+
+    def visitCadeia(self, cadeia):
+        return str(cadeia)[1:-1]
+
     def visitTitulo_site(self, ctx: t3_cc2Parser.Titulo_siteContext):
         print("visitTitulo_site\n")
-        return str(ctx.CADEIA())
+        return self.visitCadeia(ctx.CADEIA()) if ctx.CADEIA() is not None else ''
 
     def visitMenu(self, ctx: t3_cc2Parser.MenuContext):
         print("visitMenu\n")
@@ -101,9 +112,9 @@ class GeradorDeCodigo(t3_cc2Visitor):
     def visitItem(self, ctx: t3_cc2Parser.ItemContext):
         print("visitItem\n")
         if ctx is not None:
-            item = '<a class="item" href=#LINK#TARGET>#CADEIA</a>\n'
+            item = '<a class="item" href="#LINK"#TARGET>#CADEIA</a>\n'
 
-            item = item.replace("#CADEIA", str(ctx.CADEIA()))
+            item = item.replace("#CADEIA", self.visitCadeia(ctx.CADEIA()) if ctx.CADEIA() is not None else '')
             item = item.replace('#LINK', self.visitLink(ctx.link()))
             item = item.replace("#TARGET", self.visitNova_aba(ctx.link().nova_aba()))
 
@@ -120,7 +131,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     def visitLink(self, ctx: t3_cc2Parser.LinkContext):
         print('visitLink\n')
-        return str(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
+        return self.visitCadeia(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
 
     def visitNova_aba(self, ctx: t3_cc2Parser.Nova_abaContext):
         print('visitNova_aba\n')
@@ -170,8 +181,21 @@ class GeradorDeCodigo(t3_cc2Visitor):
         .ui.vertical.stripe .horizontal.divider {
             margin: 3em 0em;
         }
+
+        #banner {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            text-align: center;
+        }
+
         </style>
-        <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui inverted vertical masthead center aligned segment" id="banner">
             <div class="ui text container">
                 #IMAGEM
                 #TEXTO
@@ -190,10 +214,38 @@ class GeradorDeCodigo(t3_cc2Visitor):
         return self.visitSecao(ctx.secao()) if ctx.secao() is not None else ''
 
     def visitSecao(self, ctx: t3_cc2Parser.SecaoContext):
+        self.quantidade_colunas = 0
+
+        secao = """
+        <div class="ui vertical segment">
+            <div class="ui centered grid container">
+            #COLUNAS
+            </div>
+        </div>
+        """
         colunas = (self.visitColunas(ctx.colunas()) if ctx.colunas() is not None else '') +\
                   (self.visitColuna(ctx.coluna()) if ctx.coluna() is not None else '')
 
-        return colunas
+        if self.quantidade_colunas == 1:
+            tamanho_coluna = 'sixteen'
+        elif self.quantidade_colunas == 2:
+            tamanho_coluna = 'eight'
+        elif self.quantidade_colunas == 3:
+            tamanho_coluna = 'five'
+        elif self.quantidade_colunas == 4:
+            tamanho_coluna = 'four'
+        elif self.quantidade_colunas == 5:
+            tamanho_coluna = 'three'
+        elif self.quantidade_colunas == 6:
+            tamanho_coluna = 'two'
+        else:
+            tamanho_coluna = 'one'
+
+        colunas = colunas.replace('#TAMANHO_COLUNA', tamanho_coluna)
+
+        secao = secao.replace('#COLUNAS', colunas)
+
+        return secao
 
     def visitMais_secoes(self, ctx: t3_cc2Parser.Mais_secoesContext):
         mais_secoes = (self.visitSecao(ctx.secao()) if ctx.secao() is not None else '') +\
@@ -213,9 +265,10 @@ class GeradorDeCodigo(t3_cc2Visitor):
                (self.visitMais_colunas(ctx.mais_colunas()) if ctx.mais_colunas() is not None else '')
 
     def visitColuna(self, ctx: t3_cc2Parser.ColunaContext):
+        self.quantidade_colunas += 1
 
         coluna = """
-        <div class="ui sixteen wide column">
+        <div class="ui #TAMANHO_COLUNA wide column">
             #CONTEUDO_COLUNA
         </div>
         """
@@ -231,16 +284,14 @@ class GeradorDeCodigo(t3_cc2Visitor):
             self.codigo += "parametros("
             self.visitParametro(ctx.parametro())
             self.codigo += ")"
-        return ('<h1 class="ui header">' + str(ctx.CADEIA()) + '</h1>') \
-            if ctx is not None and str(ctx.CADEIA()) is not None else ''
+        return ('<h1 class="ui header">' + self.visitCadeia(ctx.CADEIA()) + '</h1>') if ctx.CADEIA() is not None else ''
 
     def visitSubtitulo(self, ctx: t3_cc2Parser.SubtituloContext):
         if ctx.parametro() is not None:
             self.codigo += "parametros("
             self.visitParametro(ctx.parametro())
             self.codigo += ")"
-        return ('<h2 class="ui header">' + str(ctx.CADEIA()) + '</h2>') \
-            if ctx is not None and str(ctx.CADEIA()) is not None else ''
+        return ('<h2 class="ui header">' + self.visitCadeia(ctx.CADEIA()) + '</h2>') if ctx.CADEIA() is not None else ''
 
     def visitTexto(self, ctx: t3_cc2Parser.TextoContext):
         try:
@@ -251,8 +302,9 @@ class GeradorDeCodigo(t3_cc2Visitor):
         except:
             pass
 
-        conteudo_texto = self.visitConteudo_texto(ctx.conteudo_texto()) if ctx.conteudo_texto() is not None else ""
-        mais_conteudo_texto = self.visitMais_conteudo_texto(ctx.mais_conteudo_texto()) if ctx.mais_conteudo_texto() is not None else ""
+        conteudo_texto = self.visitConteudo_texto(ctx.conteudo_texto()) if ctx.conteudo_texto() is not None else ''
+        mais_conteudo_texto = self.visitMais_conteudo_texto(ctx.mais_conteudo_texto()) \
+            if ctx.mais_conteudo_texto() is not None else ''
 
         return conteudo_texto + mais_conteudo_texto
 
@@ -270,19 +322,36 @@ class GeradorDeCodigo(t3_cc2Visitor):
             self.visitParametro(ctx.parametro())
             self.codigo += ")"
 
-        return ('<p>' + str(ctx.CADEIA()) + '</p>') if ctx is not None and ctx.CADEIA() is not None else ''
+        return ('<p>' + self.visitCadeia(ctx.CADEIA()) + '</p>') if ctx.CADEIA() is not None else ''
 
     def visitImagem(self, ctx: t3_cc2Parser.ImagemContext):
-        return ('<img src="' + str(ctx.CADEIA()).replace('"', '') + '">') \
-            if ctx is not None and ctx.CADEIA() is not None else ''
+        imagem = '<img src="' + self.visitCadeia(ctx.CADEIA()).replace('"', '') + '" class="ui #TAMANHO_IMAGEM image">' \
+            if ctx.CADEIA() is not None else ''
+
+        tamanho_imagem = self.visitTamanho(ctx.tamanho()) if ctx.tamanho() is not None else ''
+
+        if tamanho_imagem == EXTRA_PEQUENO:
+            tamanho_imagem = 'tiny'
+        elif tamanho_imagem == PEQUENO:
+            tamanho_imagem = 'small'
+        elif tamanho_imagem == NORMAL:
+            tamanho_imagem = 'medium'
+        elif tamanho_imagem == GRANDE:
+            tamanho_imagem = 'large'
+        elif tamanho_imagem == EXTRA_GRANDE:
+            tamanho_imagem = 'big'
+        else:
+            tamanho_imagem = 'medium'
+
+        imagem = imagem.replace('#TAMANHO_IMAGEM', tamanho_imagem)
+
+        return imagem
 
     def visitRodape(self, ctx: t3_cc2Parser.RodapeContext):
         rodape = """
         <div class="ui inverted vertical footer segment">
             <div class="ui container">
-                <div class="ui stackable inverted divided equal height stackable grid">
-                    #RODAPE
-                </div>
+                #RODAPE
             </div>
         </div>
         """
