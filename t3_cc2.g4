@@ -73,10 +73,10 @@ mais_conteudo_texto:
     conteudo_texto mais_conteudo_texto | ;
 
 paragrafo:
-    'paragrafo' ('(' parametro ')')? '(' CADEIA ')';
+    'paragrafo' ('(' parametro ')')? '(' CADEIA ')' link?;
 
 imagem:
-	'imagem' '(' CADEIA (',' tamanho)? ')' link | ;
+	'imagem' '(' CADEIA (',' tamanho)? ')' link? | ;
 
 parametro:
     (tamanho | fonte | cor) mais_parametros;

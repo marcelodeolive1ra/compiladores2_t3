@@ -27,13 +27,13 @@ site("Título da Página") {
                     texto {
                         titulo("Trabalho 3")
                         subtitulo("Construção de Compiladores 2")
-                        paragrafo("Texto")
+                        paragrafo("Links funcionam em parágrafos :-)") ->+ "https://github.com/marcelodeolivei1ra"
                         subtitulo("Visite o nosso projeto no GitHub")
-                        paragrafo("O projeto completo está disponível em um repositório do GitHub. Acesse-o clicando na imagem ao lado.")
+                        paragrafo("O projeto completo está disponível em um repositório do GitHub. Clique aqui para acessá-lo.") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
                     }
                 }
                 coluna {
-                    imagem("Octocat.png") -> "https://github.com/marcelodeolive1ra/compiladores2_t3"
+                    imagem("Octocat.png") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
                 }
             }
         }

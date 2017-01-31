@@ -137,11 +137,11 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     def visitLink(self, ctx: t3_cc2Parser.LinkContext):
         print('visitLink\n')
-        return self.visitCadeia(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ""
+        return self.visitCadeia(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ''
 
     def visitNova_aba(self, ctx: t3_cc2Parser.Nova_abaContext):
         print('visitNova_aba\n')
-        return ' target="_blank"' if ctx is not None else ""
+        return ' target="_blank"' if ctx is not None else ''
 
     def visitBanner(self, ctx: t3_cc2Parser.BannerContext):
         print('visitBanner\n')
@@ -327,11 +327,20 @@ class GeradorDeCodigo(t3_cc2Visitor):
             self.visitParametro(ctx.parametro())
             self.codigo += ")"
 
-        return ('<p>' + self.visitCadeia(ctx.CADEIA()) + '</p>') if ctx.CADEIA() is not None else ''
+        paragrafo = '#LINK' + ('<p>' + self.visitCadeia(ctx.CADEIA()) + '</p>#FECHALINK') \
+            if ctx.CADEIA() is not None else ''
+
+        link = '\n<a href="' + self.visitLink(ctx.link()) + '"' + self.visitNova_aba(ctx.link().nova_aba()) + '>\n' \
+            if ctx.link() is not None else ''
+        fecha_link = '\n</a>' if ctx.link() is not None else ''
+
+        paragrafo = paragrafo.replace('#LINK', link).replace('#FECHALINK', fecha_link)
+
+        return paragrafo
 
     def visitImagem(self, ctx: t3_cc2Parser.ImagemContext):
-        imagem = '<img src="' + self.visitCadeia(ctx.CADEIA()).replace('"', '') + \
-                 '" class="ui #TAMANHO_IMAGEM image">' if ctx.CADEIA() is not None else ''
+        imagem = '#LINK<img src="' + self.visitCadeia(ctx.CADEIA()).replace('"', '') + \
+                 '" class="ui #TAMANHO_IMAGEM image">#FECHALINK' if ctx.CADEIA() is not None else ''
 
         tamanho_imagem = self.visitTamanho(ctx.tamanho()) if ctx.tamanho() is not None else ''
 
@@ -349,6 +358,11 @@ class GeradorDeCodigo(t3_cc2Visitor):
             tamanho_imagem = 'medium'
 
         imagem = imagem.replace('#TAMANHO_IMAGEM', tamanho_imagem)
+
+        link = self.visitLink(ctx.link()) if ctx.link() is not None else ''
+        target = self.visitNova_aba(ctx.link().nova_aba()) if ctx.link() is not None else ''
+
+        imagem = imagem.replace('#LINK', '<a href="' + link + '"' + target + '>\n').replace('#FECHALINK', '\n</a>')
 
         return imagem
 
