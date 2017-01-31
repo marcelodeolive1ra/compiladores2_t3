@@ -3,9 +3,9 @@
 
 site("Título da Página") {
     menu {
-        item("Home") -> "http://google.com.br"
-        item("Página 2") -> "https://github.com"
-        item("Página 3") -> "http://theverge.com"
+        item("Home") -> "#"
+        item("Página 2") ->+ "https://github.com"
+        item("Página 3") ->+ "http://theverge.com"
     }
     sidebar = menu
     #sidebar {
@@ -25,13 +25,15 @@ site("Título da Página") {
             colunas {
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Trabalho 3")
+                        subtitulo("Construção de Compiladores 2")
                         paragrafo("Texto")
+                        subtitulo("Visite o nosso projeto no GitHub")
+                        paragrafo("O projeto completo está disponível em um repositório do GitHub. Acesse-o clicando na imagem ao lado.")
                     }
                 }
                 coluna {
-                    imagem("Octocat.png") -> "https://github.com"
+                    imagem("Octocat.png") -> "https://github.com/marcelodeolive1ra/compiladores2_t3"
                 }
             }
         }

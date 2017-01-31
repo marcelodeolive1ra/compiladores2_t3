@@ -64,10 +64,10 @@ mais_colunas:
     coluna mais_colunas | ;
 
 texto:
-    'texto' ('(' parametro ')')? '{' conteudo_texto mais_conteudo_texto '}';
+    'texto' ('(' parametro ')')? '{' conteudo_texto '}';
 
 conteudo_texto:
-    (titulo | subtitulo | paragrafo);
+    (titulo | subtitulo | paragrafo) mais_conteudo_texto;
 
 mais_conteudo_texto:
     conteudo_texto mais_conteudo_texto | ;

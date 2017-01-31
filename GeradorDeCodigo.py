@@ -22,8 +22,8 @@ class GeradorDeCodigo(t3_cc2Visitor):
     #SCRIPT_SIDEBAR
 </head>
 <body>
-    #PUSHER_INICIO
     #MENU
+    #PUSHER_INICIO
     #SIDEBAR
     #BANNER
     #CONTEUDO
@@ -117,7 +117,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
     def visitItem(self, ctx: t3_cc2Parser.ItemContext):
         print("visitItem\n")
         if ctx is not None:
-            item = '<a class="item" href="#LINK"#TARGET>#CADEIA</a>\n'
+            item = '<a class="item" href="#LINK"#TARGET>#CADEIA</a>'
 
             item = item.replace("#CADEIA", self.visitCadeia(ctx.CADEIA()) if ctx.CADEIA() is not None else '')
             item = item.replace('#LINK', self.visitLink(ctx.link()))
@@ -308,19 +308,18 @@ class GeradorDeCodigo(t3_cc2Visitor):
         except:
             pass
 
-        conteudo_texto = self.visitConteudo_texto(ctx.conteudo_texto()) if ctx.conteudo_texto() is not None else ''
-        mais_conteudo_texto = self.visitMais_conteudo_texto(ctx.mais_conteudo_texto()) \
-            if ctx.mais_conteudo_texto() is not None else ''
-
-        return conteudo_texto + mais_conteudo_texto
+        return self.visitConteudo_texto(ctx.conteudo_texto()) if ctx.conteudo_texto() is not None else ''
 
     def visitConteudo_texto(self, ctx: t3_cc2Parser.Conteudo_textoContext):
         return (self.visitTitulo(ctx.titulo()) if ctx.titulo() is not None else '')\
                + (self.visitSubtitulo(ctx.subtitulo()) if ctx.subtitulo() is not None else '')\
-               + (self.visitParagrafo(ctx.paragrafo()) if ctx.paragrafo() is not None else '')
+               + (self.visitParagrafo(ctx.paragrafo()) if ctx.paragrafo() is not None else '')\
+               + (self.visitMais_conteudo_texto(ctx.mais_conteudo_texto())
+                  if ctx.mais_conteudo_texto() is not None else '')
 
     def visitMais_conteudo_texto(self, ctx: t3_cc2Parser.Mais_conteudo_textoContext):
-        return self.visitConteudo_texto(ctx.conteudo_texto()) if ctx.conteudo_texto() is not None else ''
+        return self.visitConteudo_texto(ctx.conteudo_texto()) if ctx.conteudo_texto() is not None else '' + \
+               self.visitMais_conteudo_texto(ctx.mais_conteudo_texto()) if ctx.mais_conteudo_texto() is not None else ''
 
     def visitParagrafo(self, ctx: t3_cc2Parser.ParagrafoContext):
         if ctx.parametro() is not None:
@@ -331,8 +330,8 @@ class GeradorDeCodigo(t3_cc2Visitor):
         return ('<p>' + self.visitCadeia(ctx.CADEIA()) + '</p>') if ctx.CADEIA() is not None else ''
 
     def visitImagem(self, ctx: t3_cc2Parser.ImagemContext):
-        imagem = '<img src="' + self.visitCadeia(ctx.CADEIA()).replace('"', '') + '" class="ui #TAMANHO_IMAGEM image">' \
-            if ctx.CADEIA() is not None else ''
+        imagem = '<img src="' + self.visitCadeia(ctx.CADEIA()).replace('"', '') + \
+                 '" class="ui #TAMANHO_IMAGEM image">' if ctx.CADEIA() is not None else ''
 
         tamanho_imagem = self.visitTamanho(ctx.tamanho()) if ctx.tamanho() is not None else ''
 
