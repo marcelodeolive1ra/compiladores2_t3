@@ -42,7 +42,9 @@ try:
 
     print('\n' + codigo_gerado)
 
-except:
+except Exception as e:
+    print(e)
+    print(e.with_traceback(e))
     if erros_sintaticos.getErrosSintaticos() != "":
         print(erros_sintaticos.getErrosSintaticos())
     else:

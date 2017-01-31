@@ -31,7 +31,7 @@ nova_aba:
     '+';
 
 mais_itens:
-	(item)* | ;
+	item mais_itens | ;
 
 sidebar:
 	'sidebar' '{' item mais_itens '}' | 'sidebar' '=' 'menu' | ;
@@ -49,19 +49,19 @@ conteudo:
 	'conteudo' '{' secao mais_secoes '}' | ;
 
 secao:
-	'secao' '{' colunas '}';
+	'secao' '{' (colunas | coluna) '}';
 
 mais_secoes:
-    secao | ;
+    secao mais_secoes | ;
 
 colunas:
-    'colunas' '{' coluna mais_colunas '}' | coluna |;
+    'colunas' '{' coluna mais_colunas '}' | ;
 
 coluna:
     'coluna' '{' (imagem | texto) '}';
 
 mais_colunas:
-    coluna | ;
+    coluna mais_colunas | ;
 
 texto:
     'texto' ('(' parametro ')')? '{' conteudo_texto mais_conteudo_texto '}';
