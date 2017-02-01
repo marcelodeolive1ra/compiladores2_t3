@@ -1,7 +1,7 @@
 # Testa geral: compilado de testes
 # Comentário
 
-site("Título da Página") {
+site("Trabalho 3 - Construção de Compiladores 2") {
     menu {
         item("Home") -> "#"
         item("Página 2") ->+ "https://github.com"
@@ -16,8 +16,8 @@ site("Título da Página") {
     banner {
         # imagem("Octocat.png") -> "link opcional da imagem"
         texto (cor=azul, fonte=Arial) {
-            titulo("Título")
-            subtitulo("Subtítulo")
+            titulo("Construção de Compiladores 2")
+            subtitulo("Trabalho 3 - Criação de uma linguagem e implementação de um compilador para esta linguagem")
         }
     }
     conteudo {
@@ -27,7 +27,7 @@ site("Título da Página") {
                     texto {
                         titulo("Trabalho 3")
                         subtitulo("Construção de Compiladores 2")
-                        paragrafo("Você pode criar vários parágrafos.")
+                        paragrafo("Você pode criar vários parágrafos. Teste")
                         paragrafo("E você pode adicionar links a esses parágrafos :-)") ->+ "https://github.com/marcelodeolivei1ra"
                         subtitulo("Visite o nosso projeto no GitHub")
                         paragrafo("O projeto completo está disponível em um repositório do GitHub. Clique aqui para acessá-lo.") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"

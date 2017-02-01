@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <title>Título da Página</title>
+    <title>Trabalho 3 - Construção de Compiladores 2</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.js"></script>
@@ -49,42 +49,6 @@
             min-height: 700px;
             padding: 1em 0em;
         }
-        .masthead .logo.item img {
-            margin-right: 1em;
-        }
-        .masthead .ui.menu .ui.button {
-            margin-left: 0.5em;
-        }
-        .masthead h1.ui.inverted header {
-            margin-top: 3em;
-            margin-bottom: 0em;
-            font-size: 4em;
-            font-weight: normal;
-        }
-        .masthead h2 {
-            font-size: 1.7em;
-            font-weight: normal;
-        }
-
-        .ui.vertical.stripe {
-            padding: 8em 0em;
-        }
-        .ui.vertical.stripe h3 {
-            font-size: 2em;
-        }
-        .ui.vertical.stripe .button + h3,
-        .ui.vertical.stripe p + h3 {
-            margin-top: 3em;
-        }
-        .ui.vertical.stripe .floated.image {
-            clear: both;
-        }
-        .ui.vertical.stripe p {
-            font-size: 1.33em;
-        }
-        .ui.vertical.stripe .horizontal.divider {
-            margin: 3em 0em;
-        }
 
         #banner {
             display: -webkit-box;
@@ -98,14 +62,22 @@
             text-align: center;
         }
 
-        </style>
-        <div class="ui inverted vertical masthead center aligned segment" id="banner">
-            <div class="ui text container">
-                
-                <h1 class="ui inverted header">Título</h1><h2 class="ui inverted header">Subtítulo</h2>
-            </div>
-        </div>
+        #titulo_banner {
+            font-size: 4em;
+        }
 
+        #subtitulo_banner {
+            font-size: 1.7em;
+        }
+
+    </style>
+
+    <div class="ui inverted vertical masthead center aligned segment" id="banner">
+        <div class="ui text container">
+            
+            <h1 class="ui inverted header" id="titulo_banner">Construção de Compiladores 2</h1><h2 class="ui inverted header" id="subtitulo_banner">Trabalho 3 - Criação de uma linguagem e implementação de um compilador para esta linguagem</h2>
+        </div>
+    </div>
         
     
         <div class="ui vertical segment">
@@ -113,23 +85,19 @@
             <div class="middle aligned row">
                 
         <div class="left floated left aligned column">
-
-                <h1 class="ui header">Trabalho 3</h1><h2 class="ui header">Construção de Compiladores 2</h2><p>Você pode criar vários parágrafos.</p>
+                <h1 class="ui header">Trabalho 3</h1><h2 class="ui header">Construção de Compiladores 2</h2><p>Você pode criar vários parágrafos. Teste</p>
 <a href="https://github.com/marcelodeolivei1ra" target="_blank">
 <p>E você pode adicionar links a esses parágrafos :-)</p>
 </a><h2 class="ui header">Visite o nosso projeto no GitHub</h2>
 <a href="https://github.com/marcelodeolive1ra/compiladores2_t3" target="_blank">
 <p>O projeto completo está disponível em um repositório do GitHub. Clique aqui para acessá-lo.</p>
 </a>
-
         </div>
         
         <div class="right floated right aligned column">
-
                 <p align=right><a href="https://github.com/marcelodeolive1ra/compiladores2_t3" target="_blank">
 <img src="Octocat.png" class="ui medium image">
 </a></p>
-
         </div>
         
             </div>
@@ -141,27 +109,19 @@
             <div class="middle aligned row">
                 
         <div class="left floated left aligned column">
-
                 <h1 class="ui header">Coluna alinhada à esquerda</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna centralizada</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna centralizada</h1>
-
         </div>
         
         <div class="right floated right aligned column">
-
                 <h1 class="ui header">Coluna alinhada à direita</h1>
-
         </div>
         
             </div>
@@ -173,39 +133,27 @@
             <div class="middle aligned row">
                 
         <div class="column">
-
                 <h1 class="ui header">Título</h1><h2 class="ui header">Subtitulo</h2>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Título</h1><h2 class="ui header">Subtítulo</h2>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Título</h1><h2 class="ui header">Subtítulo</h2>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Título</h1><h2 class="ui header">Subtítulo</h2>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Título</h1><h2 class="ui header">Subtitulo</h2>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Título</h1><h2 class="ui header">Subtítulo</h2>
-
         </div>
         
             </div>
@@ -217,11 +165,9 @@
             <div class="middle aligned row">
                 
         <div class="center aligned column">
-
                 <p align=center><a href="https://github.com/marcelodeolive1ra/compiladores2_t3" target="_blank">
 <img src="Octocat2.jpg" class="ui medium image">
 </a></p>
-
         </div>
         
             </div>
@@ -233,63 +179,43 @@
             <div class="middle aligned row">
                 
         <div class="column">
-
                 <h1 class="ui header">Coluna #1</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna #2</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna #3</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna #4</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna #5</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna #6</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna #7</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna #8</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna #9</h1>
-
         </div>
         
         <div class="column">
-
                 <h1 class="ui header">Coluna #10</h1>
-
         </div>
         
             </div>
@@ -301,9 +227,7 @@
             <div class="middle aligned row">
                 
         <div class="right floated right aligned column">
-
                 <h1 class="ui header">Seção com uma única coluna alinhada à direita.</h1>
-
         </div>
         
             </div>

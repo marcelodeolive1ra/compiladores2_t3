@@ -40,7 +40,10 @@ class GeradorDeCodigo(t3_cc2Visitor):
         self.codigo = self.codigo.replace("#TITULODOSITE", self.visitTitulo_site(ctx.titulo_site()))
         self.codigo = self.codigo.replace('#MENU', self.visitMenu(ctx.menu()))
         self.codigo = self.codigo.replace('#SIDEBAR', self.visitSidebar(ctx.sidebar()))
-        self.codigo = self.codigo.replace('#BANNER', self.visitBanner(ctx.banner()))
+        self.codigo = self.codigo.replace('#BANNER',
+                                          self.visitBanner(ctx.banner())
+                                          if ctx.banner() is not None else '<p><br><br></p>')
+        # TODO: melhorar a forma de tratamento do espaço do menu quando não tem banner
         self.codigo = self.codigo.replace('#CONTEUDO', self.visitConteudo(ctx.conteudo()))
         self.codigo = self.codigo.replace('#RODAPE', self.visitRodape(ctx.rodape()))
 
@@ -150,42 +153,6 @@ class GeradorDeCodigo(t3_cc2Visitor):
             min-height: 700px;
             padding: 1em 0em;
         }
-        .masthead .logo.item img {
-            margin-right: 1em;
-        }
-        .masthead .ui.menu .ui.button {
-            margin-left: 0.5em;
-        }
-        .masthead h1.ui.header {
-            margin-top: 3em;
-            margin-bottom: 0em;
-            font-size: 4em;
-            font-weight: normal;
-        }
-        .masthead h2 {
-            font-size: 1.7em;
-            font-weight: normal;
-        }
-
-        .ui.vertical.stripe {
-            padding: 8em 0em;
-        }
-        .ui.vertical.stripe h3 {
-            font-size: 2em;
-        }
-        .ui.vertical.stripe .button + h3,
-        .ui.vertical.stripe p + h3 {
-            margin-top: 3em;
-        }
-        .ui.vertical.stripe .floated.image {
-            clear: both;
-        }
-        .ui.vertical.stripe p {
-            font-size: 1.33em;
-        }
-        .ui.vertical.stripe .horizontal.divider {
-            margin: 3em 0em;
-        }
 
         #banner {
             display: -webkit-box;
@@ -199,19 +166,27 @@ class GeradorDeCodigo(t3_cc2Visitor):
             text-align: center;
         }
 
-        </style>
-        <div class="ui inverted vertical masthead center aligned segment" id="banner">
-            <div class="ui text container">
-                #IMAGEM
-                #TEXTO
-            </div>
+        #titulo_banner {
+            font-size: 4em;
+        }
+
+        #subtitulo_banner {
+            font-size: 1.7em;
+        }
+
+    </style>
+
+    <div class="ui inverted vertical masthead center aligned segment" id="banner">
+        <div class="ui text container">
+            #IMAGEM
+            #TEXTO
         </div>
-
+    </div>
         """
-
         banner = banner.replace('#IMAGEM', self.visitImagem(ctx.imagem()) if ctx.imagem() is not None else '')
         banner = banner.replace('#TEXTO', self.visitTexto(ctx.texto()) if ctx.texto() is not None else '').\
-            replace("header", "inverted header")
+            replace('<h1 class="ui header">', '<h1 class="ui inverted header" id="titulo_banner">')
+        banner = banner.replace('<h2 class="ui header">', '<h2 class="ui inverted header" id="subtitulo_banner">')
 
         return banner
 
