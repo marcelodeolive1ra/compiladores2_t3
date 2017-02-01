@@ -225,8 +225,10 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
         secao = """
         <div class="ui vertical segment">
-            <div class="ui equal width centered grid container">
+            <div class="ui equal width center aligned grid container">
+            <div class="middle aligned row">
                 #COLUNAS
+            </div>
             </div>
         </div>
         """
@@ -244,7 +246,6 @@ class GeradorDeCodigo(t3_cc2Visitor):
         return mais_secoes
 
     def visitColunas(self, ctx: t3_cc2Parser.ColunasContext):
-
         colunas = (self.visitColuna(ctx.coluna()) if ctx.coluna() is not None else '') +\
                   (self.visitMais_colunas(ctx.mais_colunas()) if ctx.mais_colunas() is not None else '')
 
@@ -258,14 +259,30 @@ class GeradorDeCodigo(t3_cc2Visitor):
         self.quantidade_colunas += 1
 
         coluna = """
-        <div class="column">
-            #CONTEUDO_COLUNA
+        <div class="#ALINHAMENTOcolumn">
+                #CONTEUDO_COLUNA
         </div>
         """
+
+        alinhamento = str(ctx.alinhamento().opcao_alinhamento().getText()) if ctx.alinhamento() is not None else ''
+
+        alinhamento_semantic = ''
+        if alinhamento == 'centralizado':
+            alinhamento_semantic = 'center aligned '
+        elif alinhamento == 'esquerda':
+            alinhamento_semantic = 'left floated left aligned '
+        elif alinhamento == 'direita':
+            alinhamento_semantic = 'right floated right aligned '
+
+        coluna = coluna.replace('#ALINHAMENTO', alinhamento_semantic)
 
         coluna = coluna.replace('#CONTEUDO_COLUNA',
                                 (self.visitImagem(ctx.imagem()) if ctx.imagem() is not None else '') +
                                 (self.visitTexto(ctx.texto()) if ctx.texto() is not None else ''))
+
+        coluna = coluna.replace('#ALINHAMENTO_IMAGEM', (('<p align=' + alinhamento_semantic.split(' ')[0] + '>')
+                                                        if alinhamento_semantic != '' else ''))
+        coluna = coluna.replace('#FECHA_ALINHAMENTO_IMAGEM', '</p>' if alinhamento_semantic != '' else '')
 
         return coluna
 
@@ -323,8 +340,8 @@ class GeradorDeCodigo(t3_cc2Visitor):
         return paragrafo
 
     def visitImagem(self, ctx: t3_cc2Parser.ImagemContext):
-        imagem = '#LINK<img src="' + self.visitCadeia(ctx.CADEIA()).replace('"', '') + \
-                 '" class="ui #TAMANHO_IMAGEM image">#FECHALINK' if ctx.CADEIA() is not None else ''
+        imagem = '#ALINHAMENTO_IMAGEM#LINK<img src="' + self.visitCadeia(ctx.CADEIA()).replace('"', '') + \
+                 '" class="ui #TAMANHO_IMAGEM image">#FECHALINK#FECHA_ALINHAMENTO_IMAGEM' if ctx.CADEIA() is not None else ''
 
         tamanho_imagem = self.visitTamanho(ctx.tamanho()) if ctx.tamanho() is not None else ''
 

@@ -9,7 +9,7 @@ site("Título da Página") {
     }
     sidebar = menu
     #sidebar {
-      #  item("Home") -> "http://google.com.br"
+        #item("Home") -> "http://google.com.br"
         #item("Página 2") ->+ "https://github.com"
         #item("Página 3") -> "http://theverge.com"
     #}
@@ -23,44 +23,41 @@ site("Título da Página") {
     conteudo {
         secao {
             colunas {
-                coluna {
+                coluna(alinhamento=esquerda) {
                     texto {
                         titulo("Trabalho 3")
                         subtitulo("Construção de Compiladores 2")
-                        paragrafo("Links funcionam em parágrafos :-)") ->+ "https://github.com/marcelodeolivei1ra"
+                        paragrafo("Você pode criar vários parágrafos.")
+                        paragrafo("E você pode adicionar links a esses parágrafos :-)") ->+ "https://github.com/marcelodeolivei1ra"
                         subtitulo("Visite o nosso projeto no GitHub")
                         paragrafo("O projeto completo está disponível em um repositório do GitHub. Clique aqui para acessá-lo.") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
                     }
                 }
-                coluna {
+                coluna(alinhamento=direita) {
                     imagem("Octocat.png") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
                 }
             }
         }
         secao {
             colunas {
-                coluna {
+                coluna(alinhamento=esquerda) {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtitulo")
+                        titulo("Coluna alinhada à esquerda")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Coluna centralizada")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Coluna centralizada")
                     }
                 }
-                coluna {
+                coluna(alinhamento=direita) {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Coluna alinhada à direita")
                     }
                 }
             }
@@ -106,74 +103,77 @@ site("Título da Página") {
             }
         }
         secao {
+            coluna(alinhamento=centralizado) {
+                imagem("Octocat2.jpg") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
+            }
+        }
+        secao {
             colunas {
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtitulo")
+                        titulo("Coluna #1")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Coluna #2")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Coluna #3")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Coluna #4")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtitulo")
+                        titulo("Coluna #5")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Coluna #6")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Coluna #7")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Coluna #8")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtitulo")
+                        titulo("Coluna #9")
                     }
                 }
                 coluna {
                     texto {
-                        titulo("Título")
-                        subtitulo("Subtítulo")
+                        titulo("Coluna #10")
                     }
+                }
+            }
+        }
+        secao {
+            coluna(alinhamento=direita) {
+                texto {
+                    titulo("Seção com uma única coluna alinhada à direita.")
                 }
             }
         }
     }
     rodape {
         texto {
-            titulo("Copyright 2016")
-            subtitulo("Construção de Compiladores 2")
+            titulo("Construção de Compiladores 2 - 2016/2")
+            paragrafo("Professora Helena Caseli e Professor Daniel Lucrédio")
+            paragrafo("Trabalho 3 - Definição de uma linguagem de programação e construção de um compilador para esta linguagem.")
         }
     }
 }
