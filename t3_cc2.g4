@@ -49,13 +49,13 @@ conteudo:
 	'conteudo' '{' secao mais_secoes '}' | ;
 
 secao:
-	'secao' '{' (colunas | coluna) '}';
+	'secao' '{' texto? (colunas | coluna)? '}';
 
 mais_secoes:
     secao mais_secoes | ;
 
 colunas:
-    'colunas' '{' coluna mais_colunas '}' | ;
+    'colunas' '{' coluna mais_colunas '}';
 
 coluna:
     'coluna' ('(' alinhamento ')')? '{' (imagem | texto) '}';

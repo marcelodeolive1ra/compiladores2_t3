@@ -20,6 +20,11 @@ class GeradorDeCodigo(t3_cc2Visitor):
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.js"></script>
     #SCRIPT_SIDEBAR
+    <style>
+        p {
+            font-size: 1.1em;
+        }
+    </style>
 </head>
 <body>
     #MENU
@@ -200,7 +205,8 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
         secao = """
         <div class="ui vertical segment">
-            <div class="ui equal width center aligned grid container">
+            <div class="ui stackable equal width center aligned grid container">
+            #TEXTO
             <div class="middle aligned row">
                 #COLUNAS
             </div>
@@ -209,6 +215,20 @@ class GeradorDeCodigo(t3_cc2Visitor):
         """
         colunas = (self.visitColunas(ctx.colunas()) if ctx.colunas() is not None else '') +\
                   (self.visitColuna(ctx.coluna()) if ctx.coluna() is not None else '')
+
+        nova_linha = """<div class="middle aligned row">
+                <div class="column">
+                    #TEXTO
+                </div>
+            </div>
+        """
+
+        texto = self.visitTexto(ctx.texto()) if ctx.texto() is not None else ''
+
+        if texto != '':
+            secao = secao.replace('#TEXTO', nova_linha.replace('#TEXTO', texto))
+        else:
+            secao = secao.replace('#TEXTO', '')
 
         secao = secao.replace('#COLUNAS', colunas)
 
@@ -284,7 +304,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
         except:
             pass
 
-        return self.visitConteudo_texto(ctx.conteudo_texto()) if ctx.conteudo_texto() is not None else ''
+        return self.visitConteudo_texto(ctx.conteudo_texto()) if ctx is not None and ctx.conteudo_texto() is not None else ''
 
     def visitConteudo_texto(self, ctx: t3_cc2Parser.Conteudo_textoContext):
         return (self.visitTitulo(ctx.titulo()) if ctx.titulo() is not None else '')\
