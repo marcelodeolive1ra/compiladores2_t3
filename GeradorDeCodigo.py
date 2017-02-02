@@ -267,8 +267,8 @@ class GeradorDeCodigo(t3_cc2Visitor):
     </div>
         """
         banner = banner.replace('#TEXTO', self.visitTexto(ctx.texto()) if ctx.texto() is not None else '').\
-            replace('<h1 class="ui header">', '<h1 class="ui inverted header" id="titulo_banner">')
-        banner = banner.replace('<h2 class="ui header">', '<h2 class="ui inverted header" id="subtitulo_banner">')
+            replace('<h1 class="ui header', '<h1 id="titulo_banner" class="ui inverted header')
+        banner = banner.replace('<h2 class="ui header">', '<h2 id="subtitulo_banner" class="ui inverted header">')
 
         background = ('background: url(' + str(ctx.imagem().CADEIA()) + ');\nbackground-size: cover;background-position: center center;')\
             if ctx.imagem() is not None else ''

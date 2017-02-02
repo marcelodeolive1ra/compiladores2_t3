@@ -253,8 +253,7 @@ site("Trabalho 3 - Construção de Compiladores 2") {
     rodape {
         texto {
             titulo("Construção de Compiladores 2 - 2016/2")
-            paragrafo("Professora Helena Caseli e Professor Daniel Lucrédio")
-            paragrafo("Trabalho 3 - Definição de uma linguagem de programação e construção de um compilador para esta linguagem.")
+            paragrafo("Professora Helena Caseli e Professor Daniel Lucrédio<br>Trabalho 3 - Definição de uma linguagem de programação e construção de um compilador para esta linguagem")
         }
     }
 }
