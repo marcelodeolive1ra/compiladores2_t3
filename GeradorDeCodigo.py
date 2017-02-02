@@ -192,8 +192,10 @@ class GeradorDeCodigo(t3_cc2Visitor):
             if ctx.getText() == 'sidebar=menu':
                 sidebar = sidebar.replace('#ITEM', self.itens_menu)
             else:
-                sidebar = sidebar.replace('#ITEM', (self.visitItem(ctx.item()) if ctx.item() is not None else '') +
-                                          (self.visitMais_itens(ctx.mais_itens()) if ctx.mais_itens() is not None else ''))
+                sidebar = sidebar.replace('#ITEM',
+                                          (self.visitItem(ctx.item()) if ctx.item() is not None else '') +
+                                          (self.visitMais_itens(ctx.mais_itens())
+                                           if ctx.mais_itens() is not None else ''))
 
             return sidebar
         else:
@@ -270,11 +272,18 @@ class GeradorDeCodigo(t3_cc2Visitor):
             replace('<h1 class="ui header', '<h1 id="titulo_banner" class="ui inverted header')
         banner = banner.replace('<h2 class="ui header">', '<h2 id="subtitulo_banner" class="ui inverted header">')
 
-        background = ('background: url(' + str(ctx.imagem().CADEIA()) + ');\nbackground-size: cover;background-position: center center;')\
-            if ctx.imagem() is not None else ''
+        background = ''
+        if ctx.parametros() is not None:
+            if ctx.parametros().fundo() is not None:
 
-        if background == '':
-            background = ('background-color: ' + getColor(self.visitCor(ctx.cor())[1:]) + ';') if ctx.cor() is not None else ''
+                background = ('background: url(' + str(ctx.parametros().fundo().imagem().CADEIA()) +
+                              ');\nbackground-size: cover;background-position: center center;')\
+                    if ctx.parametros().fundo().imagem() is not None else ''
+
+                if background == '':
+                    background = ('background-color: ' +
+                                  getColor(self.visitCor(ctx.parametros().fundo().cor())[1:]) + ';') \
+                        if ctx.parametros().fundo().cor() is not None else ''
 
         banner = banner.replace('#BACKGROUND', background)
 
@@ -336,57 +345,65 @@ class GeradorDeCodigo(t3_cc2Visitor):
                (self.visitMais_colunas(ctx.mais_colunas()) if ctx.mais_colunas() is not None else '')
 
     def visitColuna(self, ctx: t3_cc2Parser.ColunaContext):
-        self.quantidade_colunas += 1
-
         coluna = """
         <div class="#ALINHAMENTOcolumn">
                 #CONTEUDO_COLUNA
         </div>
         """
 
-        alinhamento = str(ctx.alinhamento().opcao_alinhamento().getText()) if ctx.alinhamento() is not None else ''
+        alinhamento = ''
 
-        alinhamento_semantic = ''
-        if alinhamento == 'centralizado':
-            alinhamento_semantic = 'center aligned '
-        elif alinhamento == 'esquerda':
-            alinhamento_semantic = 'left floated left aligned '
-        elif alinhamento == 'direita':
-            alinhamento_semantic = 'right floated right aligned '
+        if ctx.parametros() is not None:
+            alinhamento = str(ctx.parametros().alinhamento().opcao_alinhamento().getText()) \
+                if ctx.parametros().alinhamento() is not None else ''
 
-        coluna = coluna.replace('#ALINHAMENTO', alinhamento_semantic)
+            alinhamento_semantic = ''
+            if alinhamento == 'centralizado':
+                alinhamento_semantic = 'center aligned '
+            elif alinhamento == 'esquerda':
+                alinhamento_semantic = 'left floated left aligned '
+            elif alinhamento == 'direita':
+                alinhamento_semantic = 'right floated right aligned '
+
+            alinhamento = alinhamento_semantic
+
+        coluna = coluna.replace('#ALINHAMENTO', alinhamento)
 
         coluna = coluna.replace('#CONTEUDO_COLUNA',
                                 (self.visitImagem(ctx.imagem()) if ctx.imagem() is not None else '') +
                                 (self.visitTexto(ctx.texto()) if ctx.texto() is not None else ''))
 
-        coluna = coluna.replace('#ALINHAMENTO_IMAGEM', (('<p align=' + alinhamento_semantic.split(' ')[0] + '>')
-                                                        if alinhamento_semantic != '' else ''))
-        coluna = coluna.replace('#FECHA_ALINHAMENTO_IMAGEM', '</p>' if alinhamento_semantic != '' else '')
+        coluna = coluna.replace('#ALINHAMENTO_IMAGEM', (('<p align=' + alinhamento.split(' ')[0] + '>')
+                                                        if alinhamento != '' else ''))
+        coluna = coluna.replace('#FECHA_ALINHAMENTO_IMAGEM', '</p>' if alinhamento != '' else '')
 
         return coluna
 
     def visitTitulo(self, ctx: t3_cc2Parser.TituloContext):
         cor = ''
-        if ctx.parametro() is not None:
-            cor = self.visitCor(ctx.parametro().cor()) if ctx.parametro() is not None and ctx.parametro().cor() is not None else ''
+        if ctx.parametros() is not None:
+            cor = self.visitCor(ctx.parametros().cor()) \
+                if ctx.parametros() is not None and ctx.parametros().cor() is not None else ''
 
-        titulo = ('<h1 class="ui header#COR">' + self.visitCadeia(ctx.CADEIA()) + '</h1>') if ctx.CADEIA() is not None else ''
+        titulo = ('<h1 class="ui header#COR">' + self.visitCadeia(ctx.CADEIA()) + '</h1>') \
+            if ctx.CADEIA() is not None else ''
         titulo = titulo.replace('#COR', cor)
         return titulo
 
     def visitSubtitulo(self, ctx: t3_cc2Parser.SubtituloContext):
         cor = ''
-        if ctx.parametro() is not None:
+        if ctx.parametros() is not None:
             cor = self.visitCor(
-                ctx.parametro().cor()) if ctx.parametro() is not None and ctx.parametro().cor() is not None else ''
+                ctx.parametros().cor()) if ctx.parametros() is not None and ctx.parametros().cor() is not None else ''
 
-        subtitulo = ('<h2 class="ui header#COR">' + self.visitCadeia(ctx.CADEIA()) + '</h2>') if ctx.CADEIA() is not None else ''
+        subtitulo = ('<h2 class="ui header#COR">' + self.visitCadeia(ctx.CADEIA()) + '</h2>') \
+            if ctx.CADEIA() is not None else ''
         subtitulo = subtitulo.replace('#COR', cor)
         return subtitulo
 
     def visitTexto(self, ctx: t3_cc2Parser.TextoContext):
-        return self.visitConteudo_texto(ctx.conteudo_texto()) if ctx is not None and ctx.conteudo_texto() is not None else ''
+        return self.visitConteudo_texto(ctx.conteudo_texto()) \
+            if ctx is not None and ctx.conteudo_texto() is not None else ''
 
     def visitConteudo_texto(self, ctx: t3_cc2Parser.Conteudo_textoContext):
         return (self.visitTitulo(ctx.titulo()) if ctx.titulo() is not None else '')\
@@ -401,9 +418,10 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     def visitParagrafo(self, ctx: t3_cc2Parser.ParagrafoContext):
         cor = ''
-        if ctx.parametro() is not None:
+        if ctx.parametros() is not None:
             cor = (' class="' + self.visitCor(
-                ctx.parametro().cor())[1:] + '"') if ctx.parametro() is not None and ctx.parametro().cor() is not None else ''
+                ctx.parametros().cor())[1:] + '"') \
+                if ctx.parametros() is not None and ctx.parametros().cor() is not None else ''
 
         paragrafo = '#LINK' + ('<p#COR>' + self.visitCadeia(ctx.CADEIA()) + '</p>#FECHALINK') \
             if ctx.CADEIA() is not None else ''
@@ -419,7 +437,8 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     def visitImagem(self, ctx: t3_cc2Parser.ImagemContext):
         imagem = '#ALINHAMENTO_IMAGEM#LINK<img src="' + self.visitCadeia(ctx.CADEIA()).replace('"', '') + \
-                 '" class="ui #TAMANHO_IMAGEM image">#FECHALINK#FECHA_ALINHAMENTO_IMAGEM' if ctx.CADEIA() is not None else ''
+                 '" class="ui #TAMANHO_IMAGEM image">#FECHALINK#FECHA_ALINHAMENTO_IMAGEM' \
+            if ctx.CADEIA() is not None else ''
 
         tamanho_imagem = self.visitTamanho(ctx.tamanho()) if ctx.tamanho() is not None else ''
 
@@ -458,7 +477,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
         rodape = rodape.replace('<h1', '<h3').replace('</h1>', '</h3>').replace('<h2', '<h4').replace('</h2>', '</h4>')
         return rodape
 
-    def visitParametro(self, ctx: t3_cc2Parser.ParametroContext):
+    def visitParametros(self, ctx: t3_cc2Parser.ParametrosContext):
         if ctx is not None:
             if ctx.getText().startswith("fonte"):
                 self.codigo += "fonte = " + self.visitFonte(ctx.fonte())
@@ -472,7 +491,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
             self.visitMais_parametros(ctx.mais_parametros())
 
     def visitMais_parametros(self, ctx: t3_cc2Parser.Mais_parametrosContext):
-        self.visitParametro(ctx.parametro())
+        self.visitParametros(ctx.parametros())
 
     def visitFonte(self, ctx: t3_cc2Parser.FonteContext):
         return self.visitOpcao_fonte(ctx.opcao_fonte())

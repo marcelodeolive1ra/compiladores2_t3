@@ -124,8 +124,8 @@ class t3_cc2Visitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by t3_cc2Parser#parametro.
-    def visitParametro(self, ctx:t3_cc2Parser.ParametroContext):
+    # Visit a parse tree produced by t3_cc2Parser#parametros.
+    def visitParametros(self, ctx:t3_cc2Parser.ParametrosContext):
         return self.visitChildren(ctx)
 
 
@@ -161,6 +161,11 @@ class t3_cc2Visitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by t3_cc2Parser#opcao_cor.
     def visitOpcao_cor(self, ctx:t3_cc2Parser.Opcao_corContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by t3_cc2Parser#fundo.
+    def visitFundo(self, ctx:t3_cc2Parser.FundoContext):
         return self.visitChildren(ctx)
 
 
