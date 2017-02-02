@@ -64,7 +64,7 @@ mais_colunas:
     coluna mais_colunas | ;
 
 texto:
-    'texto' ('(' parametro ')')? '{' conteudo_texto '}';
+    'texto' '{' conteudo_texto '}';
 
 conteudo_texto:
     (titulo | subtitulo | paragrafo) mais_conteudo_texto;
@@ -100,7 +100,8 @@ cor:
     'cor' '=' opcao_cor;
 
 opcao_cor:
-    'azul' | 'verde' | 'amarelo' | 'branco' | 'preto' | 'vermelho' | 'laranja' | 'roxo';
+    'azul' | 'verde' | 'amarelo' | 'branco' | 'preto' | 'vermelho' | 'laranja' | 'roxo' | 'rosa' | 'cinza' | 'marrom' |
+    'azul-claro';
 
 alinhamento:
     'alinhamento' '=' opcao_alinhamento;

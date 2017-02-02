@@ -24,6 +24,55 @@ class GeradorDeCodigo(t3_cc2Visitor):
         p {
             font-size: 1.1em;
         }
+
+        .ui.header.azul, p.azul {
+            color: #0000FF;
+        }
+
+        .ui.header.azul-claro, p.azul-claro {
+            color: #00BFFF;
+        }
+
+        .ui.header.verde, p.verde {
+            color: #32CD32;
+        }
+
+        .ui.header.amarelo, p.amarelo {
+            color: #FFD700;
+        }
+
+        .ui.header.branco, p.branco {
+            color: #FFFFFF;
+        }
+
+        .ui.header.preto, p.preto {
+            color: #000000;
+        }
+
+        .ui.header.vermelho, p.vermelho {
+            color: #FF0000;
+        }
+
+        .ui.header.laranja, p.laranja {
+            color: #FF8C00;
+        }
+
+        .ui.header.roxo, p.roxo {
+            color: #A020F0;
+        }
+
+        .ui.header.rosa, p.rosa {
+            color: #FF1493;
+        }
+
+        .ui.header.cinza, p.cinza {
+            color: #8B8989;
+        }
+
+        .ui.header.marrom, p.marrom {
+            color: #8B4513;
+        }
+
     </style>
 </head>
 <body>
@@ -282,28 +331,25 @@ class GeradorDeCodigo(t3_cc2Visitor):
         return coluna
 
     def visitTitulo(self, ctx: t3_cc2Parser.TituloContext):
+        cor = ''
         if ctx.parametro() is not None:
-            self.codigo += "parametros("
-            self.visitParametro(ctx.parametro())
-            self.codigo += ")"
-        return ('<h1 class="ui header">' + self.visitCadeia(ctx.CADEIA()) + '</h1>') if ctx.CADEIA() is not None else ''
+            cor = self.visitCor(ctx.parametro().cor()) if ctx.parametro() is not None and ctx.parametro().cor() is not None else ''
+
+        titulo = ('<h1 class="ui header#COR">' + self.visitCadeia(ctx.CADEIA()) + '</h1>') if ctx.CADEIA() is not None else ''
+        titulo = titulo.replace('#COR', cor)
+        return titulo
 
     def visitSubtitulo(self, ctx: t3_cc2Parser.SubtituloContext):
+        cor = ''
         if ctx.parametro() is not None:
-            self.codigo += "parametros("
-            self.visitParametro(ctx.parametro())
-            self.codigo += ")"
-        return ('<h2 class="ui header">' + self.visitCadeia(ctx.CADEIA()) + '</h2>') if ctx.CADEIA() is not None else ''
+            cor = self.visitCor(
+                ctx.parametro().cor()) if ctx.parametro() is not None and ctx.parametro().cor() is not None else ''
+
+        subtitulo = ('<h2 class="ui header#COR">' + self.visitCadeia(ctx.CADEIA()) + '</h2>') if ctx.CADEIA() is not None else ''
+        subtitulo = subtitulo.replace('#COR', cor)
+        return subtitulo
 
     def visitTexto(self, ctx: t3_cc2Parser.TextoContext):
-        try:
-            if ctx.parametro() is not None:
-                self.codigo += "parametros("
-                self.visitParametro(ctx.parametro())
-                self.codigo += ")"
-        except:
-            pass
-
         return self.visitConteudo_texto(ctx.conteudo_texto()) if ctx is not None and ctx.conteudo_texto() is not None else ''
 
     def visitConteudo_texto(self, ctx: t3_cc2Parser.Conteudo_textoContext):
@@ -318,12 +364,12 @@ class GeradorDeCodigo(t3_cc2Visitor):
                self.visitMais_conteudo_texto(ctx.mais_conteudo_texto()) if ctx.mais_conteudo_texto() is not None else ''
 
     def visitParagrafo(self, ctx: t3_cc2Parser.ParagrafoContext):
+        cor = ''
         if ctx.parametro() is not None:
-            self.codigo += "parametros("
-            self.visitParametro(ctx.parametro())
-            self.codigo += ")"
+            cor = (' class="' + self.visitCor(
+                ctx.parametro().cor())[1:] + '"') if ctx.parametro() is not None and ctx.parametro().cor() is not None else ''
 
-        paragrafo = '#LINK' + ('<p>' + self.visitCadeia(ctx.CADEIA()) + '</p>#FECHALINK') \
+        paragrafo = '#LINK' + ('<p#COR>' + self.visitCadeia(ctx.CADEIA()) + '</p>#FECHALINK') \
             if ctx.CADEIA() is not None else ''
 
         link = '\n<a href="' + self.visitLink(ctx.link()) + '"' + self.visitNova_aba(ctx.link().nova_aba()) + '>\n' \
@@ -331,6 +377,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
         fecha_link = '\n</a>' if ctx.link() is not None else ''
 
         paragrafo = paragrafo.replace('#LINK', link).replace('#FECHALINK', fecha_link)
+        paragrafo = paragrafo.replace('#COR', cor)
 
         return paragrafo
 
@@ -401,7 +448,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
         return self.visitOpcao_cor(ctx.opcao_cor())
 
     def visitOpcao_cor(self, ctx: t3_cc2Parser.Opcao_corContext):
-        return ctx.getText()
+        return ' ' + ctx.getText()
 
     def visitTamanho(self, ctx: t3_cc2Parser.TamanhoContext):
         return self.visitOpcao_tamanho(ctx.opcao_tamanho())
