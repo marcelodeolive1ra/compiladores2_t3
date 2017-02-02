@@ -120,8 +120,9 @@ class GeradorDeCodigo(t3_cc2Visitor):
     def visitSite(self, ctx: t3_cc2Parser.SiteContext):
         print("visitSite\n")
         self.codigo = self.codigo.replace("#TITULODOSITE", self.visitTitulo_site(ctx.titulo_site()))
-        self.codigo = self.codigo.replace('#MENU', self.visitMenu(ctx.menu()))
-        self.codigo = self.codigo.replace('#SIDEBAR', self.visitSidebar(ctx.sidebar()))
+        self.codigo = self.codigo.replace('#MENU', self.visitMenu(ctx.menu()) if ctx.menu() is not None else '')
+        self.codigo = self.codigo.replace('#SIDEBAR',
+                                          self.visitSidebar(ctx.sidebar()) if ctx.sidebar() is not None else '')
         self.codigo = self.codigo.replace('#BANNER',
                                           self.visitBanner(ctx.banner())
                                           if ctx.banner() is not None else '<p><br><br></p>')

@@ -3,7 +3,7 @@
 
 site("Trabalho 3 - Construção de Compiladores 2") {
     menu {
-        item("Home") -> "#"
+        item("Home")
         item("GitHub") ->+ "https://github.com"
         item("The Verge") ->+ "http://theverge.com"
     }
