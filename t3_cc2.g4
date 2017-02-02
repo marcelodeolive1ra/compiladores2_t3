@@ -10,10 +10,10 @@ ESPACO:
     (' ' | '\t' | '\r' | '\n') -> skip;
 
 site:
-	'site' titulo_site '{' menu? sidebar? banner? conteudo rodape? '}';
+	'site' ('(' parametros ')')? '{' menu? sidebar? banner? conteudo rodape? '}';
 
 titulo_site:
-    '(' CADEIA ')';
+    'titulo' '=' CADEIA;
 
 titulo:
 	'titulo' ('(' parametros ')')? '(' CADEIA ')';
@@ -34,7 +34,7 @@ mais_itens:
 	item mais_itens | ;
 
 sidebar:
-	'sidebar' '{' item mais_itens '}' | 'sidebar' '=' 'menu' | ;
+	'sidebar' '{' item mais_itens '}' | 'sidebar' '=' 'menu';
 
 banner:
 	'banner' ('(' parametros ')')?  '{' texto '}';
@@ -46,7 +46,7 @@ rodape:
 	'rodape' '{' (texto | (texto? colunas) | (texto? coluna)) '}';
 
 conteudo:
-	'conteudo' '{' secao mais_secoes '}' | ;
+	'conteudo' '{' secao mais_secoes '}';
 
 secao:
 	'secao' '{' (texto | (texto? colunas) | (texto? coluna)) '}';
@@ -79,7 +79,7 @@ imagem:
 	'imagem' '(' CADEIA (',' tamanho)? ')' link? | ;
 
 parametros:
-    (tamanho | fonte | cor | fundo | alinhamento) mais_parametros;
+    (tamanho | fonte | cor | fundo | alinhamento | titulo_site) mais_parametros;
 
 mais_parametros:
     ',' parametros | ;

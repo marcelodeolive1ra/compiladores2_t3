@@ -119,7 +119,9 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     def visitSite(self, ctx: t3_cc2Parser.SiteContext):
         print("visitSite\n")
-        self.codigo = self.codigo.replace("#TITULODOSITE", self.visitTitulo_site(ctx.titulo_site()))
+        self.codigo = self.codigo.replace("#TITULODOSITE",
+                                          self.visitTitulo_site(ctx.parametros().titulo_site())
+                                          if ctx.parametros() is not None else '')
         self.codigo = self.codigo.replace('#MENU', self.visitMenu(ctx.menu()) if ctx.menu() is not None else '')
         self.codigo = self.codigo.replace('#SIDEBAR',
                                           self.visitSidebar(ctx.sidebar()) if ctx.sidebar() is not None else '')
@@ -127,7 +129,8 @@ class GeradorDeCodigo(t3_cc2Visitor):
                                           self.visitBanner(ctx.banner())
                                           if ctx.banner() is not None else '<p><br><br></p>')
         # TODO: melhorar a forma de tratamento do espaço do menu quando não tem banner
-        self.codigo = self.codigo.replace('#CONTEUDO', self.visitConteudo(ctx.conteudo()))
+        self.codigo = self.codigo.replace('#CONTEUDO',
+                                          self.visitConteudo(ctx.conteudo()) if ctx.conteudo() is not None else '')
         self.codigo = self.codigo.replace('#RODAPE', self.visitRodape(ctx.rodape()) if ctx.rodape() is not None else '')
 
         if ctx.sidebar() is not None:
@@ -158,7 +161,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     def visitTitulo_site(self, ctx: t3_cc2Parser.Titulo_siteContext):
         print("visitTitulo_site\n")
-        return self.visitCadeia(ctx.CADEIA()) if ctx.CADEIA() is not None else ''
+        return self.visitCadeia(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ''
 
     def visitMenu(self, ctx: t3_cc2Parser.MenuContext):
         print("visitMenu\n")
@@ -567,7 +570,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
         elif alinhamento == 'centralizado':
             alinhamento = 'center'
         elif alinhamento == 'direita':
-            alinhamento == 'right'
+            alinhamento = 'right'
 
         return alinhamento
 
