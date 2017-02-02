@@ -1,7 +1,7 @@
 # Testa geral: compilado de testes
 # Comentário
 
-site(titulo="Trabalho 3 - Construção de Compiladores 2") {
+site(titulo="Trabalho 3 - Construção de Compiladores 2", fonte=Open Sans) {
     menu {
         item("Home")
         item("GitHub") ->+ "https://github.com"
@@ -26,11 +26,11 @@ site(titulo="Trabalho 3 - Construção de Compiladores 2") {
             colunas {
                 coluna(alinhamento=esquerda) {
                     texto {
-                        titulo("Trabalho 3")
+                        titulo(cor=vermelho, alinhamento=centralizado)("Trabalho 3")
                         subtitulo("Construção de Compiladores 2")
-                        paragrafo("Você pode criar vários parágrafos. Teste")
-                        paragrafo("E você pode adicionar links a esses parágrafos :-)") ->+ "https://github.com/marcelodeolivei1ra"
-                        subtitulo("Visite o nosso projeto no GitHub")
+                        paragrafo(alinhamento=direita, cor=verde)("Você pode criar vários parágrafos.")
+                        paragrafo(cor=roxo, alinhamento=centralizado)("E você pode adicionar links a esses parágrafos :-)") ->+ "https://github.com/marcelodeolivei1ra"
+                        subtitulo(alinhamento=direita, cor=azul-claro)("Visite o nosso projeto no GitHub")
                         paragrafo("O projeto completo está disponível em um repositório do GitHub. Clique aqui para acessá-lo.") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
                     }
                 }
