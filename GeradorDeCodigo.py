@@ -7,6 +7,34 @@ NORMAL = 'medio'
 GRANDE = 'grande'
 EXTRA_GRANDE = 'extra-grande'
 
+def getColor(cor):
+    if cor == 'azul':
+        return '#0000FF'
+    elif cor == 'azul-claro':
+        return '#00BFFF'
+    elif cor == 'verde':
+        return '#32CD32'
+    elif cor == 'amarelo':
+        return '#FD7000'
+    elif cor == 'branco':
+        return '#FFFFFF'
+    elif cor == 'preto':
+        return '#000000'
+    elif cor == 'vermelho':
+        return '#FF0000'
+    elif cor == 'laranja':
+        return '#FF8C00'
+    elif cor == 'roxo':
+        return '#A020F0'
+    elif cor == 'rosa':
+        return '#FF1493'
+    elif cor == 'cinza':
+        return '#8B8989'
+    elif cor == 'marrom':
+        return '#8B4513'
+    else:
+        return ''
+
 class GeradorDeCodigo(t3_cc2Visitor):
     codigo = """<!DOCTYPE html>
 <html>
@@ -177,7 +205,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
             item = item.replace("#CADEIA", self.visitCadeia(ctx.CADEIA()) if ctx.CADEIA() is not None else '')
             item = item.replace('#LINK', self.visitLink(ctx.link()))
-            item = item.replace("#TARGET", self.visitNova_aba(ctx.link().nova_aba()))
+            item = item.replace("#TARGET", self.visitNova_aba(ctx.link().nova_aba()) if ctx.link() is not None else '')
 
             self.itens_menu += item + '\n'
             return item
@@ -218,10 +246,11 @@ class GeradorDeCodigo(t3_cc2Visitor):
             -ms-flex-align: center;
             align-items: center;
             text-align: center;
+            #BACKGROUND
         }
 
         #titulo_banner {
-            font-size: 4em;
+            font-size: 3.5em;
         }
 
         #subtitulo_banner {
@@ -232,15 +261,21 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     <div class="ui inverted vertical masthead center aligned segment" id="banner">
         <div class="ui text container">
-            #IMAGEM
             #TEXTO
         </div>
     </div>
         """
-        banner = banner.replace('#IMAGEM', self.visitImagem(ctx.imagem()) if ctx.imagem() is not None else '')
         banner = banner.replace('#TEXTO', self.visitTexto(ctx.texto()) if ctx.texto() is not None else '').\
             replace('<h1 class="ui header">', '<h1 class="ui inverted header" id="titulo_banner">')
         banner = banner.replace('<h2 class="ui header">', '<h2 class="ui inverted header" id="subtitulo_banner">')
+
+        background = ('background: url(' + str(ctx.imagem().CADEIA()) + ');\nbackground-size: cover;background-position: center center;')\
+            if ctx.imagem() is not None else ''
+
+        if background == '':
+            background = ('background-color: ' + getColor(self.visitCor(ctx.cor())[1:]) + ';') if ctx.cor() is not None else ''
+
+        banner = banner.replace('#BACKGROUND', background)
 
         return banner
 
