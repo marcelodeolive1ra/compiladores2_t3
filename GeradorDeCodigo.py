@@ -133,8 +133,6 @@ class GeradorDeCodigo(t3_cc2Visitor):
     itens_menu = ''
 
     def visitSite(self, ctx: t3_cc2Parser.SiteContext):
-        print("visitSite\n")
-
         titulo_site = ''
         fonte = ''
 
@@ -144,13 +142,14 @@ class GeradorDeCodigo(t3_cc2Visitor):
             fonte = self.visitFonte(ctx.parametros().fonte()) if ctx.parametros().fonte() is not None else ''
 
             if ctx.parametros().mais_parametros() is not None:
-                if titulo_site == '':
-                    titulo_site = \
-                        self.visitTitulo_site(ctx.parametros().mais_parametros().parametros().titulo_site()) \
-                            if ctx.parametros().mais_parametros().parametros().titulo_site() is not None else ''
-                if fonte == '':
-                    fonte = self.visitFonte(ctx.parametros().mais_parametros().parametros().fonte()) \
-                        if ctx.parametros().mais_parametros().parametros().fonte() is not None else ''
+                if ctx.parametros().mais_parametros().parametros() is not None:
+                    if titulo_site == '':
+                        titulo_site = \
+                            self.visitTitulo_site(ctx.parametros().mais_parametros().parametros().titulo_site()) \
+                                if ctx.parametros().mais_parametros().parametros().titulo_site() is not None else ''
+                    if fonte == '':
+                        fonte = self.visitFonte(ctx.parametros().mais_parametros().parametros().fonte()) \
+                            if ctx.parametros().mais_parametros().parametros().fonte() is not None else ''
 
         self.codigo = self.codigo.replace('#TITULODOSITE', titulo_site)
         self.codigo = self.codigo.replace('#FONTE',
