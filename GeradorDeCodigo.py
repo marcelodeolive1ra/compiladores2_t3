@@ -128,7 +128,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
                                           if ctx.banner() is not None else '<p><br><br></p>')
         # TODO: melhorar a forma de tratamento do espaço do menu quando não tem banner
         self.codigo = self.codigo.replace('#CONTEUDO', self.visitConteudo(ctx.conteudo()))
-        self.codigo = self.codigo.replace('#RODAPE', self.visitRodape(ctx.rodape()))
+        self.codigo = self.codigo.replace('#RODAPE', self.visitRodape(ctx.rodape()) if ctx.rodape() is not None else '')
 
         if ctx.sidebar() is not None:
             script_sidebar = """<script>
@@ -295,20 +295,26 @@ class GeradorDeCodigo(t3_cc2Visitor):
         return secao + mais_secoes
 
     def visitSecao(self, ctx: t3_cc2Parser.SecaoContext):
-        self.quantidade_colunas = 0
-
         secao = """
         <div class="ui vertical segment">
             <div class="ui stackable equal width center aligned grid container">
             #TEXTO
-            <div class="middle aligned row">
-                #COLUNAS
-            </div>
+            #COLUNAS
             </div>
         </div>
         """
+
+        novas_colunas = """<div class="middle aligned row">
+                #COLUNAS
+            </div>"""
+
         colunas = (self.visitColunas(ctx.colunas()) if ctx.colunas() is not None else '') +\
                   (self.visitColuna(ctx.coluna()) if ctx.coluna() is not None else '')
+
+        if colunas != '':
+            secao = secao.replace('#COLUNAS', novas_colunas.replace('#COLUNAS', colunas))
+        else:
+            secao = secao.replace('#COLUNAS', '')
 
         nova_linha = """<div class="middle aligned row">
                 <div class="column">
@@ -323,8 +329,6 @@ class GeradorDeCodigo(t3_cc2Visitor):
             secao = secao.replace('#TEXTO', nova_linha.replace('#TEXTO', texto))
         else:
             secao = secao.replace('#TEXTO', '')
-
-        secao = secao.replace('#COLUNAS', colunas)
 
         return secao
 
@@ -381,24 +385,32 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     def visitTitulo(self, ctx: t3_cc2Parser.TituloContext):
         cor = ''
+        alinhamento = ''
         if ctx.parametros() is not None:
             cor = self.visitCor(ctx.parametros().cor()) \
                 if ctx.parametros() is not None and ctx.parametros().cor() is not None else ''
+            alinhamento = (' align="' + self.visitAlinhamento(ctx.parametros().alinhamento()) + '" ') \
+                if ctx.parametros().alinhamento() is not None else ''
 
-        titulo = ('<h1 class="ui header#COR">' + self.visitCadeia(ctx.CADEIA()) + '</h1>') \
+        titulo = ('<h1 #ALINHAMENTOclass="ui header#COR">' + self.visitCadeia(ctx.CADEIA()) + '</h1>') \
             if ctx.CADEIA() is not None else ''
         titulo = titulo.replace('#COR', cor)
+        titulo = titulo.replace('#ALINHAMENTO', alinhamento)
         return titulo
 
     def visitSubtitulo(self, ctx: t3_cc2Parser.SubtituloContext):
         cor = ''
+        alinhamento = ''
         if ctx.parametros() is not None:
             cor = self.visitCor(
                 ctx.parametros().cor()) if ctx.parametros() is not None and ctx.parametros().cor() is not None else ''
+            alinhamento = (' align="' + self.visitAlinhamento(ctx.parametros().alinhamento()) + '" ') \
+                if ctx.parametros().alinhamento() is not None else ''
 
         subtitulo = ('<h2 class="ui header#COR">' + self.visitCadeia(ctx.CADEIA()) + '</h2>') \
             if ctx.CADEIA() is not None else ''
         subtitulo = subtitulo.replace('#COR', cor)
+        subtitulo = subtitulo.replace('#ALINHAMENTO', alinhamento)
         return subtitulo
 
     def visitTexto(self, ctx: t3_cc2Parser.TextoContext):
@@ -418,12 +430,15 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     def visitParagrafo(self, ctx: t3_cc2Parser.ParagrafoContext):
         cor = ''
+        alinhamento = ''
         if ctx.parametros() is not None:
             cor = (' class="' + self.visitCor(
                 ctx.parametros().cor())[1:] + '"') \
                 if ctx.parametros() is not None and ctx.parametros().cor() is not None else ''
+            alinhamento = (' align="' + self.visitAlinhamento(ctx.parametros().alinhamento()) + '" ') \
+                if ctx.parametros().alinhamento() is not None else ''
 
-        paragrafo = '#LINK' + ('<p#COR>' + self.visitCadeia(ctx.CADEIA()) + '</p>#FECHALINK') \
+        paragrafo = '#LINK' + ('<p#ALINHAMENTO#COR>' + self.visitCadeia(ctx.CADEIA()) + '</p>#FECHALINK') \
             if ctx.CADEIA() is not None else ''
 
         link = '\n<a href="' + self.visitLink(ctx.link()) + '"' + self.visitNova_aba(ctx.link().nova_aba()) + '>\n' \
@@ -432,6 +447,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
         paragrafo = paragrafo.replace('#LINK', link).replace('#FECHALINK', fecha_link)
         paragrafo = paragrafo.replace('#COR', cor)
+        paragrafo = paragrafo.replace('#ALINHAMENTO', alinhamento)
 
         return paragrafo
 
@@ -467,14 +483,43 @@ class GeradorDeCodigo(t3_cc2Visitor):
     def visitRodape(self, ctx: t3_cc2Parser.RodapeContext):
         rodape = """
         <div class="ui inverted vertical footer segment">
-            <div class="ui container">
-                #RODAPE
+            <div class="ui stackable equal width center aligned grid container">
+                #TEXTO
+                #COLUNAS
             </div>
         </div>
         """
+        colunas = (self.visitColunas(ctx.colunas()) if ctx.colunas() is not None else '') + \
+                  (self.visitColuna(ctx.coluna()) if ctx.coluna() is not None else '')
 
-        rodape = rodape.replace('#RODAPE', self.visitTexto(ctx.texto())).replace('header', 'inverted header')
+        novas_colunas = """<div class="middle aligned row">
+                    #COLUNAS
+                </div>
+
+        """
+
+        if colunas != '':
+            rodape = rodape.replace('#COLUNAS', novas_colunas.replace('#COLUNAS', colunas))
+        else:
+            rodape = rodape.replace('#COLUNAS', '')
+
+        nova_linha = """<div class="middle aligned row">
+                        <div class="column">
+                            #TEXTO
+                        </div>
+                    </div>
+                """
+
+        texto = self.visitTexto(ctx.texto()) if ctx.texto() is not None else ''
+
+        if texto != '':
+            rodape = rodape.replace('#TEXTO', nova_linha.replace('#TEXTO', texto))
+        else:
+            rodape = rodape.replace('#TEXTO', '')
+
+        rodape = rodape.replace('header', 'inverted header')
         rodape = rodape.replace('<h1', '<h3').replace('</h1>', '</h3>').replace('<h2', '<h4').replace('</h2>', '</h4>')
+
         return rodape
 
     def visitParametros(self, ctx: t3_cc2Parser.ParametrosContext):
@@ -510,6 +555,21 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
     def visitOpcao_tamanho(self, ctx: t3_cc2Parser.Opcao_tamanhoContext):
         return ctx.getText()
+
+    def visitAlinhamento(self, ctx: t3_cc2Parser.AlinhamentoContext):
+        return self.visitOpcao_alinhamento(ctx.opcao_alinhamento())
+
+    def visitOpcao_alinhamento(self, ctx: t3_cc2Parser.Opcao_alinhamentoContext):
+        alinhamento = ctx.getText()
+
+        if alinhamento == 'esquerda':
+            alinhamento = 'left'
+        elif alinhamento == 'centralizado':
+            alinhamento = 'center'
+        elif alinhamento == 'direita':
+            alinhamento == 'right'
+
+        return alinhamento
 
     def getCodigo(self):
         return self.codigo

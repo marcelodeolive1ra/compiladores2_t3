@@ -10,7 +10,7 @@ ESPACO:
     (' ' | '\t' | '\r' | '\n') -> skip;
 
 site:
-	'site' titulo_site '{' menu? sidebar? banner? conteudo rodape '}';
+	'site' titulo_site '{' menu? sidebar? banner? conteudo rodape? '}';
 
 titulo_site:
     '(' CADEIA ')';
@@ -43,7 +43,7 @@ subtitulo:
 	'subtitulo' ('(' parametros ')')? '(' CADEIA ')';
 
 rodape:
-	'rodape' '{' texto '}' | ;
+	'rodape' '{' (texto | (texto? colunas) | (texto? coluna)) '}';
 
 conteudo:
 	'conteudo' '{' secao mais_secoes '}' | ;
