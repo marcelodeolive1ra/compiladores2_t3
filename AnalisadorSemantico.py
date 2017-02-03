@@ -197,9 +197,15 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitColunas(self, ctx: t3_cc2Parser.ColunasContext):
+        if ctx.coluna() is not None:
+            self.visitColuna(ctx.coluna())
+            self.visitMais_colunas(ctx.mais_colunas())
         return
 
     def visitMais_colunas(self, ctx: t3_cc2Parser.Mais_colunasContext):
+        if ctx.coluna() is not None:
+            self.visitColuna(ctx.coluna())
+            self.visitMais_colunas(ctx.mais_colunas())
         return
 
     def visitColuna(self, ctx: t3_cc2Parser.ColunaContext):
@@ -229,6 +235,12 @@ class AnalisadorSemantico(t3_cc2Visitor):
                                          'não é permitido declarar mais de um parâmetro' + \
                                          self.getRegraDoErro(ctx.start)
                 raise Exception(self.erros_semanticos)
+
+        if ctx.imagem() is not None:
+            self.visitImagem(ctx.imagem())
+        if ctx.texto() is not None:
+            self.visitTexto(ctx.texto())
+
         return
 
     def visitTitulo(self, ctx: t3_cc2Parser.TituloContext):
@@ -385,20 +397,20 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitConteudo_texto(self, ctx: t3_cc2Parser.Conteudo_textoContext):
-        if ctx.titulo() is not None:
-            self.visitTitulo(ctx.titulo())
-        if ctx.subtitulo() is not None:
-            self.visitSubtitulo(ctx.subtitulo())
-        if ctx.paragrafo() is not None:
-            self.visitParagrafo(ctx.paragrafo())
-        if ctx.mais_conteudo_texto() is not None:
-            self.visitMais_conteudo_texto(ctx.mais_conteudo_texto())
+        if ctx is not None:
+            if ctx.titulo() is not None:
+                self.visitTitulo(ctx.titulo())
+            if ctx.subtitulo() is not None:
+                self.visitSubtitulo(ctx.subtitulo())
+            if ctx.paragrafo() is not None:
+                self.visitParagrafo(ctx.paragrafo())
+            if ctx.mais_conteudo_texto() is not None:
+                self.visitMais_conteudo_texto(ctx.mais_conteudo_texto())
         return
 
     def visitMais_conteudo_texto(self, ctx: t3_cc2Parser.Mais_conteudo_textoContext):
         if ctx.conteudo_texto() is not None:
             self.visitConteudo_texto(ctx.conteudo_texto())
-        if ctx.mais_conteudo_texto() is not None:
             self.visitMais_conteudo_texto(ctx.mais_conteudo_texto())
         return
 

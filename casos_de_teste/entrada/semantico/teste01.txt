@@ -24,9 +24,9 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
     conteudo {
         secao {
             colunas {
-                coluna(alinhamento=esquerda, cor=azul) {
+                coluna(alinhamento=esquerda) {
                     texto {
-                        titulo(cor=vermelho, alinhamento=centralizado, fonte=Arial, cor=azul)("Trabalho 3")
+                        titulo(cor=vermelho, alinhamento=centralizado)("Trabalho 3")
                         subtitulo("Construção de Compiladores 2")
                         paragrafo(alinhamento=direita, cor=verde)("Você pode criar vários parágrafos.")
                         paragrafo(cor=roxo, alinhamento=centralizado)("E você pode adicionar links a esses parágrafos :-)") ->+ "https://github.com/marcelodeolivei1ra"
@@ -41,7 +41,7 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
         }
         secao {
             texto {
-                titulo("O que você pode fazer com esta linguagem?")
+                titulo(cor=azul, alinhamento=centralizado)("O que você pode fazer com esta linguagem?")
             }
             colunas {
                 coluna {
