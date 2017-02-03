@@ -84,8 +84,13 @@ class AnalisadorSemantico(t3_cc2Visitor):
                 raise Exception(self.getLinhaDoErro(ctx.sidebar().start) +
                                 'uso do comando "sidebar=menu" sem a declaração de um componente "menu".')
 
-        self.visitBanner(ctx.banner())
+        if ctx.banner() is not None:
+            self.visitBanner(ctx.banner())
 
+        self.visitConteudo(ctx.conteudo())
+
+        if ctx.rodape() is not None:
+            self.visitRodape(ctx.rodape())
         return
 
     def visitTitulo_site(self, ctx: t3_cc2Parser.Titulo_siteContext):
@@ -159,12 +164,28 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitConteudo(self, ctx: t3_cc2Parser.ConteudoContext):
+        self.visitSecao(ctx.secao())
+        self.visitMais_secoes(ctx.mais_secoes())
         return
 
     def visitSecao(self, ctx: t3_cc2Parser.SecaoContext):
+        print('secao')
+        if ctx.texto() is not None:
+            if ctx.coluna() is not None:
+                self.visitColuna(ctx.coluna())
+            elif ctx.colunas() is not None:
+                self.visitColunas(ctx.colunas())
+        else:
+            if ctx.coluna() is not None:
+                self.visitColuna(ctx.coluna())
+            elif ctx.colunas() is not None:
+                self.visitColunas(ctx.colunas())
         return
 
     def visitMais_secoes(self, ctx: t3_cc2Parser.Mais_secoesContext):
+        if ctx.secao() is not None:
+            self.visitSecao(ctx.secao())
+            self.visitMais_secoes(ctx.mais_secoes())
         return
 
     def visitColunas(self, ctx: t3_cc2Parser.ColunasContext):
@@ -174,6 +195,32 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitColuna(self, ctx: t3_cc2Parser.ColunaContext):
+        if ctx.parametros() is not None:
+            if ctx.parametros().cor() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "cor"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().tamanho() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "tamanho"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().fonte() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "fonte"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().titulo_site() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "titulo"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().mais_parametros().parametros() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido declarar mais de um parâmetro' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
         return
 
     def visitTitulo(self, ctx: t3_cc2Parser.TituloContext):

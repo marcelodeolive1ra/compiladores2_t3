@@ -13,8 +13,8 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
         #item("Página 2") ->+ "https://github.com"
         #item("Página 3") -> "http://theverge.com"
     #}
-    banner(fundo=imagem("fundo.png")) {
-    #banner(fundo=cor=verde) {
+    #banner(fundo=imagem("fundo.png")) {
+    banner(fundo=cor=verde) {
         # imagem("Octocat.png") -> "link opcional da imagem"
         texto {
             titulo("Construção de Compiladores 2")
