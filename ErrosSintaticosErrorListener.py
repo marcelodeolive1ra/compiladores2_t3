@@ -9,9 +9,13 @@ class ErrosSintaticosErrorListener(ErrorListener):
 
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
         simbolo = msg.replace("token recognition error at: ", "")
-        self.erros_sintaticos += "Linha " + str(line) + ": erro sintático próximo a " + simbolo
+        simbolo = simbolo.replace('extraneous input ', '')
+        simbolo = simbolo.replace('mismatched input ', '')
+        simbolo = simbolo.split('expecting')[0][:-1]
 
-        raise Exception("Erro sintático: " + self.erros_sintaticos)
+        self.erros_sintaticos += "Linha " + str(line) + ": erro sintático próximo a " + simbolo + '.'
+
+        raise Exception(self.erros_sintaticos)
 
     def reportAmbiguity(self, recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs):
         return
