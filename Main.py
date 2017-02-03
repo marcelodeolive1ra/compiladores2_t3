@@ -25,6 +25,7 @@ with open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_ENTRADA + CASO_DE_TESTE, encoding
 try:
     input = antlr4.InputStream(programa)
     lexer = t3_cc2Lexer(input=input)
+    lexer.removeErrorListeners()
     tokens = antlr4.CommonTokenStream(lexer=lexer)
 
     parser = t3_cc2Parser(tokens)

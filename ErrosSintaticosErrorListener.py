@@ -1,5 +1,6 @@
 from antlr4.error.ErrorListener import ErrorListener
 
+
 class ErrosSintaticosErrorListener(ErrorListener):
 
     erros_sintaticos = ""
@@ -8,13 +9,7 @@ class ErrosSintaticosErrorListener(ErrorListener):
         return self.erros_sintaticos
 
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
-        simbolo = msg.replace("token recognition error at: ", "")
-        simbolo = simbolo.replace('extraneous input ', '')
-        simbolo = simbolo.replace('mismatched input ', '')
-        simbolo = simbolo.replace('no viable alternative at input \'', '')
-        simbolo = simbolo.split('expecting')[0][:-1]
-
-        self.erros_sintaticos += 'Linha ' + str(line) + ': erro sintático próximo a ' + simbolo + '.'
+        self.erros_sintaticos += 'Linha ' + str(line) + ': erro sintático próximo a \'' + offendingSymbol.text + '\'.'
 
         raise Exception(self.erros_sintaticos)
 
