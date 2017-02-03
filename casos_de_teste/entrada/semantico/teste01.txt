@@ -2,7 +2,11 @@
 # Comentário
 
 site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
-
+    menu {
+        item("Home")
+        item("GitHub") ->+ "https://github.com"
+        item("The Verge") ->+ "http://theverge.com"
+    }
     sidebar = menu
     #sidebar {
         #item("Home") -> "http://google.com.br"

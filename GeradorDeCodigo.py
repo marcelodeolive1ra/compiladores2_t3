@@ -527,7 +527,8 @@ class GeradorDeCodigo(t3_cc2Visitor):
                  '" class="ui #TAMANHO_IMAGEM image">#FECHALINK#FECHA_ALINHAMENTO_IMAGEM' \
             if ctx.CADEIA() is not None else ''
 
-        tamanho_imagem = self.visitTamanho(ctx.tamanho()) if ctx.tamanho() is not None else ''
+        tamanho_imagem = self.visitTamanho(ctx.parametros().tamanho()) \
+            if ctx.parametros() is not None and ctx.parametros().tamanho() is not None else ''
 
         if tamanho_imagem == EXTRA_PEQUENO:
             tamanho_imagem = 'tiny'

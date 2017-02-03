@@ -76,7 +76,7 @@ paragrafo:
     'paragrafo' ('(' parametros ')')? '(' CADEIA ')' link?;
 
 imagem:
-	'imagem' '(' CADEIA (',' tamanho)? ')' link? | ;
+	'imagem' ('(' parametros ')')? '(' CADEIA ')' link?;
 
 parametros:
     (tamanho | fonte | cor | fundo | alinhamento | titulo_site) mais_parametros;
