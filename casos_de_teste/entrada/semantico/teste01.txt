@@ -123,13 +123,13 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
             }
             colunas {
                 coluna(alinhamento=centralizado) {
-                    imagem("Octocat3.jpg", tamanho=extra-pequeno)
+                    imagem(tamanho=extra-pequeno)("Octocat3.jpg")
                 }
                 coluna(alinhamento=centralizado) {
-                    imagem("Octocat4.jpg", tamanho=pequeno)
+                    imagem(tamanho=pequeno)("Octocat4.jpg")
                 }
                 coluna(alinhamento=centralizado) {
-                    imagem("Octocat5.jpg", tamanho=medio)
+                    imagem(tamanho=medio)("Octocat5.jpg")
                 }
             }
         }
@@ -139,10 +139,10 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
             }
             colunas {
                 coluna(alinhamento=centralizado) {
-                    imagem("Octocat6.jpg", tamanho=grande)
+                    imagem(tamanho=grande)("Octocat6.jpg")
                 }
                 coluna(alinhamento=centralizado) {
-                    imagem("Octocat7.jpg", tamanho=extra-grande)
+                    imagem(tamanho=extra-grande)("Octocat7.jpg")
                 }
             }
         }
