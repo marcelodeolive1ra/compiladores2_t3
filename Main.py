@@ -51,6 +51,8 @@ try:
 
         print('\n' + codigo_gerado)
 
+    print("Compilação OK")
+
 except Exception as e:
     print(e, file=sys.stderr)
     # print(e.with_traceback())

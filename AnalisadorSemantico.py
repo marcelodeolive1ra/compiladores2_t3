@@ -79,6 +79,11 @@ class AnalisadorSemantico(t3_cc2Visitor):
         if self.erros_semanticos != '':
             raise Exception(self.erros_semanticos)
 
+        if ctx.sidebar() is not None:
+            if ctx.sidebar().getText() == 'sidebar=menu' and ctx.menu() is None:
+                raise Exception(self.getLinhaDoErro(ctx.sidebar().start) +
+                                'uso do comando "sidebar=menu" sem a declaração de um componente "menu".')
+
         return
 
     def visitTitulo_site(self, ctx: t3_cc2Parser.Titulo_siteContext):
