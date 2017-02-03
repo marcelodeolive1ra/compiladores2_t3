@@ -34,9 +34,9 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
                         paragrafo("O projeto completo está disponível em um repositório do GitHub. Clique aqui para acessá-lo.") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
                     }
                 }
-                coluna(alinhamento=direita) {
-                    imagem("Octocat.png") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
-                }
+                #coluna(alinhamento=direita) {
+                #    imagem("Octocat.png") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
+                #}
             }
         }
         secao {

@@ -38,7 +38,7 @@ try:
     if TESTE == SEMANTICO:
         analisador_semantico = AnalisadorSemantico()
         analisador_semantico.visitSite(programa)
-        print(analisador_semantico.getErrosSemanticos())
+        print(analisador_semantico.getWarnings(), file=sys.stderr)
 
     elif TESTE == GERACAO_DE_CODIGO:
         gerador_de_codigo = GeradorDeCodigo()

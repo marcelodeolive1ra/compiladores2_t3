@@ -4,12 +4,19 @@ from ANTLR.t3_cc2Parser import *
 
 class AnalisadorSemantico(t3_cc2Visitor):
     erros_semanticos = ''
+    warnings = ''
 
     def getErrosSemanticos(self):
         return self.erros_semanticos
 
+    def getWarnings(self):
+        return self.warnings
+
     def getLinhaDoErro(self, dados_do_erro):
         return 'Erro semântico na linha ' + str(dados_do_erro).split(',')[3].split(':')[0] + ': '
+
+    def getLinhaDoWarning(self, dados_do_erro):
+        return str(dados_do_erro).split(',')[3].split(':')[0]
 
     def getRegraDoErro(self, dados_do_erro):
         return ' no comando ' + str(dados_do_erro).split(',')[1].split('=')[1] + '.'
@@ -200,6 +207,11 @@ class AnalisadorSemantico(t3_cc2Visitor):
         if ctx.coluna() is not None:
             self.visitColuna(ctx.coluna())
             self.visitMais_colunas(ctx.mais_colunas())
+
+            if ctx.mais_colunas().coluna() is None:
+                self.warnings += "Warning na linha " + self.getLinhaDoWarning(ctx.start) + \
+                                 ": componente 'colunas' sendo utilizado com apenas uma coluna. Use o comando " \
+                                 "'coluna' neste caso para maior desempenho do compilador."
         return
 
     def visitMais_colunas(self, ctx: t3_cc2Parser.Mais_colunasContext):
