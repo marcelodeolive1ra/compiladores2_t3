@@ -38,7 +38,8 @@ try:
     if TESTE == SEMANTICO:
         analisador_semantico = AnalisadorSemantico()
         analisador_semantico.visitSite(programa)
-        print(analisador_semantico.getWarnings(), file=sys.stderr)
+        print("Compilação finalizada" + (' com warnings. ' if analisador_semantico.getWarnings() != '' else ''))
+        print(analisador_semantico.getWarnings())
 
     elif TESTE == GERACAO_DE_CODIGO:
         gerador_de_codigo = GeradorDeCodigo()
@@ -51,8 +52,9 @@ try:
         arquivo_saida.close()
 
         print('\n' + codigo_gerado)
+        print("Compilação OK")
 
-    print("Compilação OK")
+
 
 except Exception as e:
     print(e, file=sys.stderr)

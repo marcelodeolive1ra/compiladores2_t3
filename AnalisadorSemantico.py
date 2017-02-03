@@ -6,11 +6,16 @@ class AnalisadorSemantico(t3_cc2Visitor):
     erros_semanticos = ''
     warnings = ''
 
+    lista_de_imagens = []
+    quantidade_colunas = 0
+    colunas = []
+    imagem_dentro_de_colunas = False
+
     def getErrosSemanticos(self):
         return self.erros_semanticos
 
     def getWarnings(self):
-        return self.warnings
+        return self.warnings[:-1]
 
     def getLinhaDoErro(self, dados_do_erro):
         return 'Erro semântico na linha ' + str(dados_do_erro).split(',')[3].split(':')[0] + ': '
@@ -51,7 +56,7 @@ class AnalisadorSemantico(t3_cc2Visitor):
             if ctx.parametros().fonte() is not None:
                 fonte += 1
 
-            if ctx.parametros().mais_parametros() is not None:
+            if ctx.parametros().mais_parametros().parametros() is not None:
                 if ctx.parametros().mais_parametros().parametros().cor() is not None:
                     self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
                                              'não é permitido o parâmetro "cor"' + \
@@ -104,6 +109,24 @@ class AnalisadorSemantico(t3_cc2Visitor):
 
         if ctx.rodape() is not None:
             self.visitRodape(ctx.rodape())
+
+        for imagem in self.lista_de_imagens:
+            opcao_tamanho = imagem['tamanho']
+            colunas = self.colunas[imagem['indice_coluna']]
+
+            if (((opcao_tamanho == 'grande' or opcao_tamanho == 'extra-grande') and colunas > 2) or
+                    ((opcao_tamanho == 'medio' or opcao_tamanho == '') and colunas > 4) or
+                    (opcao_tamanho == 'pequeno' and colunas > 7) or
+                    (opcao_tamanho == 'extra-pequeno' and colunas > 11)):
+
+                if opcao_tamanho != '':
+                    self.warnings += 'Warning na linha ' + imagem['linha'] + \
+                                     ': imagem muito grande para o tamanho da coluna. A imagem será redimensionada.\n'
+                elif opcao_tamanho == '':
+                    self.warnings += 'Warning na linha ' + imagem['linha'] + \
+                                     ': imagem muito grande (tamanho inferido = médio) para o tamanho da coluna. ' \
+                                     'A imagem será redimensionada.\n'
+
         return
 
     def visitTitulo_site(self, ctx: t3_cc2Parser.Titulo_siteContext):
@@ -204,14 +227,19 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitColunas(self, ctx: t3_cc2Parser.ColunasContext):
+        self.quantidade_colunas = 0
         if ctx.coluna() is not None:
+            self.imagem_dentro_de_colunas = True
+            self.colunas.append(0)
             self.visitColuna(ctx.coluna())
             self.visitMais_colunas(ctx.mais_colunas())
 
             if ctx.mais_colunas().coluna() is None:
                 self.warnings += "Warning na linha " + self.getLinhaDoWarning(ctx.start) + \
                                  ": componente 'colunas' sendo utilizado com apenas uma coluna. Use o comando " \
-                                 "'coluna' neste caso para maior desempenho do compilador."
+                                 "'coluna' neste caso para maior desempenho do compilador.\n"
+            self.colunas[-1] += self.quantidade_colunas
+        self.imagem_dentro_de_colunas = False
         return
 
     def visitMais_colunas(self, ctx: t3_cc2Parser.Mais_colunasContext):
@@ -221,6 +249,7 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitColuna(self, ctx: t3_cc2Parser.ColunaContext):
+        self.quantidade_colunas += 1
         if ctx.parametros() is not None:
             if ctx.parametros().cor() is not None:
                 self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
@@ -252,7 +281,6 @@ class AnalisadorSemantico(t3_cc2Visitor):
             self.visitImagem(ctx.imagem())
         if ctx.texto() is not None:
             self.visitTexto(ctx.texto())
-
         return
 
     def visitTitulo(self, ctx: t3_cc2Parser.TituloContext):
@@ -501,6 +529,88 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitImagem(self, ctx: t3_cc2Parser.ImagemContext):
+        tamanho = 0
+        alinhamento = 0
+        opcao_tamanho = ''
+
+        if ctx.parametros() is not None:
+            if ctx.parametros().cor() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "cor"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().fundo() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "fundo"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().titulo_site() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "titulo"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().fonte() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "fonte"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+
+            if ctx.parametros().tamanho() is not None:
+                tamanho += 1
+                opcao_tamanho = ctx.parametros().tamanho().opcao_tamanho().getText()
+            if ctx.parametros().alinhamento() is not None:
+                alinhamento += 1
+
+            if ctx.parametros().mais_parametros().parametros() is not None:
+                if ctx.parametros().mais_parametros().parametros().cor() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "cor"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().fundo() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "fundo"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().titulo_site() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "titulo"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().fonte() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "fonte"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().tamanho() is not None:
+                    tamanho += 1
+                    opcao_tamanho = ctx.parametros().tamanho().opcao_tamanho().getText()
+                if ctx.parametros().mais_parametros().parametros().alinhamento() is not None:
+                    alinhamento += 1
+
+                if ctx.parametros().mais_parametros().parametros().mais_parametros().parametros() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido mais que dois parâmetros' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+
+        if tamanho > 1:
+            self.erros_semanticos += self.getLinhaDoErro(ctx.start) + 'parâmetro "tamanho" repetido.'
+
+        if alinhamento > 1:
+            self.erros_semanticos += self.getLinhaDoErro(ctx.start) + 'parâmetro "alinhamento" repetido.'
+
+        if self.erros_semanticos != '':
+            raise Exception(self.erros_semanticos)
+
+        if self.imagem_dentro_de_colunas:
+            imagem = {
+                'linha': self.getLinhaDoWarning(ctx.start),
+                'tamanho': opcao_tamanho,
+                'indice_coluna': len(self.colunas) - 1
+            }
+            self.lista_de_imagens.append(imagem)
+
         return
 
     def visitRodape(self, ctx: t3_cc2Parser.RodapeContext):

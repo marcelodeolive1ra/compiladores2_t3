@@ -140,10 +140,22 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
             }
             colunas {
                 coluna(alinhamento=centralizado) {
-                    imagem(tamanho=grande)("Octocat6.jpg")
+                    imagem(tamanho=grande, alinhamento=direita)("Octocat6.jpg")
                 }
                 coluna(alinhamento=centralizado) {
                     imagem(tamanho=extra-grande)("Octocat7.jpg")
+                }
+                coluna(alinhamento=centralizado) {
+                    imagem("Octocat7.jpg")
+                }
+                coluna(alinhamento=centralizado) {
+                    imagem("Octocat7.jpg")
+                }
+                coluna(alinhamento=centralizado) {
+                    imagem("Octocat7.jpg")
+                }
+                coluna(alinhamento=centralizado) {
+                    imagem("Octocat7.jpg")
                 }
             }
         }
