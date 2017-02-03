@@ -3,6 +3,7 @@ import sys
 from ANTLR.t3_cc2Lexer import *
 from GeradorDeCodigo import *
 from ErrosSintaticosErrorListener import ErrosSintaticosErrorListener
+from AnalisadorSemantico import AnalisadorSemantico
 
 import os
 DIRETORIO_PROJETO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,16 +34,22 @@ try:
 
     programa = parser.site()
 
-    gerador_de_codigo = GeradorDeCodigo()
-    gerador_de_codigo.visitSite(programa)
+    if TESTE == SEMANTICO:
+        analisador_semantico = AnalisadorSemantico()
+        analisador_semantico.visitSite(programa)
+        print(analisador_semantico.getErrosSemanticos())
 
-    codigo_gerado = gerador_de_codigo.getCodigo()
+    elif TESTE == GERACAO_DE_CODIGO:
+        gerador_de_codigo = GeradorDeCodigo()
+        gerador_de_codigo.visitSite(programa)
 
-    arquivo_saida = open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_SAIDA + 'teste01.html', 'w', encoding='utf-8')
-    arquivo_saida.write(codigo_gerado)
-    arquivo_saida.close()
+        codigo_gerado = gerador_de_codigo.getCodigo()
 
-    print('\n' + codigo_gerado)
+        arquivo_saida = open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_SAIDA + 'teste01.html', 'w', encoding='utf-8')
+        arquivo_saida.write(codigo_gerado)
+        arquivo_saida.close()
+
+        print('\n' + codigo_gerado)
 
 except Exception as e:
     print(e, file=sys.stderr)
