@@ -24,9 +24,9 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
     conteudo {
         secao {
             colunas {
-                coluna(alinhamento=esquerda) {
+                coluna(alinhamento=esquerda, cor=azul) {
                     texto {
-                        titulo(cor=vermelho, alinhamento=centralizado)("Trabalho 3")
+                        titulo(cor=vermelho, alinhamento=centralizado, fonte=Arial, cor=azul)("Trabalho 3")
                         subtitulo("Construção de Compiladores 2")
                         paragrafo(alinhamento=direita, cor=verde)("Você pode criar vários parágrafos.")
                         paragrafo(cor=roxo, alinhamento=centralizado)("E você pode adicionar links a esses parágrafos :-)") ->+ "https://github.com/marcelodeolivei1ra"
@@ -111,7 +111,8 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
         }
         secao {
             texto {
-                titulo("Uma seção com uma única imagem, com alinhamento centralizado")
+                titulo(alinhamento=esquerda, cor=verde)("Uma seção com uma única imagem, com alinhamento centralizado")
+                paragrafo(alinhamento=esquerda, cor=azul)("Teste")
             }
             coluna(alinhamento=centralizado) {
                 imagem("Octocat2.jpg") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"

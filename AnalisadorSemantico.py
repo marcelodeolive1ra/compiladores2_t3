@@ -70,6 +70,12 @@ class AnalisadorSemantico(t3_cc2Visitor):
                 if ctx.parametros().mais_parametros().parametros().fonte() is not None:
                     fonte += 1
 
+                if ctx.parametros().mais_parametros().parametros().mais_parametros().parametros() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido mais que dois parâmetros' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+
         if fonte > 1:
             self.erros_semanticos += self.getLinhaDoErro(ctx.start) + 'parâmetro "fonte" repetido.'
 
@@ -161,6 +167,8 @@ class AnalisadorSemantico(t3_cc2Visitor):
                                              'não é permitido declarar mais de um parâmetro' + \
                                              self.getRegraDoErro(ctx.start)
                     raise Exception(self.erros_semanticos)
+
+        self.visitTexto(ctx.texto())
         return
 
     def visitConteudo(self, ctx: t3_cc2Parser.ConteudoContext):
@@ -169,8 +177,8 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitSecao(self, ctx: t3_cc2Parser.SecaoContext):
-        print('secao')
         if ctx.texto() is not None:
+            self.visitTexto(ctx.texto())
             if ctx.coluna() is not None:
                 self.visitColuna(ctx.coluna())
             elif ctx.colunas() is not None:
@@ -224,21 +232,248 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitTitulo(self, ctx: t3_cc2Parser.TituloContext):
+        alinhamento = 0
+        cor = 0
+
+        if ctx.parametros() is not None:
+            if ctx.parametros().tamanho() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "tamanho"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().fundo() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "fundo"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().titulo_site() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "titulo"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().fonte() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "fonte"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+
+            if ctx.parametros().alinhamento() is not None:
+                alinhamento += 1
+            if ctx.parametros().cor() is not None:
+                cor += 1
+
+            if ctx.parametros().mais_parametros().parametros() is not None:
+                if ctx.parametros().mais_parametros().parametros().tamanho() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "tamanho"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().fundo() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "fundo"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().titulo_site() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "titulo"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().fonte() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "fonte"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+
+                if ctx.parametros().mais_parametros().parametros().alinhamento() is not None:
+                    alinhamento += 1
+                if ctx.parametros().mais_parametros().parametros().cor() is not None:
+                    cor += 1
+
+                if ctx.parametros().mais_parametros().parametros().mais_parametros().parametros() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido mais que dois parâmetros' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+
+        if alinhamento > 1:
+            self.erros_semanticos += self.getLinhaDoErro(ctx.start) + 'parâmetro "alinhamento" repetido.'
+
+        if cor > 1:
+            self.erros_semanticos += self.getLinhaDoErro(ctx.start) + 'parâmetro "cor" repetido.'
+
+        if self.erros_semanticos != '':
+            raise Exception(self.erros_semanticos)
+
         return
 
     def visitSubtitulo(self, ctx: t3_cc2Parser.SubtituloContext):
+        alinhamento = 0
+        cor = 0
+
+        if ctx.parametros() is not None:
+            if ctx.parametros().tamanho() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "tamanho"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().fundo() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "fundo"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().titulo_site() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "titulo"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().fonte() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "fonte"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+
+            if ctx.parametros().alinhamento() is not None:
+                alinhamento += 1
+            if ctx.parametros().cor() is not None:
+                cor += 1
+
+            if ctx.parametros().mais_parametros().parametros() is not None:
+                if ctx.parametros().mais_parametros().parametros().tamanho() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "tamanho"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().fundo() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "fundo"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().titulo_site() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "titulo"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().fonte() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "fonte"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+
+                if ctx.parametros().mais_parametros().parametros().alinhamento() is not None:
+                    alinhamento += 1
+                if ctx.parametros().mais_parametros().parametros().cor() is not None:
+                    cor += 1
+
+                if ctx.parametros().mais_parametros().parametros().mais_parametros().parametros() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido mais que dois parâmetros' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+
+        if alinhamento > 1:
+            self.erros_semanticos += self.getLinhaDoErro(ctx.start) + 'parâmetro "alinhamento" repetido.'
+
+        if cor > 1:
+            self.erros_semanticos += self.getLinhaDoErro(ctx.start) + 'parâmetro "cor" repetido.'
+
+        if self.erros_semanticos != '':
+            raise Exception(self.erros_semanticos)
         return
 
     def visitTexto(self, ctx: t3_cc2Parser.TextoContext):
+        self.visitConteudo_texto(ctx.conteudo_texto())
         return
 
     def visitConteudo_texto(self, ctx: t3_cc2Parser.Conteudo_textoContext):
+        if ctx.titulo() is not None:
+            self.visitTitulo(ctx.titulo())
+        if ctx.subtitulo() is not None:
+            self.visitSubtitulo(ctx.subtitulo())
+        if ctx.paragrafo() is not None:
+            self.visitParagrafo(ctx.paragrafo())
+        if ctx.mais_conteudo_texto() is not None:
+            self.visitMais_conteudo_texto(ctx.mais_conteudo_texto())
         return
 
     def visitMais_conteudo_texto(self, ctx: t3_cc2Parser.Mais_conteudo_textoContext):
+        if ctx.conteudo_texto() is not None:
+            self.visitConteudo_texto(ctx.conteudo_texto())
+        if ctx.mais_conteudo_texto() is not None:
+            self.visitMais_conteudo_texto(ctx.mais_conteudo_texto())
         return
 
     def visitParagrafo(self, ctx: t3_cc2Parser.ParagrafoContext):
+        alinhamento = 0
+        cor = 0
+
+        if ctx.parametros() is not None:
+            if ctx.parametros().tamanho() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "tamanho"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().fundo() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "fundo"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().titulo_site() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "titulo"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+            if ctx.parametros().fonte() is not None:
+                self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                         'não é permitido o parâmetro "fonte"' + \
+                                         self.getRegraDoErro(ctx.start)
+                raise Exception(self.erros_semanticos)
+
+            if ctx.parametros().alinhamento() is not None:
+                alinhamento += 1
+            if ctx.parametros().cor() is not None:
+                cor += 1
+
+            if ctx.parametros().mais_parametros().parametros() is not None:
+                if ctx.parametros().mais_parametros().parametros().tamanho() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "tamanho"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().fundo() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "fundo"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().titulo_site() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "titulo"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+                if ctx.parametros().mais_parametros().parametros().fonte() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido o parâmetro "fonte"' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+
+                if ctx.parametros().mais_parametros().parametros().alinhamento() is not None:
+                    alinhamento += 1
+                if ctx.parametros().mais_parametros().parametros().cor() is not None:
+                    cor += 1
+
+                if ctx.parametros().mais_parametros().parametros().mais_parametros().parametros() is not None:
+                    self.erros_semanticos += self.getLinhaDoErro(ctx.start) + \
+                                             'não é permitido mais que dois parâmetros' + \
+                                             self.getRegraDoErro(ctx.start)
+                    raise Exception(self.erros_semanticos)
+
+        if alinhamento > 1:
+            self.erros_semanticos += self.getLinhaDoErro(ctx.start) + 'parâmetro "alinhamento" repetido.'
+
+        if cor > 1:
+            self.erros_semanticos += self.getLinhaDoErro(ctx.start) + 'parâmetro "cor" repetido.'
+
+        if self.erros_semanticos != '':
+            raise Exception(self.erros_semanticos)
         return
 
     def visitImagem(self, ctx: t3_cc2Parser.ImagemContext):
