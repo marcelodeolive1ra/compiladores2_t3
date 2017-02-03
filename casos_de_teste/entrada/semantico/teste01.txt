@@ -24,7 +24,7 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
     conteudo {
         secao {
             colunas {
-                coluna(alinhamento=esquerda) {
+                coluna(alinhamento=direita) {
                     texto {
                         titulo(cor=vermelho, alinhamento=centralizado)("Trabalho 3")
                         subtitulo("Construção de Compiladores 2")
@@ -34,7 +34,7 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
                         paragrafo("O projeto completo está disponível em um repositório do GitHub. Clique aqui para acessá-lo.") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
                     }
                 }
-                #coluna(alinhamento=direita) {
+                #coluna(alinhamento=direita, cor=azul) {
                 #    imagem("Octocat.png") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
                 #}
             }
@@ -265,7 +265,7 @@ site(fonte=Open Sans, titulo="Trabalho 3 - Construção de Compiladores 2") {
     }
     rodape {
         texto {
-            titulo(alinhamento=esquerda)("Construção de Compiladores 2 - 2016/2")
+            titulo(alinhamento=esquerda, cor=azul)("Construção de Compiladores 2 - 2016/2")
             paragrafo(alinhamento=esquerda)("Professora Helena Caseli e Professor Daniel Lucrédio<br>Trabalho 3 - Definição de uma linguagem de programação e construção de um compilador para esta linguagem")
         }
     }
