@@ -11,9 +11,10 @@ class ErrosSintaticosErrorListener(ErrorListener):
         simbolo = msg.replace("token recognition error at: ", "")
         simbolo = simbolo.replace('extraneous input ', '')
         simbolo = simbolo.replace('mismatched input ', '')
+        simbolo = simbolo.replace('no viable alternative at input \'', '')
         simbolo = simbolo.split('expecting')[0][:-1]
 
-        self.erros_sintaticos += "Linha " + str(line) + ": erro sintático próximo a " + simbolo + '.'
+        self.erros_sintaticos += 'Linha ' + str(line) + ': erro sintático próximo a ' + simbolo + '.'
 
         raise Exception(self.erros_sintaticos)
 
