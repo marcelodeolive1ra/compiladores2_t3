@@ -1,6 +1,15 @@
+# UNIVERSIDADE FEDERAL DE SÃO CARLOS
+# Construção de Compiladores 2 - 2016/2
+# Trabalho 3
+
+# Marcelo de Oliveira da Silva
+
+
 from ANTLR.t3_cc2Visitor import *
 from ANTLR.t3_cc2Parser import *
 
+
+# Constantes que definem os parâmetros da linguagem
 ALINHAMENTO = 'alinhamento'
 COR = 'cor'
 FUNDO = 'fundo'
@@ -10,99 +19,118 @@ FONTE = 'fonte'
 
 
 class AnalisadorSemantico(t3_cc2Visitor):
+
+    # O analisador semântico para a execução lançando uma exceção em caso de erros semânticos, entretanto, algumas
+    # verificações adicionais são realizadas, que não impedem a geração de código, mas que são interessantes de serem
+    # notificadas. Essas situações são armazenadas nessa variável warnings
     warnings = ''
 
-    lista_de_imagens = []
-    quantidade_colunas = 0
-    colunas = []
-    imagem_dentro_de_colunas = False
+    # Conjunto de estruturas utilizadas para indicar o warning de imagens com parâmetro de tamanho maior do que o
+    # máximo que cabe no conjunto de colunas em que a imagem está inserida
+    lista_de_imagens = []  # mapeia todas as imagens que foram utilizadas dentro de um bloco 'colunas'
+    imagem_dentro_de_colunas = False  # utilizado para adicionar itens em lista_de_imagens
+    quantidade_colunas = 0  # conta a quantidade de colunas dentro de um bloco 'colunas'
+    colunas = []  # mapeia todas as colunas individuais que estão dentro de blocos 'colunas' do programa
 
-    def getWarnings(self):
+    # Função para obter os warnings (a remoção do último elemento é para eliminar um \n)
+    def get_warnings(self):
         return self.warnings[:-1]
 
-    def getLinhaDoErro(self, dados_do_erro):
+    # Funções utilizadas para montar a mensagem de erro e lançar a exceção
+    def get_linha_do_erro(self, dados_do_erro):
         return 'Erro semântico na linha ' + str(dados_do_erro).split(',')[3].split(':')[0] + ': '
 
-    def getLinhaDoWarning(self, dados_do_erro):
+    def get_linha_do_warning(self, dados_do_erro):
         return str(dados_do_erro).split(',')[3].split(':')[0]
 
-    def getRegraDoErro(self, dados_do_erro):
+    def get_regra_do_erro(self, dados_do_erro):
         return ' no comando ' + str(dados_do_erro).split(',')[1].split('=')[1] + '.'
 
-    def getErroParametroNaoPermitido(self, dados_do_erro, parametro):
-        erro = self.getLinhaDoErro(dados_do_erro) + 'não é permitido o parâmetro "' + parametro + '"' + \
-               self.getRegraDoErro(dados_do_erro)
+    def get_erro_parametro_nao_permitido(self, dados_do_erro, parametro):
+        erro = self.get_linha_do_erro(dados_do_erro) + 'não é permitido o parâmetro "' + parametro + '"' + \
+               self.get_regra_do_erro(dados_do_erro)
         raise Exception(erro)
 
-    def getErroParametroRepetido(self, dados_do_erro, parametro):
-        erro = self.getLinhaDoErro(dados_do_erro) + 'parâmetro "' + parametro + '" repetido.'
+    def get_erro_parametro_repetido(self, dados_do_erro, parametro):
+        erro = self.get_linha_do_erro(dados_do_erro) + 'parâmetro "' + parametro + '" repetido.'
         raise Exception(erro)
 
-    def getErroProibidoMaisQueDoisParametros(self, dados_do_erro):
-        erro = self.getLinhaDoErro(dados_do_erro) + 'não é permitido mais que dois parâmetros' + \
-               self.getRegraDoErro(dados_do_erro)
+    def get_erro_proibido_mais_que_dois_parametros(self, dados_do_erro):
+        erro = self.get_linha_do_erro(dados_do_erro) + 'não é permitido mais que dois parâmetros' + \
+               self.get_regra_do_erro(dados_do_erro)
         raise Exception(erro)
 
-    def getErroProibidoMaisQueUmParametro(self, dados_do_erro):
-        erro = self.getLinhaDoErro(dados_do_erro) + 'não é permitido mais que um parâmetro' + \
-               self.getRegraDoErro(dados_do_erro)
+    def get_erro_proibido_mais_que_um_parametro(self, dados_do_erro):
+        erro = self.get_linha_do_erro(dados_do_erro) + 'não é permitido mais que um parâmetro' + \
+               self.get_regra_do_erro(dados_do_erro)
         raise Exception(erro)
 
+    # Início da verificação do programa
     def visitSite(self, ctx: t3_cc2Parser.SiteContext):
         titulo_site = 0
         fonte = 0
 
+        # Verificação se o primeiro parâmetro (se existir) é valido para a regra 'site'
         if ctx.parametros() is not None:
             if ctx.parametros().cor() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=COR)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=COR)
             if ctx.parametros().alinhamento() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=ALINHAMENTO)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=ALINHAMENTO)
             if ctx.parametros().tamanho() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TAMANHO)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TAMANHO)
             if ctx.parametros().fundo() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FUNDO)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FUNDO)
 
             if ctx.parametros().titulo_site() is not None:
                 titulo_site += 1
             if ctx.parametros().fonte() is not None:
                 fonte += 1
 
+            # Verificação se o segundo parâmetro (se existir) é valido para a regra 'site'
             if ctx.parametros().mais_parametros().parametros() is not None:
                 if ctx.parametros().mais_parametros().parametros().cor() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=COR)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=COR)
                 if ctx.parametros().mais_parametros().parametros().alinhamento() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=ALINHAMENTO)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=ALINHAMENTO)
                 if ctx.parametros().mais_parametros().parametros().tamanho() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TAMANHO)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TAMANHO)
                 if ctx.parametros().mais_parametros().parametros().fundo() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FUNDO)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FUNDO)
 
                 if ctx.parametros().mais_parametros().parametros().titulo_site() is not None:
                     titulo_site += 1
                 if ctx.parametros().mais_parametros().parametros().fonte() is not None:
                     fonte += 1
 
+                # Verificação se existem mais que dois parâmetros
                 if ctx.parametros().mais_parametros().parametros().mais_parametros().parametros() is not None:
-                    self.getErroProibidoMaisQueDoisParametros(dados_do_erro=ctx.start)
+                    self.get_erro_proibido_mais_que_dois_parametros(dados_do_erro=ctx.start)
 
+        # Verificação se algum parâmetro foi repetido
         if fonte > 1:
-            self.getErroParametroRepetido(dados_do_erro=ctx.start, parametro=FONTE)
+            self.get_erro_parametro_repetido(dados_do_erro=ctx.start, parametro=FONTE)
         if titulo_site > 1:
-            self.getErroParametroRepetido(dados_do_erro=ctx.start, parametro=TITULO)
+            self.get_erro_parametro_repetido(dados_do_erro=ctx.start, parametro=TITULO)
 
+        # Verificação do tipo de comando de sidebar (se existir) foi utilizado
+        # Se utilizado 'sidebar=menu', verifica se existe um menu declarado
         if ctx.sidebar() is not None:
             if ctx.sidebar().getText() == 'sidebar=menu' and ctx.menu() is None:
-                raise Exception(self.getLinhaDoErro(ctx.sidebar().start) +
+                raise Exception(self.get_linha_do_erro(ctx.sidebar().start) +
                                 'uso do comando "sidebar=menu" sem a declaração de um componente "menu".')
 
+        # Chama a verificação para 'banner', se existir
         if ctx.banner() is not None:
             self.visitBanner(ctx.banner())
 
+        # Visita a regra 'conteudo' sempre (pois esta é obrigatória na sintaxe)
         self.visitConteudo(ctx.conteudo())
 
+        # Chama a verificação para 'rodape', se existir
         if ctx.rodape() is not None:
             self.visitRodape(ctx.rodape())
 
+        # Verificação do warning de imagens com tamanho maior do que cabe nas colunas em que foram inseridas
         for imagem in self.lista_de_imagens:
             opcao_tamanho = imagem['tamanho']
             colunas = self.colunas[imagem['indice_coluna']]
@@ -123,31 +151,34 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitBanner(self, ctx: t3_cc2Parser.BannerContext):
-        if ctx is not None:
-            if ctx.parametros() is not None:
-                if ctx.parametros().cor() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=COR)
-                if ctx.parametros().alinhamento() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=ALINHAMENTO)
-                if ctx.parametros().tamanho() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TAMANHO)
-                if ctx.parametros().fonte() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FONTE)
-                if ctx.parametros().titulo_site() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TITULO)
+        # Verificação se existe parâmetro, e se o mesmo é válido (único parâmetro válido para 'banner' é 'fundo')
+        if ctx.parametros() is not None:
+            if ctx.parametros().cor() is not None:
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=COR)
+            if ctx.parametros().alinhamento() is not None:
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=ALINHAMENTO)
+            if ctx.parametros().tamanho() is not None:
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TAMANHO)
+            if ctx.parametros().fonte() is not None:
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FONTE)
+            if ctx.parametros().titulo_site() is not None:
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TITULO)
 
-                if ctx.parametros().mais_parametros().parametros() is not None:
-                    self.getErroProibidoMaisQueUmParametro(ctx.start)
+            # Verificação se existe mais que um parâmetro
+            if ctx.parametros().mais_parametros().parametros() is not None:
+                self.get_erro_proibido_mais_que_um_parametro(ctx.start)
 
-                ja_tem_parametro = False
-                if ctx.parametros().fundo().imagem() is not None:
-                    ja_tem_parametro = True
-                    if ctx.parametros().fundo().imagem().parametros() is not None:
-                        raise Exception(self.getLinhaDoErro(ctx.start) + \
-                                                 'não é permitido declarar parâmetros para uma imagem de fundo' + \
-                                                 self.getRegraDoErro(ctx.start))
-                if ctx.parametros().fundo().cor() is not None and ja_tem_parametro:
-                    self.getErroProibidoMaisQueUmParametro(dados_do_erro=ctx.start)
+            # Verificação do parâmetro (imagem ou cor) para o parâmetro 'fundo'
+            ja_tem_parametro = False
+            if ctx.parametros().fundo().imagem() is not None:
+                ja_tem_parametro = True
+                # E no caso do parâmetro ser 'imagem', esta não pode ter parâmetros adicionais no contexto de 'banner'
+                if ctx.parametros().fundo().imagem().parametros() is not None:
+                    raise Exception(self.get_linha_do_erro(ctx.start) +
+                                    'não é permitido declarar parâmetros para uma imagem de fundo' +
+                                    self.get_regra_do_erro(ctx.start))
+            if ctx.parametros().fundo().cor() is not None and ja_tem_parametro:
+                self.get_erro_proibido_mais_que_um_parametro(dados_do_erro=ctx.start)
 
         self.visitTexto(ctx.texto())
         return
@@ -180,13 +211,18 @@ class AnalisadorSemantico(t3_cc2Visitor):
     def visitColunas(self, ctx: t3_cc2Parser.ColunasContext):
         self.quantidade_colunas = 0
         if ctx.coluna() is not None:
+            # Set de variáveis que auxiliam a verificação do warning a seguir
             self.imagem_dentro_de_colunas = True
             self.colunas.append(0)
+
+            # Visitação das colunas
             self.visitColuna(ctx.coluna())
             self.visitMais_colunas(ctx.mais_colunas())
 
+            # Verificação de um warning: programador declarou comando 'colunas' e colocou apenas um componente 'coluna'
+            # Neste caso, poderia ter utilizado o componente 'coluna' diretamente
             if ctx.mais_colunas().coluna() is None:
-                self.warnings += "Warning na linha " + self.getLinhaDoWarning(ctx.start) + \
+                self.warnings += "Warning na linha " + self.get_linha_do_warning(ctx.start) + \
                                  ": componente 'colunas' sendo utilizado com apenas uma coluna. Use o comando " \
                                  "'coluna' neste caso para maior desempenho do compilador.\n"
             self.colunas[-1] += self.quantidade_colunas
@@ -200,19 +236,21 @@ class AnalisadorSemantico(t3_cc2Visitor):
         return
 
     def visitColuna(self, ctx: t3_cc2Parser.ColunaContext):
-        self.quantidade_colunas += 1
+        self.quantidade_colunas += 1  # contagem das colunas para validação de warning
+
+        # Verificação dos parâmetros de 'coluna', se existirem
         if ctx.parametros() is not None:
             if ctx.parametros().cor() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=COR)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=COR)
             if ctx.parametros().tamanho() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TAMANHO)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TAMANHO)
             if ctx.parametros().fonte() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FONTE)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FONTE)
             if ctx.parametros().titulo_site() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TITULO)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TITULO)
 
             if ctx.parametros().mais_parametros().parametros() is not None:
-                self.getErroProibidoMaisQueUmParametro(dados_do_erro=ctx.start)
+                self.get_erro_proibido_mais_que_um_parametro(dados_do_erro=ctx.start)
 
         if ctx.imagem() is not None:
             self.visitImagem(ctx.imagem())
@@ -224,51 +262,59 @@ class AnalisadorSemantico(t3_cc2Visitor):
         alinhamento = 0
         cor = 0
 
+        # Verificação se o primeiro parâmetro (se existir) é valido para a regra 'titulo'
         if ctx.parametros() is not None:
             if ctx.parametros().tamanho() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TAMANHO)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TAMANHO)
             if ctx.parametros().fundo() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FUNDO)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FUNDO)
             if ctx.parametros().titulo_site() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TITULO)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TITULO)
             if ctx.parametros().fonte() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FONTE)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FONTE)
 
             if ctx.parametros().alinhamento() is not None:
                 alinhamento += 1
             if ctx.parametros().cor() is not None:
                 cor += 1
 
+                # Verificação se o segundo parâmetro (se existir) é valido para a regra 'titulo'
             if ctx.parametros().mais_parametros().parametros() is not None:
                 if ctx.parametros().mais_parametros().parametros().tamanho() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TAMANHO)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TAMANHO)
                 if ctx.parametros().mais_parametros().parametros().fundo() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FUNDO)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FUNDO)
                 if ctx.parametros().mais_parametros().parametros().titulo_site() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TITULO)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TITULO)
                 if ctx.parametros().mais_parametros().parametros().fonte() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FONTE)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FONTE)
 
                 if ctx.parametros().mais_parametros().parametros().alinhamento() is not None:
                     alinhamento += 1
                 if ctx.parametros().mais_parametros().parametros().cor() is not None:
                     cor += 1
 
+                # Verificação se existem mais que dois parâmetros
                 if ctx.parametros().mais_parametros().parametros().mais_parametros().parametros() is not None:
-                    self.getErroProibidoMaisQueDoisParametros(dados_do_erro=ctx.start)
+                    self.get_erro_proibido_mais_que_dois_parametros(dados_do_erro=ctx.start)
 
+        # Verificação se algum parâmetro foi repetido
         if alinhamento > 1:
-            self.getErroParametroRepetido(dados_do_erro=ctx.start, parametro=ALINHAMENTO)
+            self.get_erro_parametro_repetido(dados_do_erro=ctx.start, parametro=ALINHAMENTO)
         if cor > 1:
-            self.getErroParametroRepetido(dados_do_erro=ctx.start, parametro=COR)
+            self.get_erro_parametro_repetido(dados_do_erro=ctx.start, parametro=COR)
 
         return
 
     def visitSubtitulo(self, ctx: t3_cc2Parser.SubtituloContext):
+        # Caso interessante: os parâmetros da regra 'subtitulo' tem exatamente as mesmas propriedades da regra 'titulo'.
+        # Para evitar repetição de código, foi removido o casting explícito da função visitTitulo
+        # (ctx: t3_cc2Parser.TituloContext) e 'subtitulo' é verificado com essa regra
         self.visitTitulo(ctx)
         return
 
     def visitTexto(self, ctx: t3_cc2Parser.TextoContext):
+        # Mesmo caso da função anterior. Evita repetição de código :-)
         self.visitConteudo_texto(ctx.conteudo_texto())
         return
 
@@ -299,15 +345,16 @@ class AnalisadorSemantico(t3_cc2Visitor):
         alinhamento = 0
         opcao_tamanho = ''
 
+        # Verificação se o primeiro parâmetro (se existir) é valido para a regra 'imagem'
         if ctx.parametros() is not None:
             if ctx.parametros().cor() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=COR)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=COR)
             if ctx.parametros().fundo() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FUNDO)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FUNDO)
             if ctx.parametros().titulo_site() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TITULO)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TITULO)
             if ctx.parametros().fonte() is not None:
-                self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FONTE)
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FONTE)
 
             if ctx.parametros().tamanho() is not None:
                 tamanho += 1
@@ -315,32 +362,36 @@ class AnalisadorSemantico(t3_cc2Visitor):
             if ctx.parametros().alinhamento() is not None:
                 alinhamento += 1
 
+            # Verificação se o segundo parâmetro (se existir) é valido para a regra 'imagem'
             if ctx.parametros().mais_parametros().parametros() is not None:
                 if ctx.parametros().mais_parametros().parametros().cor() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=COR)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=COR)
                 if ctx.parametros().mais_parametros().parametros().fundo() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FUNDO)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FUNDO)
                 if ctx.parametros().mais_parametros().parametros().titulo_site() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=TITULO)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TITULO)
                 if ctx.parametros().mais_parametros().parametros().fonte() is not None:
-                    self.getErroParametroNaoPermitido(dados_do_erro=ctx.start, parametro=FONTE)
+                    self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FONTE)
                 if ctx.parametros().mais_parametros().parametros().tamanho() is not None:
                     tamanho += 1
                     opcao_tamanho = ctx.parametros().tamanho().opcao_tamanho().getText()
                 if ctx.parametros().mais_parametros().parametros().alinhamento() is not None:
                     alinhamento += 1
 
+                # Verificação se existem mais que dois parâmetros
                 if ctx.parametros().mais_parametros().parametros().mais_parametros().parametros() is not None:
-                    self.getErroProibidoMaisQueDoisParametros(dados_do_erro=ctx.start)
+                    self.get_erro_proibido_mais_que_dois_parametros(dados_do_erro=ctx.start)
 
+        # Verificação se algum parâmetro foi repetido
         if tamanho > 1:
-            self.getErroParametroRepetido(dados_do_erro=ctx.start, parametro=TAMANHO)
+            self.get_erro_parametro_repetido(dados_do_erro=ctx.start, parametro=TAMANHO)
         if alinhamento > 1:
-            self.getErroParametroRepetido(dados_do_erro=ctx.start, parametro=ALINHAMENTO)
+            self.get_erro_parametro_repetido(dados_do_erro=ctx.start, parametro=ALINHAMENTO)
 
+        # Set de informações que serão utilizadas para validar o warning do tamanho das imagens dentro de colunas
         if self.imagem_dentro_de_colunas:
             imagem = {
-                'linha': self.getLinhaDoWarning(ctx.start),
+                'linha': self.get_linha_do_warning(ctx.start),
                 'tamanho': opcao_tamanho,
                 'indice_coluna': len(self.colunas) - 1
             }

@@ -1,5 +1,14 @@
+// UNIVERSIDADE FEDERAL DE SÃO CARLOS
+// Construção de Compiladores 2 - 2016/2
+// Trabalho 3
+
+// Marcelo de Oliveira da Silva
+
 grammar t3_cc2;
 
+// ----------------------------------------------
+// REGRAS LÉXICAS
+// ----------------------------------------------
 CADEIA:
     '"' ~('\n' | '\r' | '"')* '"';
 
@@ -9,6 +18,10 @@ COMENTARIO:
 ESPACO:
     (' ' | '\t' | '\r' | '\n') -> skip;
 
+
+// ----------------------------------------------
+// REGRAS SINTÁTICAS
+// ----------------------------------------------
 site:
 	'site' ('(' parametros ')')? '{' menu? sidebar? banner? conteudo rodape? '}';
 
@@ -78,6 +91,9 @@ paragrafo:
 imagem:
 	'imagem' ('(' parametros ')')? '(' CADEIA ')' link?;
 
+// Embora diversas regras façam uso do regra parametros, nem todos os parâmetros podem ser utilizados para todas as
+// regras, bem como a quantidade de parâmetros em cada regra é limitada.
+// A validação do correto uso dos parâmetros é feita no Analisador Semântico
 parametros:
     (tamanho | fonte | cor | fundo | alinhamento | titulo_site) mais_parametros;
 

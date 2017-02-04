@@ -1,15 +1,24 @@
+# UNIVERSIDADE FEDERAL DE SÃO CARLOS
+# Construção de Compiladores 2 - 2016/2
+# Trabalho 3
+
+# Marcelo de Oliveira da Silva
+
 from ANTLR.t3_cc2Visitor import *
 from ANTLR.t3_cc2Parser import *
 
+# Definição de constantes para parâmetros
 EXTRA_PEQUENO = 'extra-pequeno'
 PEQUENO = 'pequeno'
 NORMAL = 'medio'
 GRANDE = 'grande'
 EXTRA_GRANDE = 'extra-grande'
 
+# Definição de links para fontes que não são padrões dos computadores e precisam ser incluídas no CSS
 ROBOTO = '<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i" rel="stylesheet">'
 OPEN_SANS = '<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">'
 
+# Mapeamento das fontes não padrões dos computadores
 FONTES = {
     'Roboto': ROBOTO,
     'Open Sans': OPEN_SANS,
@@ -20,7 +29,8 @@ FONTES = {
 }
 
 
-def getColor(cor):
+# Conversor de cores da linguagem para cores em hexadecimal
+def get_cor_em_hexadecimal(cor):
     if cor == 'azul':
         return '#0000FF'
     elif cor == 'azul-claro':
@@ -48,7 +58,10 @@ def getColor(cor):
     else:
         return ''
 
+
 class GeradorDeCodigo(t3_cc2Visitor):
+
+    # Esqueleto inicial do código
     codigo = """<!DOCTYPE html>
 <html>
 <head>
@@ -319,7 +332,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
 
                 if background == '':
                     background = ('background-color: ' +
-                                  getColor(self.visitCor(ctx.parametros().fundo().cor())[1:]) + ';') \
+                                  get_cor_em_hexadecimal(self.visitCor(ctx.parametros().fundo().cor())[1:]) + ';') \
                         if ctx.parametros().fundo().cor() is not None else ''
 
         banner = banner.replace('#BACKGROUND', background)

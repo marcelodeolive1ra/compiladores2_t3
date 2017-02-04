@@ -1,11 +1,17 @@
+# UNIVERSIDADE FEDERAL DE SÃO CARLOS
+# Construção de Compiladores 2 - 2016/2
+# Trabalho 3
+
+# Marcelo de Oliveira da Silva
+
 import antlr4
+import os
 import sys
 from ANTLR.t3_cc2Lexer import *
 from GeradorDeCodigo import *
 from ErrosSintaticosErrorListener import ErrosSintaticosErrorListener
 from AnalisadorSemantico import AnalisadorSemantico
 
-import os
 DIRETORIO_PROJETO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SINTATICO = 'sintatico/'
@@ -23,23 +29,30 @@ with open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_ENTRADA + CASO_DE_TESTE, encoding
     programa = f.read()
 
 try:
-    input = antlr4.InputStream(programa)
-    lexer = t3_cc2Lexer(input=input)
+    # Conversão do arquivo de entrada para um input stream do ANTLR
+    programa_input = antlr4.InputStream(programa)
+
+    # Análise léxica
+    lexer = t3_cc2Lexer(input=programa_input)
+    # Remoção do ErrorListener do léxico, pois os erros serão tratados no ErrorListener customizado do sintático
     lexer.removeErrorListeners()
     tokens = antlr4.CommonTokenStream(lexer=lexer)
 
     parser = t3_cc2Parser(tokens)
+
+    # Remoção do ErrorListerner do parser e adição do ErrorListener customizado
     parser.removeErrorListeners()
     erros_sintaticos = ErrosSintaticosErrorListener()
     parser.addErrorListener(erros_sintaticos)
 
+    # Início da compilação
     programa = parser.site()
 
     if TESTE == SEMANTICO:
         analisador_semantico = AnalisadorSemantico()
         analisador_semantico.visitSite(programa)
-        print("Compilação finalizada" + (' com warnings. ' if analisador_semantico.getWarnings() != '' else ''))
-        print(analisador_semantico.getWarnings())
+        print("Compilação finalizada" + (' com warnings. ' if analisador_semantico.get_warnings() != '' else ''))
+        print(analisador_semantico.get_warnings())
 
     elif TESTE == GERACAO_DE_CODIGO:
         gerador_de_codigo = GeradorDeCodigo()
