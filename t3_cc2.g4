@@ -18,12 +18,13 @@ COMENTARIO:
 ESPACO:
     (' ' | '\t' | '\r' | '\n') -> skip;
 
+ERRO: .;
 
 // ----------------------------------------------
 // REGRAS SINTÁTICAS
 // ----------------------------------------------
 site:
-	'site' ('(' parametros ')')? '{' menu? sidebar? banner? conteudo rodape? '}';
+	'site' ('(' parametros ')')? '{' menu? sidebar? banner? conteudo rodape? '}' EOF;
 
 titulo_site:
     'titulo' '=' CADEIA;

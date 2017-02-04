@@ -55,6 +55,7 @@ T__53=54
 CADEIA=55
 COMENTARIO=56
 ESPACO=57
+ERRO=58
 'site'=1
 '('=2
 ')'=3
