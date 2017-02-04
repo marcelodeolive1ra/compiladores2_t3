@@ -1,0 +1,22 @@
+# CT_SINTATICO_21
+# Uso de mais de um componente 'coluna' dentro de seção fora de um comando 'colunas'
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                }
+            }
+            coluna {
+                texto {
+                    titulo("Teste")
+                }
+            }
+        }
+    }
+}

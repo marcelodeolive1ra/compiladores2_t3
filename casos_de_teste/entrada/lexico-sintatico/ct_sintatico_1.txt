@@ -1,0 +1,8 @@
+# CT_SINTATICO_01
+# Falta bloco 'conteudo'
+
+site {
+    menu {
+        item("Home")
+    }
+}

@@ -1,0 +1,20 @@
+# CT_SINTATICO_28
+# Banner sem 'texto'
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+}

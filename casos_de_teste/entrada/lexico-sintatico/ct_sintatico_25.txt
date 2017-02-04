@@ -1,0 +1,17 @@
+# CT_SINTATICO_25
+# 'link' sem aspas
+
+site {
+    menu {
+        item("Home") -> google.com.br
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+# CT_SINTATICO_08
+Linha de texto livre sem tag de comentário
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            texto {
+                titulo("Teste")
+            }
+        }
+    }
+}

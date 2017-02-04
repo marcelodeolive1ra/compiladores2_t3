@@ -1,0 +1,17 @@
+# CT_SINTATICO_16
+# Tentativa de uso de parâmetro em 'texto'
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto(alinhamento=esquerda) {
+                    titulo("Teste")
+                }
+            }
+        }
+    }
+}

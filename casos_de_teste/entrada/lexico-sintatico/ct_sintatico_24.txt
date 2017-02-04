@@ -1,0 +1,17 @@
+# CT_SINTATICO_24
+# 'link' sem a string do link
+
+site {
+    menu {
+        item("Home") ->
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+}

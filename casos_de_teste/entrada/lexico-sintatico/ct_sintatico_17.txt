@@ -1,0 +1,17 @@
+# CT_SINTATICO_17
+# Uso de parênteses que delimitam parâmetro para título sem nenhum parâmetro
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo()("Teste")
+                }
+            }
+        }
+    }
+}

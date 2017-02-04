@@ -1,0 +1,22 @@
+# CT_SINTATICO_32
+# Banner parâmetro 'fundo=cor' incompleto
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner(fundo=cor) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+}

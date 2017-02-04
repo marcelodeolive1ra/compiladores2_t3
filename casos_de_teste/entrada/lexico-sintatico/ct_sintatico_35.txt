@@ -1,0 +1,25 @@
+# CT_SINTATICO_35
+# 'rodape' dentro de 'conteudo'
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+        rodape {
+            texto("Compiladores 2")
+        }
+    }
+}

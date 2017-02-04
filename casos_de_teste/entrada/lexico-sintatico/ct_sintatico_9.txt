@@ -1,0 +1,18 @@
+# CT_SINTATICO_09
+# Sidebar sem itens
+
+site {
+    menu {
+        item("Home")
+    }
+    sidebar {
+
+    }
+    conteudo {
+        secao {
+            texto {
+                titulo("Teste")
+            }
+        }
+    }
+}

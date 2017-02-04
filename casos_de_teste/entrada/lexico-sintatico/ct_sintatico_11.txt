@@ -1,0 +1,18 @@
+# CT_SINTATICO_11
+# Redeclaração de menu
+
+site {
+    menu {
+        item("Home")
+    }
+    menu {
+        item("Home2")
+    }
+    conteudo {
+        secao {
+            texto {
+                titulo("Teste")
+            }
+        }
+    }
+}

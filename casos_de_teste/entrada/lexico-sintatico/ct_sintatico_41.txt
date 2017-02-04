@@ -1,0 +1,25 @@
+# CT_SINTATICO_41
+# Lista de Parâmetros fora de ordem (o conjunto de todos os parâmetros, não a ordem de cada parâmetro em si)
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")(cor=verde, alinhamento=esquerda)
+                }
+            }
+        }
+    }
+    rodape {
+        texto("Compiladores 2")
+    }
+}

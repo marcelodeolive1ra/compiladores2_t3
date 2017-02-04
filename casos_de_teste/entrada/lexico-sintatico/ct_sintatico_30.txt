@@ -1,0 +1,24 @@
+# CT_SINTATICO_30
+# Banner com 'secao' ao invés de 'texto' diretamente
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        secao {
+            texto {
+                titulo("Teste")
+            }
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+}

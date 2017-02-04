@@ -1,0 +1,25 @@
+# CT_SINTATICO_40
+# Parâmetros não separados por vírgula
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=verde alinhamento=justificado)("Teste")
+                }
+            }
+        }
+    }
+    rodape {
+        texto("Compiladores 2")
+    }
+}

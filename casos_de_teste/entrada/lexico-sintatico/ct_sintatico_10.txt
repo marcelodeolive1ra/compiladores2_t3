@@ -1,0 +1,18 @@
+# CT_SINTATICO_10
+# Sidebar em ordem errada (deveria ser logo após o menu)
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            texto {
+                titulo("Teste")
+            }
+        }
+    }
+    sidebar {
+        item("Home")
+    }
+}

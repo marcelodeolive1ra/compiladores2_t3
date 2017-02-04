@@ -1,0 +1,17 @@
+# CT_SINTATICO_19
+# Uso de ponto e vírgula
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste");
+                }
+            }
+        }
+    }
+}

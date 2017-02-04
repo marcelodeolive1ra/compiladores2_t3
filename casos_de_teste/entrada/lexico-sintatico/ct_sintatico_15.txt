@@ -1,0 +1,17 @@
+# CT_SINTATICO_15
+# 'texto' sem 'paragrafo' ou 'titulo' ou 'subtitulo'
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+
+                }
+            }
+        }
+    }
+}

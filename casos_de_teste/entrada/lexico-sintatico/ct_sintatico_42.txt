@@ -1,0 +1,25 @@
+# CT_SINTATICO_42
+# Parágrafo vazio
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo()
+                }
+            }
+        }
+    }
+    rodape {
+        texto("Compiladores 2")
+    }
+}

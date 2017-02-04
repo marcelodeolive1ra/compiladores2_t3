@@ -1,0 +1,15 @@
+# CT_SINTATICO_06
+# Comando 'menu' escrito errado
+
+site {
+    mnu {
+        item(Home)
+    }
+    conteudo {
+        secao {
+            texto {
+                titulo("Teste")
+            }
+        }
+    }
+}

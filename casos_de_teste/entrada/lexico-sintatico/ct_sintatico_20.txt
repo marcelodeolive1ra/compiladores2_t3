@@ -1,0 +1,24 @@
+# CT_SINTATICO_20
+# Uso de 'secao' dentro de 'secao'
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                }
+            }
+            secao {
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+            }
+        }
+    }
+}

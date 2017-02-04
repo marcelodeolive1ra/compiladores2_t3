@@ -1,0 +1,11 @@
+# CT_SINTATICO_12
+# 'conteudo' sem seções
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+
+    }
+}

@@ -1,0 +1,15 @@
+# CT_SINTATICO_14
+# 'coluna' sem 'imagem' ou 'texto'
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            coluna {
+
+            }
+        }
+    }
+}

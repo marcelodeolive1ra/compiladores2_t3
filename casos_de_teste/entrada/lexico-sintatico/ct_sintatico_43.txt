@@ -1,0 +1,25 @@
+# CT_SINTATICO_43
+# Aspas não fechada em 'paragrafo'
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste)
+                }
+            }
+        }
+    }
+    rodape {
+        texto("Compiladores 2")
+    }
+}

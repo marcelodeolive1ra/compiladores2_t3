@@ -1,0 +1,15 @@
+# CT_SINTATICO_05
+# Não coloca aspas no parâmetro de 'item'
+
+site {
+    menu {
+        item(Home)
+    }
+    conteudo {
+        secao {
+            texto {
+                titulo("Teste")
+            }
+        }
+    }
+}

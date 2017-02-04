@@ -1,0 +1,22 @@
+# CT_SINTATICO_31
+# Banner parâmetro 'fundo' incompleto
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner(fundo) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+# CT_SINTATICO_34
+# 'rodape' sem 'texto' e/ou 'coluna'/'colunas'
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+    rodape {
+
+    }
+}

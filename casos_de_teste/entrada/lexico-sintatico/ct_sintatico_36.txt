@@ -1,0 +1,25 @@
+# CT_SINTATICO_36
+# 'rodape' fora de 'site'
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+}
+rodape {
+    texto("Compiladores 2")
+}

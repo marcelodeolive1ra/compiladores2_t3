@@ -1,0 +1,15 @@
+# CT_SINTATICO_04
+# Não coloca parâmetro em 'item' do 'menu'
+
+site {
+    menu {
+        item
+    }
+    conteudo {
+        secao {
+            texto {
+                titulo("Teste")
+            }
+        }
+    }
+}

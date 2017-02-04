@@ -1,0 +1,14 @@
+# CT_SINTATICO_02
+# Não fecha chave para o comando site
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            texto {
+                titulo("Teste")
+            }
+        }
+    }

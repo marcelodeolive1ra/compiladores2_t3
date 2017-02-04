@@ -1,0 +1,17 @@
+# CT_SINTATICO_26
+# Tag de link para nova aba errado ('*' ao invés de '+')
+
+site {
+    menu {
+        item("Home") ->* "google.com.br"
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+}

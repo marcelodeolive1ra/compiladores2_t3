@@ -1,0 +1,17 @@
+# CT_SINTATICO_27
+# Tentativa de uso de parâmetros em 'menu'
+
+site {
+    menu(cor=preto) {
+        item("Home") ->* "google.com.br"
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+}

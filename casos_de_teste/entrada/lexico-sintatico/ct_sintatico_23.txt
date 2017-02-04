@@ -1,0 +1,15 @@
+# CT_SINTATICO_23
+# Uso um comando 'paragrafo' sem um comando 'texto' em volta
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            coluna {
+                paragrafo("Teste")
+            }
+        }
+    }
+}

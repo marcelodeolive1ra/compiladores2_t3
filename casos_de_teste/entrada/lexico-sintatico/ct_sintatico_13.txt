@@ -1,0 +1,13 @@
+# CT_SINTATICO_13
+# 'secao' sem 'texto' e/ou 'coluna'/'colunas'
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+
+        }
+    }
+}

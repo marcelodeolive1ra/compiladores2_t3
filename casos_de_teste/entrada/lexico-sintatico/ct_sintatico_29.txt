@@ -1,0 +1,24 @@
+# CT_SINTATICO_29
+# Banner com 'coluna' ao invés de 'texto' diretamente
+
+site {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        coluna {
+            texto {
+                titulo("Teste")
+            }
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo("Teste")
+                }
+            }
+        }
+    }
+}

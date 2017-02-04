@@ -1,0 +1,20 @@
+# CT_SINTATICO_22
+# Uso um comando 'texto' dentro de 'secao' fora da ordem (o permitido é: primeiro 'texto', depois 'coluna' ou 'colunas')
+
+site {
+    menu {
+        item("Home")
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                }
+            }
+            texto {
+                titulo("Teste")
+            }
+        }
+    }
+}
