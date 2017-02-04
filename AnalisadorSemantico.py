@@ -4,7 +4,6 @@
 
 # Marcelo de Oliveira da Silva
 
-
 from ANTLR.t3_cc2Visitor import *
 from ANTLR.t3_cc2Parser import *
 
@@ -176,6 +175,11 @@ class AnalisadorSemantico(t3_cc2Visitor):
                 if ctx.parametros().fundo().imagem().parametros() is not None:
                     raise Exception(self.get_linha_do_erro(ctx.start) +
                                     'não é permitido declarar parâmetros para uma imagem de fundo' +
+                                    self.get_regra_do_erro(ctx.start))
+                # E a imagem de fundo do banner não pode ter links
+                if ctx.parametros().fundo().imagem().link() is not None:
+                    raise Exception(self.get_linha_do_erro(ctx.start) +
+                                    'não é permitido declarar links para uma imagem de fundo' +
                                     self.get_regra_do_erro(ctx.start))
             if ctx.parametros().fundo().cor() is not None and ja_tem_parametro:
                 self.get_erro_proibido_mais_que_um_parametro(dados_do_erro=ctx.start)
