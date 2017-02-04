@@ -207,11 +207,9 @@ class GeradorDeCodigo(t3_cc2Visitor):
         return str(cadeia)[1:-1]
 
     def visitTitulo_site(self, ctx: t3_cc2Parser.Titulo_siteContext):
-        print("visitTitulo_site\n")
         return self.visitCadeia(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ''
 
     def visitMenu(self, ctx: t3_cc2Parser.MenuContext):
-        print("visitMenu\n")
         if ctx is not None:
             menu = """
         <!-- Menu principal -->
@@ -228,10 +226,7 @@ class GeradorDeCodigo(t3_cc2Visitor):
             return menu
 
     def visitSidebar(self, ctx: t3_cc2Parser.SidebarContext):
-        print("visitSidebar\n")
-
         if ctx is not None:
-
             sidebar = """
             <!-- Sidebar -->
             <div class="ui vertical inverted sidebar menu">
@@ -252,7 +247,6 @@ class GeradorDeCodigo(t3_cc2Visitor):
             return ''
 
     def visitItem(self, ctx: t3_cc2Parser.ItemContext):
-        print("visitItem\n")
         if ctx is not None:
             item = '<a class="item" href="#LINK"#TARGET>#CADEIA</a>'
 
@@ -266,22 +260,17 @@ class GeradorDeCodigo(t3_cc2Visitor):
             return ''
 
     def visitMais_itens(self, ctx: t3_cc2Parser.Mais_itensContext):
-        print('visitMais_itens\n')
         itens = (self.visitItem(ctx.item()) if ctx.item() is not None else '') + \
                 (self.visitMais_itens(ctx.mais_itens()) if ctx.mais_itens() is not None else '')
-
         return itens
 
     def visitLink(self, ctx: t3_cc2Parser.LinkContext):
-        print('visitLink\n')
         return self.visitCadeia(ctx.CADEIA()) if ctx is not None and ctx.CADEIA() is not None else ''
 
     def visitNova_aba(self, ctx: t3_cc2Parser.Nova_abaContext):
-        print('visitNova_aba\n')
         return ' target="_blank"' if ctx is not None else ''
 
     def visitBanner(self, ctx: t3_cc2Parser.BannerContext):
-        print('visitBanner\n')
         banner = """
     <style>
         .masthead.segment {
