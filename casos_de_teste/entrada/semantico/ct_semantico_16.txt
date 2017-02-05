@@ -1,0 +1,23 @@
+# CT_SEMANTICO_16
+# Uso de mais de um parâmetro em 'banner'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img"), cor=azul) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

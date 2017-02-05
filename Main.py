@@ -48,14 +48,44 @@ def casos_de_teste_sintatico():
             parser.addErrorListener(erros_sintaticos)
             try:
                 parser.site()
-                print('CT' + str(i) + ': compilação finalizada.')
+                print('[CT' + str(i) + '] compilação finalizada.')
             except Exception as e:
-                print('CT' + str(i) + '_sintatico: ' + str(e), file=sys.stderr)
+                print('[CT' + str(i) + '_SINTATICO] ' + str(e), file=sys.stderr)
                 pass
 
 
 def casos_de_teste_semantico():
-    return
+    print('-----------------------------------------------')
+    print('CASOS DE TESTE DO ANALISADOR SEMÂNTICO')
+    print('-----------------------------------------------')
+    for i in range(1, 55):
+        with open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_ENTRADA + SEMANTICO + 'ct_semantico_' + str(i) + '.txt',
+                  encoding='utf-8') as caso_de_teste:
+            programa = caso_de_teste.read()
+            programa_input = antlr4.InputStream(programa)
+
+            lexer = t3_cc2Lexer(input=programa_input)
+            lexer.removeErrorListeners()
+            tokens = antlr4.CommonTokenStream(lexer=lexer)
+
+            parser = t3_cc2Parser(tokens)
+
+            parser.removeErrorListeners()
+            erros_sintaticos = ErrosSintaticosErrorListener()
+            parser.addErrorListener(erros_sintaticos)
+            try:
+                programa = parser.site()
+                analisador_semantico = AnalisadorSemantico()
+                analisador_semantico.visitSite(programa)
+
+                warnings = analisador_semantico.get_warnings()
+                print('[CT' + str(i) + '_SEMANTICO] Compilação finalizada' +
+                      (' com warnings. ' if warnings != '' else '.'))
+                if warnings != '':
+                    print('\t' + warnings.replace('\n', '\n\t'), file=sys.stderr)
+            except Exception as e:
+                print('[CT' + str(i) + '_SEMANTICO] ' + str(e), file=sys.stderr)
+                pass
 
 
 def casos_de_teste_gerador():

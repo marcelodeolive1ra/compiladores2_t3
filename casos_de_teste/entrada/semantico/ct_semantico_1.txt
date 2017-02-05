@@ -1,0 +1,22 @@
+# CT_SEMANTICO_1
+# Parâmetro 'cor' inválido em 'site'
+
+site(cor=azul) {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

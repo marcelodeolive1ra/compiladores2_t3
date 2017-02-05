@@ -1,0 +1,25 @@
+# CT_SEMANTICO_28
+# Uso de parâmetro repetido em 'subtitulo'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                    titulo("Teste")
+                    subtitulo(cor=preto, cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

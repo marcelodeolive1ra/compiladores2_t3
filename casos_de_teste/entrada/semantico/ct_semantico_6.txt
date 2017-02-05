@@ -1,0 +1,22 @@
+# CT_SEMANTICO_6
+# Segundo parâmetro em 'site' inválido
+
+site(fonte=Arial, cor=azul) {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

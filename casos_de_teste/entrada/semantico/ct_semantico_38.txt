@@ -1,0 +1,25 @@
+# CT_SEMANTICO_38
+# Uso de parâmetro 'fonte' inválido em 'coluna'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna(fonte=Open Sans) {
+                texto {
+                    titulo("Teste")
+                    subtitulo("Teste")
+                    paragrafo(cor=preto)("Teste")
+                }
+            }
+        }
+    }
+}

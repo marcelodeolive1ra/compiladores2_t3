@@ -1,0 +1,21 @@
+# CT_SEMANTICO_43
+# Uso de parâmetro 'titulo' em 'imagem'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                imagem(titulo="Teste")("img") -> "link"
+            }
+        }
+    }
+}

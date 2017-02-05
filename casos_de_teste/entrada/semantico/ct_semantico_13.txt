@@ -1,0 +1,23 @@
+# CT_SEMANTICO_13
+# Uso de parâmetro 'tamanho' em 'banner'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(tamanho=grande) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

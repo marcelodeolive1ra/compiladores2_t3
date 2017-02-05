@@ -1,0 +1,23 @@
+# CT_SEMANTICO_18
+# Uso de parâmetro 'fonte' inválido em 'titulo'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo(fonte=Helvetica)("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

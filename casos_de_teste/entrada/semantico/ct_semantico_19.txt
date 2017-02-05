@@ -1,0 +1,23 @@
+# CT_SEMANTICO_19
+# Uso de parâmetro 'fundo' inválido em 'titulo'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo(fundo=cor=azul)("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

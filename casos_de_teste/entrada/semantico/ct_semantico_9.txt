@@ -1,0 +1,23 @@
+# CT_SEMANTICO_9
+# Uso de parâmetro em 'imagem' quando esta é parâmetro de 'fundo' do 'banner'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem(tamanho=grande)("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

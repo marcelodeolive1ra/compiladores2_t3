@@ -1,0 +1,22 @@
+# CT_SEMANTICO_2
+# Parâmetro 'fundo' inválido em 'site'
+
+site(fundo=cor=azul) {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

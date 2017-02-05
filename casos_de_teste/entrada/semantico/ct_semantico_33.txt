@@ -1,0 +1,25 @@
+# CT_SEMANTICO_33
+# Uso de mais de dois parâmetros em 'paragrafo'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                    subtitulo("Teste")
+                    paragrafo(cor=preto, alinhamento=centralizado, fonte=Open Sans)("Teste")
+                }
+            }
+        }
+    }
+}

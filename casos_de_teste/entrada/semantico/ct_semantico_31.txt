@@ -1,0 +1,25 @@
+# CT_SEMANTICO_31
+# Uso de parâmetro 'fundo' inválido em 'paragrafo'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                    subtitulo("Teste")
+                    paragrafo(fundo=cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

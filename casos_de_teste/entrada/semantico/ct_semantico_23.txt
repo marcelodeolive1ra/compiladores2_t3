@@ -1,0 +1,25 @@
+# CT_SEMANTICO_23
+# Uso de parâmetro 'tamanho' inválido em 'subtitulo'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                    titulo("Teste")
+                    subtitulo(tamanho=medio)("Teste")
+                }
+            }
+        }
+    }
+}

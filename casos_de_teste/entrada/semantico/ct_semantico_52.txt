@@ -1,0 +1,58 @@
+# CT_SEMANTICO_52
+# Warning: imagem de tamanho 'pequeno' não cabe em uma coluna de grupo de oito colunas
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            colunas {
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    imagem(tamanho=pequeno)("img")
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+            }
+        }
+    }
+}

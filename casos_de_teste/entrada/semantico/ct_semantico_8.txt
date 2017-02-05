@@ -1,0 +1,20 @@
+# CT_SEMANTICO_8
+# Uso do comando 'sidebar=menu' sem um menu declarado
+
+site(fonte=Arial, titulo="Teste") {
+    sidebar=menu
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

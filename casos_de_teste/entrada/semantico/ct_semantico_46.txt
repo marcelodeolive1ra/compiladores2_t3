@@ -1,0 +1,21 @@
+# CT_SEMANTICO_46
+# Uso de mais de dois parâmetros em 'imagem'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                imagem(alinhamento=direita, tamanho=pequeno, cor=azul)("img") -> "link"
+            }
+        }
+    }
+}

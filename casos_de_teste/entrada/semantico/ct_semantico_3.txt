@@ -1,0 +1,22 @@
+# CT_SEMANTICO_3
+# Parâmetro 'tamanho' inválido em 'site'
+
+site(tamanho=grande) {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

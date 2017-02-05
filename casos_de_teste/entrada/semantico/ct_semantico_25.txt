@@ -1,0 +1,25 @@
+# CT_SEMANTICO_25
+# Uso de parâmetro 'fundo' inválido em 'subtitulo'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                    titulo("Teste")
+                    subtitulo(fundo=cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

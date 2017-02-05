@@ -1,0 +1,22 @@
+# CT_SEMANTICO_4
+# Parâmetro 'alinhamento' inválido em 'site'
+
+site(alinhamento=esquerda) {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    banner {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                }
+            }
+        }
+    }
+}

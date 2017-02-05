@@ -1,0 +1,21 @@
+# CT_SEMANTICO_45
+# Uso de parâmetros repetidos em 'imagem'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                imagem(alinhamento=direita, alinhamento=centralizado)("img") -> "link"
+            }
+        }
+    }
+}

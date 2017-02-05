@@ -1,0 +1,72 @@
+# CT_SEMANTICO_54
+# Múltiplos warnings simultâneos de imagens que não cabem em suas colunas
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            colunas {
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    imagem("img")
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    imagem(tamanho=grande)("img")
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    imagem(tamanho=pequeno)("img")
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+                coluna {
+                    imagem(tamanho=extra-grande)("img")
+                }
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+            }
+        }
+    }
+}

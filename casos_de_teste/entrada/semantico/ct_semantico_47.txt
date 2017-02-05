@@ -1,0 +1,25 @@
+# CT_SEMANTICO_47
+# Warning: componente 'colunas' sendo utilizado com apenas uma coluna
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            colunas {
+                coluna {
+                    texto {
+                        titulo("Teste")
+                    }
+                }
+            }
+        }
+    }
+}

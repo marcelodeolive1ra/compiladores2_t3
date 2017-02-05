@@ -1,0 +1,25 @@
+# CT_SEMANTICO_26
+# Uso de parâmetro 'titulo' inválido em 'subtitulo'
+
+site(fonte=Arial, titulo="Teste") {
+    menu {
+        item("Home") -> "google.com.br"
+    }
+    sidebar=menu
+    banner(fundo=imagem("img")) {
+        texto {
+            titulo("Teste")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    paragrafo(cor=azul)("Teste")
+                    titulo("Teste")
+                    subtitulo(titulo="Teste")("Teste")
+                }
+            }
+        }
+    }
+}
