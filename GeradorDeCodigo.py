@@ -191,7 +191,6 @@ class GeradorDeCodigo(t3_cc2Visitor):
             })
         ;
     </script>"""
-
             self.codigo = self.codigo.replace("#SCRIPT_SIDEBAR", script_sidebar)
             self.codigo = self.codigo.replace("#PUSHER_INICIO", '<div class="pusher">')
             self.codigo = self.codigo.replace("#PUSHER_FIM", '</div>')
@@ -202,6 +201,11 @@ class GeradorDeCodigo(t3_cc2Visitor):
                         </a>
                         """
             self.codigo = self.codigo.replace("#BOTAO_SIDEBAR", botao_sidebar)
+        else:
+            self.codigo = self.codigo.replace('#SCRIPT_SIDEBAR', '')
+            self.codigo = self.codigo.replace('#PUSHER_INICIO', '')
+            self.codigo = self.codigo.replace('#PUSHER_FIM', '')
+            self.codigo = self.codigo.replace('#BOTAO_SIDEBAR', '')
 
     def visitCadeia(self, cadeia):
         return str(cadeia)[1:-1]
@@ -416,10 +420,6 @@ class GeradorDeCodigo(t3_cc2Visitor):
                                 (self.visitImagem(ctx.imagem()) if ctx.imagem() is not None else '') +
                                 (self.visitTexto(ctx.texto()) if ctx.texto() is not None else ''))
 
-        coluna = coluna.replace('#ALINHAMENTO_IMAGEM', (('<p align=' + alinhamento.split(' ')[0] + '>')
-                                                        if alinhamento != '' else ''))
-        coluna = coluna.replace('#FECHA_ALINHAMENTO_IMAGEM', '</p>' if alinhamento != '' else '')
-
         return coluna
 
     def visitTitulo(self, ctx: t3_cc2Parser.TituloContext):
@@ -532,6 +532,10 @@ class GeradorDeCodigo(t3_cc2Visitor):
         tamanho_imagem = self.visitTamanho(ctx.parametros().tamanho()) \
             if ctx.parametros() is not None and ctx.parametros().tamanho() is not None else ''
 
+        if tamanho_imagem == '':
+            tamanho_imagem = self.visitTamanho(ctx.parametros().mais_parametros().parametros().tamanho()) \
+                if ctx.parametros() is not None and ctx.parametros().mais_parametros().parametros() is not None else ''
+
         if tamanho_imagem == EXTRA_PEQUENO:
             tamanho_imagem = 'tiny'
         elif tamanho_imagem == PEQUENO:
@@ -546,6 +550,19 @@ class GeradorDeCodigo(t3_cc2Visitor):
             tamanho_imagem = 'medium'
 
         imagem = imagem.replace('#TAMANHO_IMAGEM', tamanho_imagem)
+
+        alinhamento = ('<p align="' + self.visitAlinhamento(ctx.parametros().alinhamento()) + '"> ') \
+            if ctx.parametros() is not None and ctx.parametros().alinhamento() is not None else ''
+
+        if alinhamento == '':
+            alinhamento = ('<p align="' + self.visitAlinhamento(
+                ctx.parametros().mais_parametros().parametros().alinhamento()) + '"> ') \
+                if ctx.parametros() is not None and ctx.parametros().mais_parametros().parametros() is not None else ''
+
+        if alinhamento == '':
+            alinhamento = '<p align="center">'
+        imagem = imagem.replace('#ALINHAMENTO_IMAGEM', alinhamento).replace('#FECHA_ALINHAMENTO_IMAGEM',
+                                                                            '</p>' if alinhamento != '' else '')
 
         link = self.visitLink(ctx.link()) if ctx.link() is not None else ''
         target = self.visitNova_aba(ctx.link().nova_aba()) if ctx.link() is not None else ''
