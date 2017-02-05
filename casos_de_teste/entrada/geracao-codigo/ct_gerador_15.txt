@@ -22,7 +22,7 @@ site(titulo="Trabalho 3 - Construção de Compiladores 2", fonte=Open Sans) {
                         titulo("Trabalho 3<br>Construção de Compiladores 2")
                         paragrafo("Criação de uma linguagem de programação e construção de um compilador para esta linguagem")
                         paragrafo("<strong>Projeto completo deste compilador disponível no GitHub:</strong>")
-                        paragrafo("http://github.com/marcelodeolive1ra/t3_compiladores2") -> "http://github.com/marcelodeolive1ra/t3_compiladores2"
+                        paragrafo("http://github.com/marcelodeolive1ra/compiladores2_t3") -> "http://github.com/marcelodeolive1ra/compiladores2_t3"
                     }
                 }
                 coluna {
