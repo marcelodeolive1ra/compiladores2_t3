@@ -1,0 +1,20 @@
+# CT_GERADOR_2
+# Site com banner
+
+site {
+    banner {
+        texto {
+            titulo("Título do banner")
+            subtitulo("Subtítulo do banner")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                }
+            }
+        }
+    }
+}

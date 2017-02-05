@@ -28,9 +28,9 @@ EXECUCAO_CASOS_DE_TESTE = True
 
 
 def casos_de_teste_sintatico():
-    print('-----------------------------------------------')
-    print('CASOS DE TESTE DO ANALISADOR LÉXICO/SINTÁTICO')
-    print('-----------------------------------------------')
+    print('----------------------------------------------------------')
+    print('CASOS DE TESTE DO ANALISADOR LÉXICO/SINTÁTICO - 44 CASOS')
+    print('----------------------------------------------------------')
     for i in range(1, 45):
         with open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_ENTRADA + SINTATICO + 'ct_sintatico_' + str(i) + '.txt',
                   encoding='utf-8') as caso_de_teste:
@@ -55,9 +55,9 @@ def casos_de_teste_sintatico():
 
 
 def casos_de_teste_semantico():
-    print('-----------------------------------------------')
-    print('CASOS DE TESTE DO ANALISADOR SEMÂNTICO')
-    print('-----------------------------------------------')
+    print('----------------------------------------------------------')
+    print('CASOS DE TESTE DO ANALISADOR SEMÂNTICO - 54 CASOS')
+    print('----------------------------------------------------------')
     for i in range(1, 55):
         with open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_ENTRADA + SEMANTICO + 'ct_semantico_' + str(i) + '.txt',
                   encoding='utf-8') as caso_de_teste:
@@ -89,7 +89,53 @@ def casos_de_teste_semantico():
 
 
 def casos_de_teste_gerador():
-    return
+    print('----------------------------------------------------------')
+    print('CASOS DE TESTE DO GERADOR DE CÓDIGO - 20 CASOS')
+    print('----------------------------------------------------------')
+    for i in range(1, 21):
+        with open(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_ENTRADA + GERACAO_DE_CODIGO + 'ct_gerador_' + str(i) + '.txt',
+                  encoding='utf-8') as caso_de_teste:
+            programa = caso_de_teste.read()
+            programa_input = antlr4.InputStream(programa)
+
+            lexer = t3_cc2Lexer(input=programa_input)
+            lexer.removeErrorListeners()
+            tokens = antlr4.CommonTokenStream(lexer=lexer)
+
+            parser = t3_cc2Parser(tokens)
+
+            parser.removeErrorListeners()
+            erros_sintaticos = ErrosSintaticosErrorListener()
+            parser.addErrorListener(erros_sintaticos)
+            try:
+                programa = parser.site()
+                analisador_semantico = AnalisadorSemantico()
+                analisador_semantico.visitSite(programa)
+
+                warnings = analisador_semantico.get_warnings()
+
+                if warnings != '':
+                    print('\t' + warnings.replace('\n', '\n\t'), file=sys.stderr)
+
+                gerador_de_codigo = GeradorDeCodigo()
+                gerador_de_codigo.visitSite(programa)
+
+                codigo_gerado = gerador_de_codigo.getCodigo()
+
+                arquivo = DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_SAIDA + GERACAO_DE_CODIGO + 'ct_gerador_' + \
+                          str(i) + '.html'
+
+                arquivo_saida = open(arquivo, 'w', encoding='utf-8')
+                arquivo_saida.write(codigo_gerado)
+                arquivo_saida.close()
+
+                print('[CT' + str(i) + '_GERADOR] Compilação finalizada' +
+                      (' com warnings. ' if warnings != '' else ' sem erros.'))
+            except Exception as e:
+                print('[CT' + str(i) + '_GERADOR] ' + str(e), file=sys.stderr)
+                pass
+    print('\nArquivos compilados com sucesso geraram arquivos .html em:')
+    print(DIRETORIO_PROJETO + CAMINHO_ARQUIVOS_SAIDA + GERACAO_DE_CODIGO + '\n')
 
 
 def main():
@@ -160,7 +206,7 @@ def main():
                 print('\nSintaxe de uso do compilador:')
                 print('./Main.py -e PATH/arquivo_de_entrada.txt -s PATH/arquivo_de_saida.html')
                 print('\nSintaxe para rodar os casos de teste:')
-                print('./Main.py -t [sintatico | semantico | gerador | todos]')
+                print('./Main.py -t [sintatico | semantico | gerador | todos]\n')
 
             print('-----------------------------------------------')
     else:
@@ -174,6 +220,12 @@ def main():
             casos_de_teste_sintatico()
             casos_de_teste_semantico()
             casos_de_teste_gerador()
+        else:
+            print('***PARÂMETROS INVÁLIDOS***')
+            print('\nSintaxe de uso do compilador:')
+            print('./Main.py -e PATH/arquivo_de_entrada.txt -s PATH/arquivo_de_saida.html')
+            print('\nSintaxe para rodar os casos de teste:')
+            print('./Main.py -t [sintatico | semantico | gerador | todos]\n')
 
 if __name__ == '__main__':
     main()

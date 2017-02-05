@@ -1,0 +1,256 @@
+# CT_GERADOR_20
+# Um site bem completo
+
+site(titulo="Trabalho 3 - Construção de Compiladores 2", fonte=Open Sans) {
+    menu {
+        item("Home")
+        item("Google") -> "http://google.com"
+        item("The Verge") ->+ "http://theverge.com"
+    }
+    sidebar=menu
+    banner(fundo=imagem("fundo.png")) {
+        texto {
+            titulo("Construção de Compiladores 2")
+            subtitulo("Trabalho 3 - Criação de uma linguagem e implementação de um compilador para esta linguagem")
+        }
+    }
+    conteudo {
+        secao {
+            colunas {
+                coluna(alinhamento=esquerda) {
+                    texto {
+                        titulo("Trabalho 3<br>Construção de Compiladores 2")
+                        paragrafo("Criação de uma linguagem de programação e construção de um compilador para esta linguagem.")
+                        paragrafo("No caso, a linguagem criada é uma linguagem para a criação de websites incríveis, como este :-)")
+                        paragrafo("<strong>Projeto completo deste compilador disponível no GitHub:</strong>")
+                        paragrafo("http://github.com/marcelodeolive1ra/t3_compiladores2") -> "http://github.com/marcelodeolive1ra/t3_compiladores2"
+                    }
+                }
+                coluna {
+                    imagem(alinhamento=direita)("Octocat.png") -> "http://github.com"
+                }
+            }
+        }
+        secao {
+            texto {
+                titulo("O que você pode fazer com esta linguagem?")
+            }
+            colunas {
+                coluna {
+                    texto {
+                        titulo(cor=azul-claro)("Banner")
+                        paragrafo("Crie um banner como o desta página com <code>banner { titulo(...) subtitulo(...) }</code>")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo(cor=verde)("Menus")
+                        paragrafo("Criar menus é muito fácil: use <code>menu { item(...) -> link }</code>. Caso queira que algum link abra em uma nova aba, basta usar <code>->+</code>.")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo(cor=vermelho)("Sidebars")
+                        paragrafo("Use <code>sidebar { item() }</code> para criar uma sidebar e automaticamente adicionar um botão para ativá-la no menu principal.")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo(cor=laranja)("Imagens")
+                        paragrafo("Basta usar <code>imagem(local)</code>. Caso queira um link, é só usar a mesma sintaxe de links em itens de menus.")
+                    }
+                }
+            }
+        }
+        secao {
+            coluna {
+                texto {
+                    titulo("Você pode organizar o conteúdo em colunas")
+                    paragrafo("E em qualquer string, pode usar as tags clássicas de HTML, como <strong>&lt;strong&gt; para texto em negrito</strong>, <i>&lt;i&gt; para texto itálico</i> e <u>&lt;u&gt; para texto sublinhado</u>. Pode também usar a tag &lt;br&gt; para forçar uma quebra de linha dentro de um parágrafo.")
+                    subtitulo("Pode usar subtítulos")
+                    paragrafo("E assim criar um texto longo com a combinação de títulos/subtítulos e parágrafos.")
+                }
+            }
+        }
+        secao {
+            texto {
+                titulo("Pode criar uma seção com várias colunas")
+                subtitulo("E alinhá-las como quiser")
+                paragrafo("E quando a seção é composta por colunas, pode adicionar texto no início da seção.<br>E é possível utilizar alinhamento à esquerda, centralizado e à direita para o conteúdo das colunas.")
+
+            }
+            colunas {
+                coluna(alinhamento=esquerda) {
+                    texto {
+                        subtitulo("Coluna alinhada à esquerda")
+                    }
+                }
+                coluna {
+                    texto {
+                        subtitulo("Coluna centralizada")
+                    }
+                }
+                coluna {
+                    texto {
+                        subtitulo("Coluna centralizada")
+                    }
+                }
+                coluna(alinhamento=direita) {
+                    texto {
+                        subtitulo("Coluna alinhada à direita")
+                    }
+                }
+            }
+        }
+        secao {
+            texto {
+                titulo("Uma seção com uma única imagem, com alinhamento centralizado")
+            }
+            coluna(alinhamento=centralizado) {
+                imagem("Octocat2.jpg") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
+            }
+        }
+        secao {
+            texto {
+                titulo(cor=azul-claro)("Os sites criados por essa linguagem são automaticamente responsivos")
+                paragrafo("Experimente ver o que acontece diminuindo o tamanho da janela do navegador")
+            }
+        }
+        secao {
+            texto {
+                titulo(cor=verde)("O tamanho das colunas é ajustado automaticamente de acordo com o número de colunas")
+            }
+            colunas {
+                coluna {
+                    texto {
+                        titulo("Coluna #1")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Coluna #2")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Coluna #3")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Coluna #4")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Coluna #5")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Coluna #6")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Coluna #7")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo("Coluna #8")
+                    }
+                }
+            }
+        }
+        secao {
+            texto {
+                titulo("Você pode usar diversas cores em títulos, subtítulos e parágrafos")
+            }
+            colunas {
+                coluna {
+                    texto {
+                        titulo(cor=preto)("preto")
+                        titulo(cor=azul)("azul")
+                        titulo(cor=azul-claro)("azul-claro")
+                        titulo(cor=amarelo)("amarelo")
+                        titulo(cor=verde)("verde")
+                        titulo(cor=vermelho)("vermelho")
+                        titulo(cor=laranja)("laranja")
+                        titulo(cor=roxo)("roxo")
+                        titulo(cor=rosa)("rosa")
+                        titulo(cor=cinza)("cinza")
+                        titulo(cor=marrom)("marrom")
+                    }
+                }
+                coluna {
+                    texto {
+                        subtitulo(cor=preto)("preto")
+                        subtitulo(cor=azul)("azul")
+                        subtitulo(cor=azul-claro)("azul-claro")
+                        subtitulo(cor=amarelo)("amarelo")
+                        subtitulo(cor=verde)("verde")
+                        subtitulo(cor=vermelho)("vermelho")
+                        subtitulo(cor=laranja)("laranja")
+                        subtitulo(cor=roxo)("roxo")
+                        subtitulo(cor=rosa)("rosa")
+                        subtitulo(cor=cinza)("cinza")
+                        subtitulo(cor=marrom)("marrom")
+                    }
+                }
+                coluna {
+                    texto {
+                        paragrafo(cor=preto)("preto")
+                        paragrafo(cor=azul)("azul")
+                        paragrafo(cor=azul-claro)("azul-claro")
+                        paragrafo(cor=amarelo)("amarelo")
+                        paragrafo(cor=verde)("verde")
+                        paragrafo(cor=vermelho)("vermelho")
+                        paragrafo(cor=laranja)("laranja")
+                        paragrafo(cor=roxo)("roxo")
+                        paragrafo(cor=rosa)("rosa")
+                        paragrafo(cor=cinza)("cinza")
+                        paragrafo(cor=marrom)("marrom")
+                    }
+                }
+            }
+        }
+        secao {
+            texto {
+                titulo("Você pode usar tamanhos diferentes de imagens, dentro de colunas")
+                subtitulo("<code>extra-pequeno</code>, <code>pequeno</code>, <code>medio</code>")
+            }
+            colunas {
+                coluna(alinhamento=centralizado) {
+                    imagem(tamanho=extra-pequeno)("Octocat3.jpg")
+                }
+                coluna(alinhamento=centralizado) {
+                    imagem(tamanho=pequeno)("Octocat4.jpg")
+                }
+                coluna(alinhamento=centralizado) {
+                    imagem(tamanho=medio)("Octocat5.jpg")
+                }
+            }
+        }
+        secao {
+            texto {
+                titulo("Tamanhos muito grande, se preferir")
+                subtitulo("<code>grande</code>, <code>extra-grande</code>")
+            }
+            colunas {
+                coluna(alinhamento=centralizado) {
+                    imagem(tamanho=grande)("Octocat6.jpg")
+                }
+                coluna(alinhamento=centralizado) {
+                    imagem(tamanho=extra-grande)("Octocat7.jpg")
+                }
+            }
+        }
+    }
+    rodape {
+        texto {
+            titulo(alinhamento=esquerda)("Construção de Compiladores 2 - 2016/2")
+            paragrafo(alinhamento=esquerda)("Professora Helena Caseli e Professor Daniel Lucrédio<br>Trabalho 3 - Definição de uma linguagem de programação e construção de um compilador para esta linguagem")
+        }
+    }
+}

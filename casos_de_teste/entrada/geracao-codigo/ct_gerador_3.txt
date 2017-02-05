@@ -1,0 +1,25 @@
+# CT_GERADOR_3
+# Site com banner e menu (com itens sem link, com link normal e com link que abre em nova guia)
+
+site {
+    menu {
+        item("Home")
+        item("Google") -> "http://google.com"
+        item("The Verge") ->+ "http://theverge.com"
+    }
+    banner {
+        texto {
+            titulo("Título do banner")
+            subtitulo("Subtítulo do banner")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>Trabalho 3 - Construção de Compiladores 2</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.js"></script>
+    <script>
+        $(document)
+            .ready(function() {
+                $('.ui.sidebar')
+                    .sidebar('attach events', '.toc.item')
+                ;
+            })
+        ;
+    </script>
+    <style>
+        p, .ui.header, a {
+	font-family: 'Open Sans', sans-serif;
+}
+        p {
+            font-size: 1.1em;
+        }
+
+        .ui.header.azul, p.azul {
+            color: #0000FF;
+        }
+
+        .ui.header.azul-claro, p.azul-claro {
+            color: #00BFFF;
+        }
+
+        .ui.header.verde, p.verde {
+            color: #32CD32;
+        }
+
+        .ui.header.amarelo, p.amarelo {
+            color: #FFD700;
+        }
+
+        .ui.header.branco, p.branco {
+            color: #FFFFFF;
+        }
+
+        .ui.header.preto, p.preto {
+            color: #000000;
+        }
+
+        .ui.header.vermelho, p.vermelho {
+            color: #FF0000;
+        }
+
+        .ui.header.laranja, p.laranja {
+            color: #FF8C00;
+        }
+
+        .ui.header.roxo, p.roxo {
+            color: #A020F0;
+        }
+
+        .ui.header.rosa, p.rosa {
+            color: #FF1493;
+        }
+
+        .ui.header.cinza, p.cinza {
+            color: #8B8989;
+        }
+
+        .ui.header.marrom, p.marrom {
+            color: #8B4513;
+        }
+
+    </style>
+</head>
+<body>
+    
+        <!-- Menu principal -->
+        <div class="ui large top fixed menu">
+            <div class="ui container">
+                
+                        <a class="toc item">
+                            <i class="sidebar icon"></i>
+                        </a>
+                        
+                <a class="item" href="">Home</a><a class="item" href="http://google.com">Google</a><a class="item" href="http://theverge.com" target="_blank">The Verge</a>
+            </div>
+        </div>
+            
+    <div class="pusher">
+    
+            <!-- Sidebar -->
+            <div class="ui vertical inverted sidebar menu">
+                <a class="item" href="">Home</a>
+<a class="item" href="http://google.com">Google</a>
+<a class="item" href="http://theverge.com" target="_blank">The Verge</a>
+
+            </div>
+            
+    
+    <style>
+        .masthead.segment {
+            min-height: 700px;
+            padding: 1em 0em;
+        }
+
+        #banner {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            text-align: center;
+            background: url("fundo.png");
+background-size: cover;background-position: center center;
+        }
+
+        #titulo_banner {
+            font-size: 3.5em;
+        }
+
+        #subtitulo_banner {
+            font-size: 1.7em;
+        }
+
+    </style>
+
+    <div class="ui inverted vertical masthead center aligned segment" id="banner">
+        <div class="ui text container">
+            <h1 id="titulo_banner" class="ui inverted header">Construção de Compiladores 2</h1>
+<h2 id="subtitulo_banner" class="ui inverted header">Trabalho 3 - Criação de uma linguagem e implementação de um compilador para esta linguagem</h2>
+        </div>
+    </div>
+        
+    
+        <div class="ui vertical segment">
+            <div class="ui stackable equal width center aligned grid container">
+            
+            <div class="middle aligned row">
+                
+        <div class="left floated left aligned column">
+                <h1 class="ui header">Trabalho 3<br>Construção de Compiladores 2</h1>
+<p>Criação de uma linguagem de programação e construção de um compilador para esta linguagem.</p><p>No caso, a linguagem criada é uma linguagem para a criação de websites incríveis, como este :-)</p><p><strong>Projeto completo deste compilador disponível no GitHub:</strong></p>
+<a href="http://github.com/marcelodeolive1ra/t3_compiladores2">
+<p>http://github.com/marcelodeolive1ra/t3_compiladores2</p>
+</a>
+        </div>
+        
+        <div class="column">
+                <p align="right"> <a href="http://github.com">
+<img src="Octocat.png" class="ui medium image">
+</a></p>
+        </div>
+        
+            </div>
+            </div>
+        </div>
+        
+        <div class="ui vertical segment">
+            <div class="ui stackable equal width center aligned grid container">
+            <div class="middle aligned row">
+                <div class="column">
+                    <h1 class="ui header">O que você pode fazer com esta linguagem?</h1>
+
+                </div>
+            </div>
+        
+            <div class="middle aligned row">
+                
+        <div class="column">
+                <h1 class="ui header azul-claro">Banner</h1>
+<p>Crie um banner como o desta página com <code>banner { titulo(...) subtitulo(...) }</code></p>
+        </div>
+        
+        <div class="column">
+                <h1 class="ui header verde">Menus</h1>
+<p>Criar menus é muito fácil: use <code>menu { item(...) -> link }</code>. Caso queira que algum link abra em uma nova aba, basta usar <code>->+</code>.</p>
+        </div>
+        
+        <div class="column">
+                <h1 class="ui header vermelho">Sidebars</h1>
+<p>Use <code>sidebar { item() }</code> para criar uma sidebar e automaticamente adicionar um botão para ativá-la no menu principal.</p>
+        </div>
+        
+        <div class="column">
+                <h1 class="ui header laranja">Imagens</h1>
+<p>Basta usar <code>imagem(local)</code>. Caso queira um link, é só usar a mesma sintaxe de links em itens de menus.</p>
+        </div>
+        
+            </div>
+            </div>
+        </div>
+        
+        <div class="ui vertical segment">
+            <div class="ui stackable equal width center aligned grid container">
+            
+            <div class="middle aligned row">
+                
+        <div class="column">
+                <h1 class="ui header">Você pode organizar o conteúdo em colunas</h1>
+<p>E em qualquer string, pode usar as tags clássicas de HTML, como <strong>&lt;strong&gt; para texto em negrito</strong>, <i>&lt;i&gt; para texto itálico</i> e <u>&lt;u&gt; para texto sublinhado</u>. Pode também usar a tag &lt;br&gt; para forçar uma quebra de linha dentro de um parágrafo.</p><h2 class="ui header">Pode usar subtítulos</h2><p>E assim criar um texto longo com a combinação de títulos/subtítulos e parágrafos.</p>
+        </div>
+        
+            </div>
+            </div>
+        </div>
+        
+        <div class="ui vertical segment">
+            <div class="ui stackable equal width center aligned grid container">
+            <div class="middle aligned row">
+                <div class="column">
+                    <h1 class="ui header">Pode criar uma seção com várias colunas</h1>
+<h2 class="ui header">E alinhá-las como quiser</h2><p>E quando a seção é composta por colunas, pode adicionar texto no início da seção.<br>E é possível utilizar alinhamento à esquerda, centralizado e à direita para o conteúdo das colunas.</p>
+                </div>
+            </div>
+        
+            <div class="middle aligned row">
+                
+        <div class="left floated left aligned column">
+                <h2 class="ui header">Coluna alinhada à esquerda</h2>
+        </div>
+        
+        <div class="column">
+                <h2 class="ui header">Coluna centralizada</h2>
+        </div>
+        
+        <div class="column">
+                <h2 class="ui header">Coluna centralizada</h2>
+        </div>
+        
+        <div class="right floated right aligned column">
+                <h2 class="ui header">Coluna alinhada à direita</h2>
+        </div>
+        
+            </div>
+            </div>
+        </div>
+        
+        <div class="ui vertical segment">
+            <div class="ui stackable equal width center aligned grid container">
+            <div class="middle aligned row">
+                <div class="column">
+                    <h1 class="ui header">Uma seção com uma única imagem, com alinhamento centralizado</h1>
+
+                </div>
+            </div>
+        
+            <div class="middle aligned row">
+                
+        <div class="center aligned column">
+                <p align="center"><a href="https://github.com/marcelodeolive1ra/compiladores2_t3" target="_blank">
+<img src="Octocat2.jpg" class="ui medium image">
+</a></p>
+        </div>
+        
+            </div>
+            </div>
+        </div>
+        
+        <div class="ui vertical segment">
+            <div class="ui stackable equal width center aligned grid container">
+            <div class="middle aligned row">
+                <div class="column">
+                    <h1 class="ui header azul-claro">Os sites criados por essa linguagem são automaticamente responsivos</h1>
+<p>Experimente ver o que acontece diminuindo o tamanho da janela do navegador</p>
+                </div>
+            </div>
+        
+            
+            </div>
+        </div>
+        
+        <div class="ui vertical segment">
+            <div class="ui stackable equal width center aligned grid container">
+            <div class="middle aligned row">
+                <div class="column">
+                    <h1 class="ui header verde">O tamanho das colunas é ajustado automaticamente de acordo com o número de colunas</h1>
+
+                </div>
+            </div>
+        
+            <div class="middle aligned row">
+                
+        <div class="column">
+                <h1 class="ui header">Coluna #1</h1>
+
+        </div>
+        
+        <div class="column">
+                <h1 class="ui header">Coluna #2</h1>
+
+        </div>
+        
+        <div class="column">
+                <h1 class="ui header">Coluna #3</h1>
+
+        </div>
+        
+        <div class="column">
+                <h1 class="ui header">Coluna #4</h1>
+
+        </div>
+        
+        <div class="column">
+                <h1 class="ui header">Coluna #5</h1>
+
+        </div>
+        
+        <div class="column">
+                <h1 class="ui header">Coluna #6</h1>
+
+        </div>
+        
+        <div class="column">
+                <h1 class="ui header">Coluna #7</h1>
+
+        </div>
+        
+        <div class="column">
+                <h1 class="ui header">Coluna #8</h1>
+
+        </div>
+        
+            </div>
+            </div>
+        </div>
+        
+        <div class="ui vertical segment">
+            <div class="ui stackable equal width center aligned grid container">
+            <div class="middle aligned row">
+                <div class="column">
+                    <h1 class="ui header">Você pode usar diversas cores em títulos, subtítulos e parágrafos</h1>
+
+                </div>
+            </div>
+        
+            <div class="middle aligned row">
+                
+        <div class="column">
+                <h1 class="ui header preto">preto</h1>
+<h1 class="ui header azul">azul</h1>
+<h1 class="ui header azul-claro">azul-claro</h1>
+<h1 class="ui header amarelo">amarelo</h1>
+<h1 class="ui header verde">verde</h1>
+<h1 class="ui header vermelho">vermelho</h1>
+<h1 class="ui header laranja">laranja</h1>
+<h1 class="ui header roxo">roxo</h1>
+<h1 class="ui header rosa">rosa</h1>
+<h1 class="ui header cinza">cinza</h1>
+<h1 class="ui header marrom">marrom</h1>
+
+        </div>
+        
+        <div class="column">
+                <h2 class="ui header preto">preto</h2><h2 class="ui header azul">azul</h2><h2 class="ui header azul-claro">azul-claro</h2><h2 class="ui header amarelo">amarelo</h2><h2 class="ui header verde">verde</h2><h2 class="ui header vermelho">vermelho</h2><h2 class="ui header laranja">laranja</h2><h2 class="ui header roxo">roxo</h2><h2 class="ui header rosa">rosa</h2><h2 class="ui header cinza">cinza</h2><h2 class="ui header marrom">marrom</h2>
+        </div>
+        
+        <div class="column">
+                <p class="preto">preto</p><p class="azul">azul</p><p class="azul-claro">azul-claro</p><p class="amarelo">amarelo</p><p class="verde">verde</p><p class="vermelho">vermelho</p><p class="laranja">laranja</p><p class="roxo">roxo</p><p class="rosa">rosa</p><p class="cinza">cinza</p><p class="marrom">marrom</p>
+        </div>
+        
+            </div>
+            </div>
+        </div>
+        
+        <div class="ui vertical segment">
+            <div class="ui stackable equal width center aligned grid container">
+            <div class="middle aligned row">
+                <div class="column">
+                    <h1 class="ui header">Você pode usar tamanhos diferentes de imagens, dentro de colunas</h1>
+<h2 class="ui header"><code>extra-pequeno</code>, <code>pequeno</code>, <code>medio</code></h2>
+                </div>
+            </div>
+        
+            <div class="middle aligned row">
+                
+        <div class="center aligned column">
+                <p align="center"><a href="">
+<img src="Octocat3.jpg" class="ui tiny image">
+</a></p>
+        </div>
+        
+        <div class="center aligned column">
+                <p align="center"><a href="">
+<img src="Octocat4.jpg" class="ui small image">
+</a></p>
+        </div>
+        
+        <div class="center aligned column">
+                <p align="center"><a href="">
+<img src="Octocat5.jpg" class="ui medium image">
+</a></p>
+        </div>
+        
+            </div>
+            </div>
+        </div>
+        
+        <div class="ui vertical segment">
+            <div class="ui stackable equal width center aligned grid container">
+            <div class="middle aligned row">
+                <div class="column">
+                    <h1 class="ui header">Tamanhos muito grande, se preferir</h1>
+<h2 class="ui header"><code>grande</code>, <code>extra-grande</code></h2>
+                </div>
+            </div>
+        
+            <div class="middle aligned row">
+                
+        <div class="center aligned column">
+                <p align="center"><a href="">
+<img src="Octocat6.jpg" class="ui large image">
+</a></p>
+        </div>
+        
+        <div class="center aligned column">
+                <p align="center"><a href="">
+<img src="Octocat7.jpg" class="ui big image">
+</a></p>
+        </div>
+        
+            </div>
+            </div>
+        </div>
+        
+    
+        <div class="ui inverted vertical footer segment">
+            <div class="ui stackable equal width center aligned grid container">
+                <div class="middle aligned row">
+                        <div class="column">
+                            <h3  align="left" class="ui inverted header">Construção de Compiladores 2 - 2016/2</h3>
+<p align="left" >Professora Helena Caseli e Professor Daniel Lucrédio<br>Trabalho 3 - Definição de uma linguagem de programação e construção de um compilador para esta linguagem</p>
+                        </div>
+                    </div>
+                
+                
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
+    

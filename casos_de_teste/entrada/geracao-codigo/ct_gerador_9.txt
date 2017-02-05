@@ -1,0 +1,32 @@
+# CT_GERADOR_9
+# Site com rodapé
+
+site(titulo="T3 - Compiladores 2", fonte=Open Sans) {
+    menu {
+        item("Home")
+        item("Google") -> "http://google.com"
+        item("The Verge") ->+ "http://theverge.com"
+    }
+    sidebar=menu
+    banner(fundo=imagem("fundo.png")) {
+        texto {
+            titulo("Título do banner")
+            subtitulo("Subtítulo do banner")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                }
+            }
+        }
+    }
+    rodape {
+        texto {
+            titulo("Construção de Compiladores 2 - 2016/2")
+            paragrafo("Professora Helena Caseli e Professor Daniel Lucrédio<br>Trabalho 3 - Definição de uma linguagem de programação e construção de um compilador para esta linguagem")
+        }
+    }
+}

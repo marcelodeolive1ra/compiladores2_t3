@@ -1,0 +1,26 @@
+# CT_GERADOR_7
+# Banner com fundo colorido
+
+site(titulo="T3 - Compiladores 2", fonte=Open Sans) {
+    menu {
+        item("Home")
+        item("Google") -> "http://google.com"
+        item("The Verge") ->+ "http://theverge.com"
+    }
+    sidebar=menu
+    banner(fundo=cor=azul-claro) {
+        texto {
+            titulo("Título do banner")
+            subtitulo("Subtítulo do banner")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                }
+            }
+        }
+    }
+}

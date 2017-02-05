@@ -1,0 +1,14 @@
+# CT_GERADOR_1
+# Site com o essencialmente obrigatório
+
+site {
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                }
+            }
+        }
+    }
+}

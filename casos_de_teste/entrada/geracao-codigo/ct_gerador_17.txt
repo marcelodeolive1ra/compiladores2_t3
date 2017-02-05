@@ -1,0 +1,110 @@
+# CT_GERADOR_17
+# Imagens de diversos todos os tamanhos possíveis
+
+site(titulo="Trabalho 3 - Construção de Compiladores 2", fonte=Open Sans) {
+    menu {
+        item("Home")
+        item("Google") -> "http://google.com"
+        item("The Verge") ->+ "http://theverge.com"
+    }
+    sidebar=menu
+    banner(fundo=imagem("fundo.png")) {
+        texto {
+            titulo("Construção de Compiladores 2")
+            subtitulo("Trabalho 3 - Criação de uma linguagem e implementação de um compilador para esta linguagem")
+        }
+    }
+    conteudo {
+        secao {
+            colunas {
+                coluna(alinhamento=esquerda) {
+                    texto {
+                        titulo("Trabalho 3<br>Construção de Compiladores 2")
+                        paragrafo("Criação de uma linguagem de programação e construção de um compilador para esta linguagem")
+                        paragrafo("<strong>Projeto completo deste compilador disponível no GitHub:</strong>")
+                        paragrafo("http://github.com/marcelodeolive1ra/t3_compiladores2") -> "http://github.com/marcelodeolive1ra/t3_compiladores2"
+                    }
+                }
+                coluna {
+                    imagem(alinhamento=direita)("Octocat.png") -> "http://github.com"
+                }
+            }
+        }
+        secao {
+            texto {
+                titulo("O que você pode fazer com esta linguagem?")
+            }
+            colunas {
+                coluna {
+                    texto {
+                        titulo(cor=azul-claro)("Banner")
+                        paragrafo("Crie um banner como o desta página com <code>banner { titulo(...) subtitulo(...) }</code>")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo(cor=verde)("Menus")
+                        paragrafo("Criar menus é muito fácil: use <code>menu { item(...) -> link }</code>. Caso queira que algum link abra em uma nova aba, basta usar <code>->+</code>.")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo(cor=vermelho)("Sidebars")
+                        paragrafo("Use <code>sidebar { item() }</code> para criar uma sidebar e automaticamente adicionar um botão para ativá-la no menu principal.")
+                    }
+                }
+                coluna {
+                    texto {
+                        titulo(cor=laranja)("Imagens")
+                        paragrafo("Basta usar <code>imagem(local)</code>. Caso queira um link, é só usar a mesma sintaxe de links em itens de menus.")
+                    }
+                }
+            }
+        }
+        secao {
+            texto {
+                titulo("Uma seção com uma única imagem, com alinhamento centralizado")
+            }
+            coluna(alinhamento=centralizado) {
+                imagem("Octocat2.jpg") ->+ "https://github.com/marcelodeolive1ra/compiladores2_t3"
+            }
+        }
+        secao {
+            texto {
+                titulo("Você pode usar tamanhos diferentes de imagens, dentro de colunas")
+                subtitulo("<code>extra-pequeno</code>, <code>pequeno</code>, <code>medio</code>")
+            }
+            colunas {
+                coluna(alinhamento=centralizado) {
+                    imagem(tamanho=extra-pequeno)("Octocat3.jpg")
+                }
+                coluna(alinhamento=centralizado) {
+                    imagem(tamanho=pequeno)("Octocat4.jpg")
+                }
+                coluna(alinhamento=centralizado) {
+                    imagem(tamanho=medio)("Octocat5.jpg")
+                }
+            }
+        }
+        secao {
+            texto {
+                titulo("Tamanhos muito grande, se preferir")
+                subtitulo("<code>grande</code>, <code>extra-grande</code>")
+            }
+            colunas {
+                coluna(alinhamento=centralizado) {
+                    imagem(tamanho=grande)("Octocat6.jpg")
+                }
+                coluna(alinhamento=centralizado) {
+                    imagem(tamanho=extra-grande)("Octocat7.jpg")
+                }
+            }
+        }
+    }
+    rodape {
+        texto {
+            titulo(alinhamento=esquerda)("Construção de Compiladores 2 - 2016/2")
+            paragrafo(alinhamento=esquerda)("Professora Helena Caseli e Professor Daniel Lucrédio<br>Trabalho 3 - Definição de uma linguagem de programação e construção de um compilador para esta linguagem")
+        }
+    }
+}

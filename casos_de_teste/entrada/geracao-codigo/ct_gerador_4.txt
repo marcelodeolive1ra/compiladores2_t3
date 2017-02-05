@@ -1,0 +1,30 @@
+# CT_GERADOR_4
+# Site com sidebar diferente do menu
+
+site {
+    menu {
+        item("Home")
+        item("Google") -> "http://google.com"
+        item("The Verge") ->+ "http://theverge.com"
+    }
+    sidebar {
+        item("Home")
+        item("GitHub") ->+ "http://github.com"
+        item("YouTube") ->+ "http://youtube.com"
+    }
+    banner {
+        texto {
+            titulo("Título do banner")
+            subtitulo("Subtítulo do banner")
+        }
+    }
+    conteudo {
+        secao {
+            coluna {
+                texto {
+                    titulo("Teste")
+                }
+            }
+        }
+    }
+}

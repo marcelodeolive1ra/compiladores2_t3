@@ -1,0 +1,38 @@
+# CT_GERADOR_13
+# Alinhamento de coluna
+
+site(titulo="T3 - Compiladores 2", fonte=Open Sans) {
+    menu {
+        item("Home")
+        item("Google") -> "http://google.com"
+        item("The Verge") ->+ "http://theverge.com"
+    }
+    sidebar=menu
+    banner(fundo=imagem("fundo.png")) {
+        texto {
+            titulo("Título do banner")
+            subtitulo("Subtítulo do banner")
+        }
+    }
+    conteudo {
+        secao {
+            colunas {
+                coluna(alinhamento=esquerda) {
+                    texto {
+                        titulo("Trabalho 3<br>Construção de Compiladores 2")
+                        paragrafo("Criação de uma linguagem de programação e construção de um compilador para esta linguagem")
+                    }
+                }
+                coluna {
+                    imagem(alinhamento=direita)("Octocat.png") -> "http://github.com"
+                }
+            }
+        }
+    }
+    rodape {
+        texto {
+            titulo(alinhamento=esquerda)("Construção de Compiladores 2 - 2016/2")
+            paragrafo(alinhamento=esquerda)("Professora Helena Caseli e Professor Daniel Lucrédio<br>Trabalho 3 - Definição de uma linguagem de programação e construção de um compilador para esta linguagem")
+        }
+    }
+}
