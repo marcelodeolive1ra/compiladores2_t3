@@ -189,8 +189,15 @@ def main():
                 arquivo_saida.write(codigo_gerado)
                 arquivo_saida.close()
 
-                print("Compilação finalizada" +
-                      (' com warnings. ' if analisador_semantico.get_warnings() != '' else '.'))
+                warnings = analisador_semantico.get_warnings()
+                print('Compilação finalizada' +
+                      (' com warnings. ' if warnings != '' else ' sem erros.'))
+
+                if warnings != '':
+                    print('\t' + warnings.replace('\n', '\n\t'), file=sys.stderr)
+
+                print('\nArquivo compilado salvo em:')
+                print(args.saida + '\n')
 
             except Exception as e:
                 print(e, file=sys.stderr)
@@ -202,11 +209,10 @@ def main():
             if not args.saida:
                 print('Erro: arquivo de saída não informado.', file=sys.stderr)
 
-            if not args.entrada or not args.saida:
-                print('\nSintaxe de uso do compilador:')
-                print('./Main.py -e PATH/arquivo_de_entrada.txt -s PATH/arquivo_de_saida.html')
-                print('\nSintaxe para rodar os casos de teste:')
-                print('./Main.py -t [sintatico | semantico | gerador | todos]\n')
+            print('\nSintaxe de uso do compilador:')
+            print('./Main.py -e PATH/arquivo_de_entrada.txt -s PATH/arquivo_de_saida.html')
+            print('\nSintaxe para rodar os casos de teste:')
+            print('./Main.py -t [sintatico | semantico | gerador | todos]\n')
 
             print('-----------------------------------------------')
     else:
