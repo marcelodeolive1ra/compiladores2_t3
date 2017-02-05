@@ -68,6 +68,7 @@ class AnalisadorSemantico(t3_cc2Visitor):
     def visitSite(self, ctx: t3_cc2Parser.SiteContext):
         titulo_site = 0
         fonte = 0
+        self.lista_de_imagens = []
 
         # Verificação se o primeiro parâmetro (se existir) é valido para a regra 'site'
         if ctx.parametros() is not None:
@@ -230,7 +231,7 @@ class AnalisadorSemantico(t3_cc2Visitor):
                                  ": componente 'colunas' sendo utilizado com apenas uma coluna. Use o comando " \
                                  "'coluna' neste caso para maior desempenho do compilador.\n"
             self.colunas[-1] += self.quantidade_colunas
-        self.imagem_dentro_de_colunas = False
+
         return
 
     def visitMais_colunas(self, ctx: t3_cc2Parser.Mais_colunasContext):
@@ -252,6 +253,8 @@ class AnalisadorSemantico(t3_cc2Visitor):
                 self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FONTE)
             if ctx.parametros().titulo_site() is not None:
                 self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=TITULO)
+            if ctx.parametros().fundo() is not None:
+                self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FUNDO)
 
             if ctx.parametros().mais_parametros().parametros() is not None:
                 self.get_erro_proibido_mais_que_um_parametro(dados_do_erro=ctx.start)
@@ -378,7 +381,7 @@ class AnalisadorSemantico(t3_cc2Visitor):
                     self.get_erro_parametro_nao_permitido(dados_do_erro=ctx.start, parametro=FONTE)
                 if ctx.parametros().mais_parametros().parametros().tamanho() is not None:
                     tamanho += 1
-                    opcao_tamanho = ctx.parametros().tamanho().opcao_tamanho().getText()
+                    opcao_tamanho = ctx.parametros().mais_parametros().parametros().tamanho().opcao_tamanho().getText()
                 if ctx.parametros().mais_parametros().parametros().alinhamento() is not None:
                     alinhamento += 1
 
